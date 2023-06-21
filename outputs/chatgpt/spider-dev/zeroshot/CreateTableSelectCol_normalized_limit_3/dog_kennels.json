@@ -1,0 +1,576 @@
+[
+    {
+        "db_id": "dog_kennels",
+        "question": "Which states have both owners and professionals living there?",
+        "gold_sql": "SELECT state FROM Owners INTERSECT SELECT state FROM Professionals",
+        "predicted_sql": "select distinct o.state from owners o inner join professionals p on o.state = p.state",
+        "prompt_len": 1611
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Find the states where both owners and professionals live.",
+        "gold_sql": "SELECT state FROM Owners INTERSECT SELECT state FROM Professionals",
+        "predicted_sql": "select distinct owners.state from owners inner join professionals on owners.state = professionals.state",
+        "prompt_len": 1611
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What is the average age of the dogs who have gone through any treatments?",
+        "gold_sql": "SELECT avg(age) FROM Dogs WHERE dog_id IN ( SELECT dog_id FROM Treatments )",
+        "predicted_sql": "select avg(cast(age as integer)) from dogs where dog_id in (select dog_id from treatments)",
+        "prompt_len": 1616
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Find the average age of the dogs who went through treatments.",
+        "gold_sql": "SELECT avg(age) FROM Dogs WHERE dog_id IN ( SELECT dog_id FROM Treatments )",
+        "predicted_sql": "select avg(cast(age as integer)) from dogs where dog_id in (select dog_id from treatments)",
+        "prompt_len": 1613
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Which professionals live in the state of Indiana or have done treatment on more than 2 treatments? List his or her id, last name and cell phone.",
+        "gold_sql": "SELECT professional_id , last_name , cell_number FROM Professionals WHERE state = 'Indiana' UNION SELECT T1.professional_id , T1.last_name , T1.cell_number FROM Professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id = T2.professional_id GROUP BY T1.professional_id HAVING count(*) > 2",
+        "predicted_sql": "select professionals.professional_id, professionals.last_name, professionals.cell_number from professionals inner join treatments on professionals.professional_id = treatments.professional_id where professionals.state = 'Indiana' or (select count(*) from treatments where treatments.professional_id = professionals.professional_id) > 2",
+        "prompt_len": 1632
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Find the id, last name and cell phone of the professionals who live in the state of Indiana or have performed more than two treatments.",
+        "gold_sql": "SELECT professional_id , last_name , cell_number FROM Professionals WHERE state = 'Indiana' UNION SELECT T1.professional_id , T1.last_name , T1.cell_number FROM Professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id = T2.professional_id GROUP BY T1.professional_id HAVING count(*) > 2",
+        "predicted_sql": "select professional_id, last_name, cell_number  from professionals  where state = 'Indiana' or professional_id in (  select professional_id   from treatments   group by professional_id   having count(*) > 2 )",
+        "prompt_len": 1628
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Which dogs have not cost their owner more than 1000 for treatment ? List the dog names .",
+        "gold_sql": "select name from dogs where dog_id not in ( select dog_id from treatments group by dog_id having sum(cost_of_treatment) > 1000 )",
+        "predicted_sql": "select dogs.name from dogs inner join treatments on dogs.dog_id = treatments.dog_id where treatments.cost_of_treatment <= 1000 group by dogs.name",
+        "prompt_len": 1621
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What are the names of the dogs for which the owner has not spend more than 1000 for treatment ?",
+        "gold_sql": "select name from dogs where dog_id not in ( select dog_id from treatments group by dog_id having sum(cost_of_treatment) > 1000 )",
+        "predicted_sql": "select dogs.name from dogs inner join treatments on dogs.dog_id = treatments.dog_id where treatments.cost_of_treatment <= 1000 group by dogs.name having sum(treatments.cost_of_treatment) <= 1000",
+        "prompt_len": 1623
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Which first names are used for professionals or owners but are not used as dog names?",
+        "gold_sql": "SELECT first_name FROM Professionals UNION SELECT first_name FROM Owners EXCEPT SELECT name FROM Dogs",
+        "predicted_sql": "select distinct owners.first_name as name from owners left join dogs on owners.owner_id = dogs.owner_id left join professionals on owners.first_name = professionals.first_name where dogs.name is null and professionals.first_name is not null union select distinct professionals.first_name as name from professionals left join owners on professionals.first_name = owners.first_name left join dogs on owners.owner_id = dogs.owner_id where dogs.name is null and owners.first_name is not null",
+        "prompt_len": 1618
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Find the first names that are used for professionals or owners but are not used as dog names.",
+        "gold_sql": "SELECT first_name FROM Professionals UNION SELECT first_name FROM Owners EXCEPT SELECT name FROM Dogs",
+        "predicted_sql": "select distinct owners.first_name from owners left join dogs on owners.owner_id = dogs.owner_id left join professionals on owners.first_name = professionals.first_name where dogs.name is null and professionals.first_name is not null union select distinct professionals.first_name from professionals left join owners on professionals.first_name = owners.first_name left join dogs on owners.owner_id = dogs.owner_id where dogs.name is null and owners.first_name is not null",
+        "prompt_len": 1620
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Which professional did not operate any treatment on dogs? List the professional's id, role and email.",
+        "gold_sql": "SELECT professional_id , role_code , email_address FROM Professionals EXCEPT SELECT T1.professional_id , T1.role_code , T1.email_address FROM Professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id = T2.professional_id",
+        "predicted_sql": "select professionals.professional_id, professionals.role_code, professionals.email_address from professionals left join treatments on professionals.professional_id = treatments.professional_id where treatments.treatment_id is null",
+        "prompt_len": 1621
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Give me the id, role and email of the professionals who did not perform any treatment on dogs.",
+        "gold_sql": "SELECT professional_id , role_code , email_address FROM Professionals EXCEPT SELECT T1.professional_id , T1.role_code , T1.email_address FROM Professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id = T2.professional_id",
+        "predicted_sql": "select professionals.professional_id, professionals.role_code, professionals.email_address from professionals left join treatments on professionals.professional_id = treatments.professional_id where treatments.treatment_id is null",
+        "prompt_len": 1621
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Which owner owns the most dogs? List the owner id, first name and last name.",
+        "gold_sql": "SELECT T1.owner_id , T2.first_name , T2.last_name FROM Dogs AS T1 JOIN Owners AS T2 ON T1.owner_id = T2.owner_id GROUP BY T1.owner_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select owners.owner_id, owners.first_name, owners.last_name from owners inner join dogs on owners.owner_id = dogs.owner_id group by owners.owner_id order by count(dogs.dog_id) desc limit 1",
+        "prompt_len": 1619
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Return the owner id, first name and last name of the owner who has the most dogs.",
+        "gold_sql": "SELECT T1.owner_id , T2.first_name , T2.last_name FROM Dogs AS T1 JOIN Owners AS T2 ON T1.owner_id = T2.owner_id GROUP BY T1.owner_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select owners.owner_id, owners.first_name, owners.last_name from owners inner join dogs on owners.owner_id = dogs.owner_id group by owners.owner_id order by count(dogs.dog_id) desc limit 1",
+        "prompt_len": 1620
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Which professionals have done at least two treatments? List the professional's id, role, and first name.",
+        "gold_sql": "SELECT T1.professional_id , T1.role_code , T1.first_name FROM Professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id = T2.professional_id GROUP BY T1.professional_id HAVING count(*) >= 2",
+        "predicted_sql": "select professionals.professional_id, professionals.role_code, professionals.first_name from professionals inner join treatments on professionals.professional_id = treatments.professional_id group by treatments.professional_id having count(*) >= 2",
+        "prompt_len": 1622
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What are the id, role, and first name of the professionals who have performed two or more treatments?",
+        "gold_sql": "SELECT T1.professional_id , T1.role_code , T1.first_name FROM Professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id = T2.professional_id GROUP BY T1.professional_id HAVING count(*) >= 2",
+        "predicted_sql": "select professionals.professional_id, professionals.role_code, professionals.first_name from professionals inner join treatments on treatments.professional_id = professionals.professional_id group by treatments.professional_id having count(*) >= 2",
+        "prompt_len": 1622
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What is the name of the breed with the most dogs?",
+        "gold_sql": "SELECT T1.breed_name FROM Breeds AS T1 JOIN Dogs AS T2 ON T1.breed_code = T2.breed_code GROUP BY T1.breed_name ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select breeds.breed_name, count(dogs.breed_code) as num_dogs from breeds join dogs on breeds.breed_code = dogs.breed_code group by breeds.breed_name order by num_dogs desc limit 1",
+        "prompt_len": 1613
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Which breed do the most dogs have? Give me the breed name.",
+        "gold_sql": "SELECT T1.breed_name FROM Breeds AS T1 JOIN Dogs AS T2 ON T1.breed_code = T2.breed_code GROUP BY T1.breed_name ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select breed_name from breeds where breed_code = (  select breed_code  from dogs  group by breed_code  order by count(*) desc  limit 1 )",
+        "prompt_len": 1615
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Which owner has paid for the most treatments on his or her dogs? List the owner id and last name.",
+        "gold_sql": "SELECT T1.owner_id , T1.last_name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id = T2.owner_id JOIN Treatments AS T3 ON T2.dog_id = T3.dog_id GROUP BY T1.owner_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select owners.owner_id, owners.last_name from owners inner join dogs on owners.owner_id = dogs.owner_id inner join treatments on dogs.dog_id = treatments.dog_id group by owners.owner_id order by sum(treatments.cost_of_treatment) desc limit 1",
+        "prompt_len": 1623
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Tell me the owner id and last name of the owner who spent the most on treatments of his or her dogs.",
+        "gold_sql": "SELECT T1.owner_id , T1.last_name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id = T2.owner_id JOIN Treatments AS T3 ON T2.dog_id = T3.dog_id GROUP BY T1.owner_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select owners.owner_id, owners.last_name from owners inner join dogs on owners.owner_id = dogs.owner_id inner join treatments on dogs.dog_id = treatments.dog_id group by owners.owner_id order by sum(treatments.cost_of_treatment) desc limit 1",
+        "prompt_len": 1624
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What is the description of the treatment type that costs the least money in total?",
+        "gold_sql": "SELECT T1.treatment_type_description FROM Treatment_types AS T1 JOIN Treatments AS T2 ON T1.treatment_type_code = T2.treatment_type_code GROUP BY T1.treatment_type_code ORDER BY sum(cost_of_treatment) ASC LIMIT 1",
+        "predicted_sql": "select treatment_type_description, sum(cost_of_treatment) as total_cost from treatments join treatment_types on treatments.treatment_type_code = treatment_types.treatment_type_code group by treatments.treatment_type_code order by total_cost asc limit 1",
+        "prompt_len": 1617
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Give me the description of the treatment type whose total cost is the lowest.",
+        "gold_sql": "SELECT T1.treatment_type_description FROM Treatment_types AS T1 JOIN Treatments AS T2 ON T1.treatment_type_code = T2.treatment_type_code GROUP BY T1.treatment_type_code ORDER BY sum(cost_of_treatment) ASC LIMIT 1",
+        "predicted_sql": "select treatment_type_description from treatment_types where treatment_type_code = (  select treatment_type_code  from treatments  group by treatment_type_code  order by sum(cost_of_treatment)  limit 1 )",
+        "prompt_len": 1616
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Which owner has paid the largest amount of money in total for their dogs? Show the owner id and zip code.",
+        "gold_sql": "SELECT T1.owner_id , T1.zip_code FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id = T2.owner_id JOIN Treatments AS T3 ON T2.dog_id = T3.dog_id GROUP BY T1.owner_id ORDER BY sum(T3.cost_of_treatment) DESC LIMIT 1",
+        "predicted_sql": "select owners.owner_id, owners.zip_code, sum(charges.charge_amount) as total_paid from owners inner join dogs on owners.owner_id = dogs.owner_id inner join treatments on dogs.dog_id = treatments.dog_id inner join charges on treatments.treatment_type_code = charges.charge_type group by owners.owner_id order by total_paid desc limit 1",
+        "prompt_len": 1624
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Find the owner id and zip code of the owner who spent the most money in total for his or her dogs.",
+        "gold_sql": "SELECT T1.owner_id , T1.zip_code FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id = T2.owner_id JOIN Treatments AS T3 ON T2.dog_id = T3.dog_id GROUP BY T1.owner_id ORDER BY sum(T3.cost_of_treatment) DESC LIMIT 1",
+        "predicted_sql": "select owners.owner_id, owners.zip_code, sum(charges.charge_amount) as total_spent from owners inner join dogs on owners.owner_id = dogs.owner_id inner join treatments on dogs.dog_id = treatments.dog_id inner join charges on treatments.treatment_type_code = charges.charge_type group by owners.owner_id order by total_spent desc limit 1",
+        "prompt_len": 1624
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Which professionals have done at least two types of treatments? List the professional id and cell phone.",
+        "gold_sql": "SELECT T1.professional_id , T1.cell_number FROM Professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id = T2.professional_id GROUP BY T1.professional_id HAVING count(*) >= 2",
+        "predicted_sql": "select professionals.professional_id, professionals.cell_number from treatments inner join professionals on treatments.professional_id = professionals.professional_id group by treatments.professional_id having count(distinct treatments.treatment_type_code) >= 2",
+        "prompt_len": 1620
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Find the id and cell phone of the professionals who operate two or more types of treatments.",
+        "gold_sql": "SELECT T1.professional_id , T1.cell_number FROM Professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id = T2.professional_id GROUP BY T1.professional_id HAVING count(*) >= 2",
+        "predicted_sql": "select p.professional_id, p.cell_number from professionals p inner join treatments t on p.professional_id = t.professional_id group by p.professional_id having count(distinct t.treatment_type_code) >= 2",
+        "prompt_len": 1619
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What are the first name and last name of the professionals who have done treatment with cost below average?",
+        "gold_sql": "SELECT DISTINCT T1.first_name , T1.last_name FROM Professionals AS T1 JOIN Treatments AS T2 WHERE cost_of_treatment < ( SELECT avg(cost_of_treatment) FROM Treatments )",
+        "predicted_sql": "select professionals.first_name, professionals.last_name from professionals inner join treatments on treatments.professional_id = professionals.professional_id where treatments.cost_of_treatment < (select avg(cost_of_treatment) from treatments)",
+        "prompt_len": 1621
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Which professionals have operated a treatment that costs less than the average? Give me theor first names and last names.",
+        "gold_sql": "SELECT DISTINCT T1.first_name , T1.last_name FROM Professionals AS T1 JOIN Treatments AS T2 WHERE cost_of_treatment < ( SELECT avg(cost_of_treatment) FROM Treatments )",
+        "predicted_sql": "select distinct first_name, last_name from professionals where professional_id in (  select professional_id  from treatments  where cost_of_treatment < (   select avg(cost_of_treatment)   from treatments  ) )",
+        "prompt_len": 1623
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "List the date of each treatment, together with the first name of the professional who operated it.",
+        "gold_sql": "SELECT T1.date_of_treatment , T2.first_name FROM Treatments AS T1 JOIN Professionals AS T2 ON T1.professional_id = T2.professional_id",
+        "predicted_sql": "select treatments.date_of_treatment, professionals.first_name from treatments inner join professionals on treatments.professional_id = professionals.professional_id",
+        "prompt_len": 1620
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What are the date and the operating professional's first name of each treatment?",
+        "gold_sql": "SELECT T1.date_of_treatment , T2.first_name FROM Treatments AS T1 JOIN Professionals AS T2 ON T1.professional_id = T2.professional_id",
+        "predicted_sql": "select treatments.date_of_treatment, professionals.first_name from treatments inner join professionals on treatments.professional_id = professionals.professional_id",
+        "prompt_len": 1616
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "List the cost of each treatment and the corresponding treatment type description.",
+        "gold_sql": "SELECT T1.cost_of_treatment , T2.treatment_type_description FROM Treatments AS T1 JOIN treatment_types AS T2 ON T1.treatment_type_code = T2.treatment_type_code",
+        "predicted_sql": "select treatments.cost_of_treatment, treatment_types.treatment_type_description from treatments inner join treatment_types on treatments.treatment_type_code = treatment_types.treatment_type_code",
+        "prompt_len": 1614
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What are the cost and treatment type description of each treatment?",
+        "gold_sql": "SELECT T1.cost_of_treatment , T2.treatment_type_description FROM Treatments AS T1 JOIN treatment_types AS T2 ON T1.treatment_type_code = T2.treatment_type_code",
+        "predicted_sql": "select treatments.cost_of_treatment, treatment_types.treatment_type_description from treatments inner join treatment_types on treatments.treatment_type_code = treatment_types.treatment_type_code",
+        "prompt_len": 1613
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "List each owner's first name, last name, and the size of his for her dog.",
+        "gold_sql": "SELECT T1.first_name , T1.last_name , T2.size_code FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id = T2.owner_id",
+        "predicted_sql": "select owners.first_name, owners.last_name, sizes.size_description from owners inner join dogs on owners.owner_id = dogs.owner_id inner join sizes on dogs.size_code = sizes.size_code",
+        "prompt_len": 1620
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What are each owner's first name, last name, and the size of their dog?",
+        "gold_sql": "SELECT T1.first_name , T1.last_name , T2.size_code FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id = T2.owner_id",
+        "predicted_sql": "select owners.first_name, owners.last_name, sizes.size_description from owners join dogs on owners.owner_id = dogs.owner_id join sizes on dogs.size_code = sizes.size_code",
+        "prompt_len": 1619
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "List pairs of the owner's first name and the dogs's name.",
+        "gold_sql": "SELECT T1.first_name , T2.name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id = T2.owner_id",
+        "predicted_sql": "select owners.first_name, dogs.name from owners inner join dogs on owners.owner_id = dogs.owner_id",
+        "prompt_len": 1615
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What are each owner's first name and their dogs's name?",
+        "gold_sql": "SELECT T1.first_name , T2.name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id = T2.owner_id",
+        "predicted_sql": "select owners.first_name, dogs.name from owners inner join dogs on owners.owner_id = dogs.owner_id",
+        "prompt_len": 1614
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "List the names of the dogs of the rarest breed and the treatment dates of them.",
+        "gold_sql": "SELECT T1.name , T2.date_of_treatment FROM Dogs AS T1 JOIN Treatments AS T2 ON T1.dog_id = T2.dog_id WHERE T1.breed_code = ( SELECT breed_code FROM Dogs GROUP BY breed_code ORDER BY count(*) ASC LIMIT 1 )",
+        "predicted_sql": "select dogs.name, treatments.date_of_treatment from dogs inner join breeds on dogs.breed_code = breeds.breed_code inner join treatments on dogs.dog_id = treatments.dog_id where breeds.breed_name = (select breed_name from breeds order by breed_code limit 1) order by treatments.date_of_treatment",
+        "prompt_len": 1619
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Which dogs are of the rarest breed? Show their names and treatment dates.",
+        "gold_sql": "SELECT T1.name , T2.date_of_treatment FROM Dogs AS T1 JOIN Treatments AS T2 ON T1.dog_id = T2.dog_id WHERE T1.breed_code = ( SELECT breed_code FROM Dogs GROUP BY breed_code ORDER BY count(*) ASC LIMIT 1 )",
+        "predicted_sql": "select dogs.name, treatments.date_of_treatment from dogs inner join treatments on dogs.dog_id = treatments.dog_id where dogs.breed_code = (select breed_code from breeds order by breed_code limit 1) order by treatments.date_of_treatment",
+        "prompt_len": 1617
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Which dogs are owned by someone who lives in Virginia? List the owner's first name and the dog's name.",
+        "gold_sql": "SELECT T1.first_name , T2.name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id = T2.owner_id WHERE T1.state = 'Virginia'",
+        "predicted_sql": "select owners.first_name, dogs.name from owners inner join dogs on owners.owner_id = dogs.owner_id where owners.state = 'Virginia'",
+        "prompt_len": 1624
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Find the first names of owners living in Virginia and the names of dogs they own.",
+        "gold_sql": "SELECT T1.first_name , T2.name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id = T2.owner_id WHERE T1.state = 'Virginia'",
+        "predicted_sql": "select owners.first_name, dogs.name from owners inner join dogs on owners.owner_id = dogs.owner_id where owners.state = 'Virginia'",
+        "prompt_len": 1618
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What are the arriving date and the departing date of the dogs who have gone through a treatment?",
+        "gold_sql": "SELECT DISTINCT T1.date_arrived , T1.date_departed FROM Dogs AS T1 JOIN Treatments AS T2 ON T1.dog_id = T2.dog_id",
+        "predicted_sql": "select dogs.date_arrived, dogs.date_departed from dogs inner join treatments on dogs.dog_id = treatments.dog_id",
+        "prompt_len": 1620
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Find the arriving date and the departing date of the dogs that received a treatment.",
+        "gold_sql": "SELECT DISTINCT T1.date_arrived , T1.date_departed FROM Dogs AS T1 JOIN Treatments AS T2 ON T1.dog_id = T2.dog_id",
+        "predicted_sql": "select dogs.date_arrived, dogs.date_departed, treatments.date_of_treatment from dogs inner join treatments on dogs.dog_id = treatments.dog_id",
+        "prompt_len": 1617
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "List the last name of the owner owning the youngest dog.",
+        "gold_sql": "SELECT T1.last_name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id = T2.owner_id WHERE T2.age = ( SELECT max(age) FROM Dogs )",
+        "predicted_sql": "select o.last_name from owners o join dogs d on o.owner_id = d.owner_id where d.date_of_birth = (select min(date_of_birth) from dogs) limit 1",
+        "prompt_len": 1613
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Who owns the youngest dog? Give me his or her last name.",
+        "gold_sql": "SELECT T1.last_name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id = T2.owner_id WHERE T2.age = ( SELECT max(age) FROM Dogs )",
+        "predicted_sql": "select owners.last_name from dogs join owners on dogs.owner_id = owners.owner_id where date_of_birth = (select min(date_of_birth) from dogs) limit 1",
+        "prompt_len": 1615
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "List the emails of the professionals who live in the state of Hawaii or the state of Wisconsin.",
+        "gold_sql": "SELECT email_address FROM Professionals WHERE state = 'Hawaii' OR state = 'Wisconsin'",
+        "predicted_sql": "select email_address from professionals where state = 'Hawaii' or state = 'Wisconsin'",
+        "prompt_len": 1620
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What are the emails of the professionals living in either the state of Hawaii or the state of Wisconsin?",
+        "gold_sql": "SELECT email_address FROM Professionals WHERE state = 'Hawaii' OR state = 'Wisconsin'",
+        "predicted_sql": "select email_address from professionals where state = 'Hawaii' or state = 'Wisconsin'",
+        "prompt_len": 1621
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What are the arriving date and the departing date of all the dogs?",
+        "gold_sql": "SELECT date_arrived , date_departed FROM Dogs",
+        "predicted_sql": "select date_arrived, date_departed from dogs",
+        "prompt_len": 1615
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "List the arrival date and the departure date for all the dogs.",
+        "gold_sql": "SELECT date_arrived , date_departed FROM Dogs",
+        "predicted_sql": "select date_arrived, date_departed from dogs",
+        "prompt_len": 1614
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "How many dogs went through any treatments?",
+        "gold_sql": "SELECT count(DISTINCT dog_id) FROM Treatments",
+        "predicted_sql": "select count(distinct dog_id) from treatments",
+        "prompt_len": 1609
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Count the number of dogs that went through a treatment.",
+        "gold_sql": "SELECT count(DISTINCT dog_id) FROM Treatments",
+        "predicted_sql": "select count(distinct dog_id) from treatments",
+        "prompt_len": 1612
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "How many professionals have performed any treatment to dogs?",
+        "gold_sql": "SELECT count(DISTINCT professional_id) FROM Treatments",
+        "predicted_sql": "select count(distinct professional_id) from treatments",
+        "prompt_len": 1611
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Find the number of professionals who have ever treated dogs.",
+        "gold_sql": "SELECT count(DISTINCT professional_id) FROM Treatments",
+        "predicted_sql": "select count(distinct professional_id) from treatments",
+        "prompt_len": 1612
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Which professionals live in a city containing the substring 'West'? List his or her role, street, city and state.",
+        "gold_sql": "SELECT role_code , street , city , state FROM professionals WHERE city LIKE '%West%'",
+        "predicted_sql": "select role_code, street, city, state from professionals where city like '%West%'",
+        "prompt_len": 1625
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Find the role, street, city and state of the professionals living in a city that contains the substring 'West'.",
+        "gold_sql": "SELECT role_code , street , city , state FROM professionals WHERE city LIKE '%West%'",
+        "predicted_sql": "select role_code, street, city, state from professionals where city like '%West%'",
+        "prompt_len": 1624
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Which owners live in the state whose name contains the substring 'North'? List his first name, last name and email.",
+        "gold_sql": "SELECT first_name , last_name , email_address FROM Owners WHERE state LIKE '%North%'",
+        "predicted_sql": "select first_name, last_name, email_address from owners where state like '%North%'",
+        "prompt_len": 1625
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Return the first name, last name and email of the owners living in a state whose name contains the substring 'North'.",
+        "gold_sql": "SELECT first_name , last_name , email_address FROM Owners WHERE state LIKE '%North%'",
+        "predicted_sql": "select first_name, last_name, email_address from owners where state like '%North%'",
+        "prompt_len": 1625
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "How many dogs have an age below the average?",
+        "gold_sql": "SELECT count(*) FROM Dogs WHERE age < ( SELECT avg(age) FROM Dogs )",
+        "predicted_sql": "select count(*) from dogs where age < (select avg(age) from dogs)",
+        "prompt_len": 1611
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Count the number of dogs of an age below the average.",
+        "gold_sql": "SELECT count(*) FROM Dogs WHERE age < ( SELECT avg(age) FROM Dogs )",
+        "predicted_sql": "select count(*) from dogs where age < (select avg(cast(age as integer)) from dogs)",
+        "prompt_len": 1613
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "How much does the most recent treatment cost?",
+        "gold_sql": "SELECT cost_of_treatment FROM Treatments ORDER BY date_of_treatment DESC LIMIT 1",
+        "predicted_sql": "select max(cost_of_treatment) from treatments",
+        "prompt_len": 1610
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Show me the cost of the most recently performed treatment.",
+        "gold_sql": "SELECT cost_of_treatment FROM Treatments ORDER BY date_of_treatment DESC LIMIT 1",
+        "predicted_sql": "select cost_of_treatment from treatments order by date_of_treatment desc limit 1",
+        "prompt_len": 1612
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "How many dogs have not gone through any treatment?",
+        "gold_sql": "SELECT count(*) FROM Dogs WHERE dog_id NOT IN ( SELECT dog_id FROM Treatments )",
+        "predicted_sql": "select count(*) from dogs where dog_id not in (select dog_id from treatments)",
+        "prompt_len": 1611
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Tell me the number of dogs that have not received any treatment .",
+        "gold_sql": "select count(*) from dogs where dog_id not in ( select dog_id from treatments )",
+        "predicted_sql": "select count(*) from dogs where dog_id not in (select dog_id from treatments)",
+        "prompt_len": 1614
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "How many owners temporarily do not have any dogs?",
+        "gold_sql": "SELECT count(*) FROM Owners WHERE owner_id NOT IN ( SELECT owner_id FROM Dogs )",
+        "predicted_sql": "select count(*) from owners o left join dogs d on o.owner_id = d.owner_id where d.dog_id is null",
+        "prompt_len": 1611
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Find the number of owners who do not own any dogs at this moment.",
+        "gold_sql": "SELECT count(*) FROM Owners WHERE owner_id NOT IN ( SELECT owner_id FROM Dogs )",
+        "predicted_sql": "select count(*) from owners where owner_id not in (select owner_id from dogs where date_adopted is null and date_departed is null)",
+        "prompt_len": 1616
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "How many professionals did not operate any treatment on dogs?",
+        "gold_sql": "SELECT count(*) FROM Professionals WHERE professional_id NOT IN ( SELECT professional_id FROM Treatments )",
+        "predicted_sql": "select count(*) from professionals where professional_id not in (select professional_id from treatments)",
+        "prompt_len": 1612
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Find the number of professionals who have not treated any dogs.",
+        "gold_sql": "SELECT count(*) FROM Professionals WHERE professional_id NOT IN ( SELECT professional_id FROM Treatments )",
+        "predicted_sql": "select count(*) from professionals where professional_id not in (select professional_id from treatments)",
+        "prompt_len": 1613
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "List the dog name, age and weight of the dogs who have been abandoned? 1 stands for yes, and 0 stands for no.",
+        "gold_sql": "SELECT name , age , weight FROM Dogs WHERE abandoned_yn = 1",
+        "predicted_sql": "select name, age, weight from dogs where abandoned_yn = '1'",
+        "prompt_len": 1630
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What are the dog name, age and weight of the dogs that were abandoned? Note that 1 stands for yes, and 0 stands for no in the tables.",
+        "gold_sql": "SELECT name , age , weight FROM Dogs WHERE abandoned_yn = 1",
+        "predicted_sql": "select name, age, weight from dogs where abandoned_yn = 1",
+        "prompt_len": 1635
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What is the average age of all the dogs?",
+        "gold_sql": "SELECT avg(age) FROM Dogs",
+        "predicted_sql": "select avg(age) from dogs",
+        "prompt_len": 1611
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Compute the average age of all the dogs.",
+        "gold_sql": "SELECT avg(age) FROM Dogs",
+        "predicted_sql": "select avg(age) from dogs",
+        "prompt_len": 1610
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What is the age of the oldest dog?",
+        "gold_sql": "SELECT max(age) FROM Dogs",
+        "predicted_sql": "select max(age) from dogs",
+        "prompt_len": 1610
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Tell me the age of the oldest dog.",
+        "gold_sql": "SELECT max(age) FROM Dogs",
+        "predicted_sql": "select max(age) from dogs",
+        "prompt_len": 1610
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "How much does each charge type costs? List both charge type and amount.",
+        "gold_sql": "SELECT charge_type , charge_amount FROM Charges",
+        "predicted_sql": "select charge_type, charge_amount from charges",
+        "prompt_len": 1616
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "List each charge type and its amount.",
+        "gold_sql": "SELECT charge_type , charge_amount FROM Charges",
+        "predicted_sql": "select charge_type, charge_amount from charges",
+        "prompt_len": 1609
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "How much does the most expensive charge type costs?",
+        "gold_sql": "SELECT max(charge_amount) FROM Charges",
+        "predicted_sql": "select max(charge_amount) from charges",
+        "prompt_len": 1611
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What is the charge amount of the most expensive charge type?",
+        "gold_sql": "SELECT max(charge_amount) FROM Charges",
+        "predicted_sql": "select max(charge_amount) from charges",
+        "prompt_len": 1613
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "List the email, cell phone and home phone of all the professionals.",
+        "gold_sql": "SELECT email_address , cell_number , home_phone FROM professionals",
+        "predicted_sql": "select email_address, cell_number, home_phone from professionals",
+        "prompt_len": 1615
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What are the email, cell phone and home phone of each professional?",
+        "gold_sql": "SELECT email_address , cell_number , home_phone FROM professionals",
+        "predicted_sql": "select email_address, cell_number, home_phone from professionals",
+        "prompt_len": 1615
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What are all the possible breed type and size type combinations?",
+        "gold_sql": "SELECT DISTINCT breed_code , size_code FROM dogs",
+        "predicted_sql": "select breeds.breed_name, sizes.size_description from breeds, sizes",
+        "prompt_len": 1613
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "Find the distinct breed type and size type combinations for dogs.",
+        "gold_sql": "SELECT DISTINCT breed_code , size_code FROM dogs",
+        "predicted_sql": "select distinct breed_code, size_code from dogs",
+        "prompt_len": 1613
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "List the first name of all the professionals along with the description of the treatment they have done.",
+        "gold_sql": "SELECT DISTINCT T1.first_name , T3.treatment_type_description FROM professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id = T2.professional_id JOIN Treatment_types AS T3 ON T2.treatment_type_code = T3.treatment_type_code",
+        "predicted_sql": "select professionals.first_name, treatment_types.treatment_type_description from professionals inner join treatments on professionals.professional_id = treatments.professional_id inner join treatment_types on treatments.treatment_type_code = treatment_types.treatment_type_code",
+        "prompt_len": 1620
+    },
+    {
+        "db_id": "dog_kennels",
+        "question": "What are each professional's first name and description of the treatment they have performed?",
+        "gold_sql": "SELECT DISTINCT T1.first_name , T3.treatment_type_description FROM professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id = T2.professional_id JOIN Treatment_types AS T3 ON T2.treatment_type_code = T3.treatment_type_code",
+        "predicted_sql": "select professionals.first_name, treatment_types.treatment_type_description from professionals join treatments on treatments.professional_id = professionals.professional_id join treatment_types on treatments.treatment_type_code = treatment_types.treatment_type_code",
+        "prompt_len": 1617
+    }
+]

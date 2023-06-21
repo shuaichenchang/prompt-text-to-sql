@@ -1,0 +1,212 @@
+[
+    {
+        "db_id": "course_teach",
+        "question": "How many teachers are there?",
+        "gold_sql": "SELECT count(*) FROM teacher",
+        "predicted_sql": "select count(*) from teacher",
+        "prompt_len": 311
+    },
+    {
+        "db_id": "course_teach",
+        "question": "What is the total count of teachers?",
+        "gold_sql": "SELECT count(*) FROM teacher",
+        "predicted_sql": "select count(*) from teacher",
+        "prompt_len": 313
+    },
+    {
+        "db_id": "course_teach",
+        "question": "List the names of teachers in ascending order of age.",
+        "gold_sql": "SELECT Name FROM teacher ORDER BY Age ASC",
+        "predicted_sql": "select name from teacher order by age asc",
+        "prompt_len": 316
+    },
+    {
+        "db_id": "course_teach",
+        "question": "What are the names of the teachers ordered by ascending age?",
+        "gold_sql": "SELECT Name FROM teacher ORDER BY Age ASC",
+        "predicted_sql": "select name from teacher order by age asc",
+        "prompt_len": 317
+    },
+    {
+        "db_id": "course_teach",
+        "question": "What are the age and hometown of teachers?",
+        "gold_sql": "SELECT Age , Hometown FROM teacher",
+        "predicted_sql": "select age, hometown from teacher",
+        "prompt_len": 314
+    },
+    {
+        "db_id": "course_teach",
+        "question": "What is the age and hometown of every teacher?",
+        "gold_sql": "SELECT Age , Hometown FROM teacher",
+        "predicted_sql": "select age, hometown from teacher",
+        "prompt_len": 315
+    },
+    {
+        "db_id": "course_teach",
+        "question": "List the name of teachers whose hometown is not `` Little Lever Urban District '' .",
+        "gold_sql": "select name from teacher where hometown != \"little lever urban district\"",
+        "predicted_sql": "select name from teacher where hometown != \"Little Lever Urban District\"",
+        "prompt_len": 321
+    },
+    {
+        "db_id": "course_teach",
+        "question": "What are the names of the teachers whose hometown is not `` Little Lever Urban District '' ?",
+        "gold_sql": "select name from teacher where hometown != \"little lever urban district\"",
+        "predicted_sql": "select name from teacher where hometown != \"Little Lever Urban District\"",
+        "prompt_len": 323
+    },
+    {
+        "db_id": "course_teach",
+        "question": "Show the name of teachers aged either 32 or 33?",
+        "gold_sql": "SELECT Name FROM teacher WHERE Age = 32 OR Age = 33",
+        "predicted_sql": "select name from teacher where age in ('32', '33')",
+        "prompt_len": 318
+    },
+    {
+        "db_id": "course_teach",
+        "question": "What are the names of the teachers who are aged either 32 or 33?",
+        "gold_sql": "SELECT Name FROM teacher WHERE Age = 32 OR Age = 33",
+        "predicted_sql": "select name from teacher where age in ('32', '33')",
+        "prompt_len": 322
+    },
+    {
+        "db_id": "course_teach",
+        "question": "What is the hometown of the youngest teacher?",
+        "gold_sql": "SELECT Hometown FROM teacher ORDER BY Age ASC LIMIT 1",
+        "predicted_sql": "select hometown from teacher where age = (select min(age) from teacher)",
+        "prompt_len": 314
+    },
+    {
+        "db_id": "course_teach",
+        "question": "Where is the youngest teacher from?",
+        "gold_sql": "SELECT Hometown FROM teacher ORDER BY Age ASC LIMIT 1",
+        "predicted_sql": "select hometown from teacher where age = (select min(age) from teacher)",
+        "prompt_len": 312
+    },
+    {
+        "db_id": "course_teach",
+        "question": "Show different hometown of teachers and the number of teachers from each hometown.",
+        "gold_sql": "SELECT Hometown , COUNT(*) FROM teacher GROUP BY Hometown",
+        "predicted_sql": "select hometown, count(*) as num_teachers from teacher group by hometown",
+        "prompt_len": 319
+    },
+    {
+        "db_id": "course_teach",
+        "question": "For each hometown, how many teachers are there?",
+        "gold_sql": "SELECT Hometown , COUNT(*) FROM teacher GROUP BY Hometown",
+        "predicted_sql": "select hometown, count(*) as num_teachers from teacher group by hometown",
+        "prompt_len": 315
+    },
+    {
+        "db_id": "course_teach",
+        "question": "List the most common hometown of teachers.",
+        "gold_sql": "SELECT Hometown FROM teacher GROUP BY Hometown ORDER BY COUNT(*) DESC LIMIT 1",
+        "predicted_sql": "select hometown, count(*) as count from teacher group by hometown order by count desc limit 1",
+        "prompt_len": 313
+    },
+    {
+        "db_id": "course_teach",
+        "question": "What is the most commmon hometowns for teachers?",
+        "gold_sql": "SELECT Hometown FROM teacher GROUP BY Hometown ORDER BY COUNT(*) DESC LIMIT 1",
+        "predicted_sql": "select hometown, count(*) as count from teacher group by hometown order by count desc limit 1",
+        "prompt_len": 316
+    },
+    {
+        "db_id": "course_teach",
+        "question": "Show the hometowns shared by at least two teachers.",
+        "gold_sql": "SELECT Hometown FROM teacher GROUP BY Hometown HAVING COUNT(*) >= 2",
+        "predicted_sql": "select distinct t1.hometown from teacher t1 inner join teacher t2 on t1.hometown = t2.hometown and t1.teacher_id <> t2.teacher_id",
+        "prompt_len": 316
+    },
+    {
+        "db_id": "course_teach",
+        "question": "What are the towns from which at least two teachers come from?",
+        "gold_sql": "SELECT Hometown FROM teacher GROUP BY Hometown HAVING COUNT(*) >= 2",
+        "predicted_sql": "select hometown from teacher group by hometown having count(*) >= 2",
+        "prompt_len": 318
+    },
+    {
+        "db_id": "course_teach",
+        "question": "Show names of teachers and the courses they are arranged to teach.",
+        "gold_sql": "SELECT T3.Name , T2.Course FROM course_arrange AS T1 JOIN course AS T2 ON T1.Course_ID = T2.Course_ID JOIN teacher AS T3 ON T1.Teacher_ID = T3.Teacher_ID",
+        "predicted_sql": "select teacher.name, course.course from teacher inner join course_arrange on teacher.teacher_id = course_arrange.teacher_id inner join course on course_arrange.course_id = course.course_id",
+        "prompt_len": 318
+    },
+    {
+        "db_id": "course_teach",
+        "question": "What is the name of each teacher and what course they teach?",
+        "gold_sql": "SELECT T3.Name , T2.Course FROM course_arrange AS T1 JOIN course AS T2 ON T1.Course_ID = T2.Course_ID JOIN teacher AS T3 ON T1.Teacher_ID = T3.Teacher_ID",
+        "predicted_sql": "select teacher.name, course.course from teacher join course_arrange on teacher.teacher_id = course_arrange.teacher_id join course on course_arrange.course_id = course.course_id",
+        "prompt_len": 318
+    },
+    {
+        "db_id": "course_teach",
+        "question": "Show names of teachers and the courses they are arranged to teach in ascending alphabetical order of the teacher's name.",
+        "gold_sql": "SELECT T3.Name , T2.Course FROM course_arrange AS T1 JOIN course AS T2 ON T1.Course_ID = T2.Course_ID JOIN teacher AS T3 ON T1.Teacher_ID = T3.Teacher_ID ORDER BY T3.Name",
+        "predicted_sql": "select teacher.name, course.course from teacher join course_arrange on teacher.teacher_id = course_arrange.teacher_id join course on course_arrange.course_id = course.course_id order by teacher.name asc",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "course_teach",
+        "question": "What are the names of the teachers and the courses they teach in ascending alphabetical order by the name of the teacher?",
+        "gold_sql": "SELECT T3.Name , T2.Course FROM course_arrange AS T1 JOIN course AS T2 ON T1.Course_ID = T2.Course_ID JOIN teacher AS T3 ON T1.Teacher_ID = T3.Teacher_ID ORDER BY T3.Name",
+        "predicted_sql": "select teacher.name, course.course from teacher join course_arrange on teacher.teacher_id = course_arrange.teacher_id join course on course_arrange.course_id = course.course_id order by teacher.name asc",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "course_teach",
+        "question": "Show the name of the teacher for the math course.",
+        "gold_sql": "SELECT T3.Name FROM course_arrange AS T1 JOIN course AS T2 ON T1.Course_ID = T2.Course_ID JOIN teacher AS T3 ON T1.Teacher_ID = T3.Teacher_ID WHERE T2.Course = \"Math\"",
+        "predicted_sql": "select teacher.name from teacher join course_arrange on teacher.teacher_id = course_arrange.teacher_id join course on course_arrange.course_id = course.course_id where course.course = \"Math\"",
+        "prompt_len": 316
+    },
+    {
+        "db_id": "course_teach",
+        "question": "What are the names of the people who teach math courses?",
+        "gold_sql": "SELECT T3.Name FROM course_arrange AS T1 JOIN course AS T2 ON T1.Course_ID = T2.Course_ID JOIN teacher AS T3 ON T1.Teacher_ID = T3.Teacher_ID WHERE T2.Course = \"Math\"",
+        "predicted_sql": "select teacher.name from teacher join course_arrange on teacher.teacher_id = course_arrange.teacher_id join course on course_arrange.course_id = course.course_id where course.course = \"Math\"",
+        "prompt_len": 317
+    },
+    {
+        "db_id": "course_teach",
+        "question": "Show names of teachers and the number of courses they teach.",
+        "gold_sql": "SELECT T2.Name , COUNT(*) FROM course_arrange AS T1 JOIN teacher AS T2 ON T1.Teacher_ID = T2.Teacher_ID GROUP BY T2.Name",
+        "predicted_sql": "select teacher.name, count(course_arrange.course_id) as num_courses from teacher inner join course_arrange on teacher.teacher_id = course_arrange.teacher_id group by teacher.name",
+        "prompt_len": 317
+    },
+    {
+        "db_id": "course_teach",
+        "question": "What are the names of the teachers and how many courses do they teach?",
+        "gold_sql": "SELECT T2.Name , COUNT(*) FROM course_arrange AS T1 JOIN teacher AS T2 ON T1.Teacher_ID = T2.Teacher_ID GROUP BY T2.Name",
+        "predicted_sql": "select teacher.name, count(course_arrange.course_id) as num_courses from teacher left join course_arrange on teacher.teacher_id = course_arrange.teacher_id group by teacher.teacher_id",
+        "prompt_len": 320
+    },
+    {
+        "db_id": "course_teach",
+        "question": "Show names of teachers that teach at least two courses.",
+        "gold_sql": "SELECT T2.Name FROM course_arrange AS T1 JOIN teacher AS T2 ON T1.Teacher_ID = T2.Teacher_ID GROUP BY T2.Name HAVING COUNT(*) >= 2",
+        "predicted_sql": "select teacher.name from teacher inner join course_arrange on teacher.teacher_id = course_arrange.teacher_id group by teacher.name having count(distinct course_arrange.course_id) >= 2",
+        "prompt_len": 316
+    },
+    {
+        "db_id": "course_teach",
+        "question": "What are the names of the teachers who teach at least two courses?",
+        "gold_sql": "SELECT T2.Name FROM course_arrange AS T1 JOIN teacher AS T2 ON T1.Teacher_ID = T2.Teacher_ID GROUP BY T2.Name HAVING COUNT(*) >= 2",
+        "predicted_sql": "select teacher.name from teacher inner join course_arrange on teacher.teacher_id = course_arrange.teacher_id group by teacher.name having count(distinct course_arrange.course_id) >= 2",
+        "prompt_len": 319
+    },
+    {
+        "db_id": "course_teach",
+        "question": "List the names of teachers who have not been arranged to teach courses.",
+        "gold_sql": "SELECT Name FROM teacher WHERE Teacher_id NOT IN (SELECT Teacher_id FROM course_arrange)",
+        "predicted_sql": "select name from teacher where teacher_id not in (select teacher_id from course_arrange)",
+        "prompt_len": 319
+    },
+    {
+        "db_id": "course_teach",
+        "question": "What are the names of the teachers whose courses have not been arranged?",
+        "gold_sql": "SELECT Name FROM teacher WHERE Teacher_id NOT IN (SELECT Teacher_id FROM course_arrange)",
+        "predicted_sql": "select teacher.name from teacher left join course_arrange on teacher.teacher_id = course_arrange.teacher_id where course_arrange.course_id is null",
+        "prompt_len": 319
+    }
+]

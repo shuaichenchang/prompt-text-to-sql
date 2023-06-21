@@ -1,0 +1,436 @@
+[
+    {
+        "db_id": "wta_1",
+        "question": "Find the total number of players.",
+        "gold_sql": "SELECT count(*) FROM players",
+        "predicted_sql": "select count(*) from players",
+        "prompt_len": 930
+    },
+    {
+        "db_id": "wta_1",
+        "question": "How many players are there?",
+        "gold_sql": "SELECT count(*) FROM players",
+        "predicted_sql": "select count(*) from players",
+        "prompt_len": 929
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the total number of matches.",
+        "gold_sql": "SELECT count(*) FROM matches",
+        "predicted_sql": "select count(*) from matches",
+        "prompt_len": 930
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Count the number of matches.",
+        "gold_sql": "SELECT count(*) FROM matches",
+        "predicted_sql": "select count(*) from matches",
+        "prompt_len": 929
+    },
+    {
+        "db_id": "wta_1",
+        "question": "List the first name and birth date of all players from the country with code USA.",
+        "gold_sql": "SELECT first_name , birth_date FROM players WHERE country_code = 'USA'",
+        "predicted_sql": "select first_name, birth_date from players where country_code = 'USA'",
+        "prompt_len": 940
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What are the first names and birth dates of players from the USA?",
+        "gold_sql": "SELECT first_name , birth_date FROM players WHERE country_code = 'USA'",
+        "predicted_sql": "select first_name, birth_date from players where country_code = \"USA\"",
+        "prompt_len": 937
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the average age of losers and winners of all matches.",
+        "gold_sql": "SELECT avg(loser_age) , avg(winner_age) FROM matches",
+        "predicted_sql": "select avg(loser_age) as avg_loser_age, avg(winner_age) as avg_winner_age from matches",
+        "prompt_len": 935
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What are the average ages of losers and winners across matches?",
+        "gold_sql": "SELECT avg(loser_age) , avg(winner_age) FROM matches",
+        "predicted_sql": "select avg(loser_age), avg(winner_age) from matches",
+        "prompt_len": 935
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the average rank of winners in all matches.",
+        "gold_sql": "SELECT avg(winner_rank) FROM matches",
+        "predicted_sql": "select avg(winner_rank) from matches",
+        "prompt_len": 933
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What is the average rank for winners in all matches?",
+        "gold_sql": "SELECT avg(winner_rank) FROM matches",
+        "predicted_sql": "select avg(winner_rank) from matches",
+        "prompt_len": 934
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the highest rank of losers in all matches.",
+        "gold_sql": "SELECT min(loser_rank) FROM matches",
+        "predicted_sql": "select max(loser_rank) from matches",
+        "prompt_len": 933
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What is the best rank of losers across all matches?",
+        "gold_sql": "SELECT min(loser_rank) FROM matches",
+        "predicted_sql": "select min(loser_rank) from matches",
+        "prompt_len": 934
+    },
+    {
+        "db_id": "wta_1",
+        "question": "find the number of distinct country codes of all players.",
+        "gold_sql": "SELECT count(DISTINCT country_code) FROM players",
+        "predicted_sql": "select count(distinct country_code) from players",
+        "prompt_len": 934
+    },
+    {
+        "db_id": "wta_1",
+        "question": "How many distinct countries do players come from?",
+        "gold_sql": "SELECT count(DISTINCT country_code) FROM players",
+        "predicted_sql": "select count(distinct country_code) from players",
+        "prompt_len": 932
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the number of distinct name of losers.",
+        "gold_sql": "SELECT count(DISTINCT loser_name) FROM matches",
+        "predicted_sql": "select count(distinct loser_name) from matches",
+        "prompt_len": 932
+    },
+    {
+        "db_id": "wta_1",
+        "question": "How many different loser names are there?",
+        "gold_sql": "SELECT count(DISTINCT loser_name) FROM matches",
+        "predicted_sql": "select count(distinct loser_name) from matches",
+        "prompt_len": 931
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the name of tourney that has more than 10 matches.",
+        "gold_sql": "SELECT tourney_name FROM matches GROUP BY tourney_name HAVING count(*) > 10",
+        "predicted_sql": "select tourney_name from matches group by tourney_name having count(*) > 10",
+        "prompt_len": 937
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What are the names of tournaments that have more than 10 matches?",
+        "gold_sql": "SELECT tourney_name FROM matches GROUP BY tourney_name HAVING count(*) > 10",
+        "predicted_sql": "select tourney_name from matches group by tourney_name having count(*) > 10",
+        "prompt_len": 937
+    },
+    {
+        "db_id": "wta_1",
+        "question": "List the names of all winners who played in both 2013 and 2016.",
+        "gold_sql": "SELECT winner_name FROM matches WHERE YEAR = 2013 INTERSECT SELECT winner_name FROM matches WHERE YEAR = 2016",
+        "predicted_sql": "select distinct winner_name from matches where year = 2013 and winner_name in (   select winner_name   from matches   where year = 2016 )",
+        "prompt_len": 941
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What are the names of players who won in both 2013 and 2016?",
+        "gold_sql": "SELECT winner_name FROM matches WHERE YEAR = 2013 INTERSECT SELECT winner_name FROM matches WHERE YEAR = 2016",
+        "predicted_sql": "select p.first_name, p.last_name from players p inner join matches m1 on p.player_id = m1.winner_id inner join matches m2 on p.player_id = m2.winner_id where m1.year = 2013 and m2.year = 2016",
+        "prompt_len": 941
+    },
+    {
+        "db_id": "wta_1",
+        "question": "List the number of all matches who played in years of 2013 or 2016.",
+        "gold_sql": "SELECT count(*) FROM matches WHERE YEAR = 2013 OR YEAR = 2016",
+        "predicted_sql": "select count(*) from matches where year = 2013 or year = 2016",
+        "prompt_len": 942
+    },
+    {
+        "db_id": "wta_1",
+        "question": "How many matches were played in 2013 or 2016?",
+        "gold_sql": "SELECT count(*) FROM matches WHERE YEAR = 2013 OR YEAR = 2016",
+        "predicted_sql": "select count(*) from matches where year = 2013 or year = 2016",
+        "prompt_len": 937
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What are the country code and first name of the players who won in both tourney WTA Championships and Australian Open?",
+        "gold_sql": "SELECT T1.country_code , T1.first_name FROM players AS T1 JOIN matches AS T2 ON T1.player_id = T2.winner_id WHERE T2.tourney_name = 'WTA Championships' INTERSECT SELECT T1.country_code , T1.first_name FROM players AS T1 JOIN matches AS T2 ON T1.player_id = T2.winner_id WHERE T2.tourney_name = 'Australian Open'",
+        "predicted_sql": "select players.country_code, players.first_name from players inner join matches as m1 on players.player_id = m1.winner_id inner join matches as m2 on players.player_id = m2.winner_id where m1.tourney_name = 'WTA Championships' and m2.tourney_name = 'Australian Open'",
+        "prompt_len": 947
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What are the first names and country codes for players who won both the WTA Championships and the Australian Open?",
+        "gold_sql": "SELECT T1.country_code , T1.first_name FROM players AS T1 JOIN matches AS T2 ON T1.player_id = T2.winner_id WHERE T2.tourney_name = 'WTA Championships' INTERSECT SELECT T1.country_code , T1.first_name FROM players AS T1 JOIN matches AS T2 ON T1.player_id = T2.winner_id WHERE T2.tourney_name = 'Australian Open'",
+        "predicted_sql": "select players.first_name, players.country_code from players inner join matches on players.player_id = matches.winner_id where matches.tourney_name = 'WTA Championships' and matches.tourney_id like '%-AUS-%' group by players.player_id having count(distinct matches.tourney_name) = 2",
+        "prompt_len": 945
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the first name and country code of the oldest player.",
+        "gold_sql": "SELECT first_name , country_code FROM players ORDER BY birth_date LIMIT 1",
+        "predicted_sql": "select first_name, country_code from players where birth_date = (select min(birth_date) from players)",
+        "prompt_len": 935
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What is the first name and country code of the oldest player?",
+        "gold_sql": "SELECT first_name , country_code FROM players ORDER BY birth_date LIMIT 1",
+        "predicted_sql": "select first_name, country_code from players where birth_date = (select min(birth_date) from players)",
+        "prompt_len": 936
+    },
+    {
+        "db_id": "wta_1",
+        "question": "List the first and last name of all players in the order of birth date.",
+        "gold_sql": "SELECT first_name , last_name FROM players ORDER BY birth_date",
+        "predicted_sql": "select first_name, last_name from players order by birth_date",
+        "prompt_len": 939
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What are the full names of all players, sorted by birth date?",
+        "gold_sql": "SELECT first_name , last_name FROM players ORDER BY birth_date",
+        "predicted_sql": "select first_name || ' ' || last_name as full_name from players order by birth_date",
+        "prompt_len": 937
+    },
+    {
+        "db_id": "wta_1",
+        "question": "List the first and last name of all players who are left / L hand in the order of birth date.",
+        "gold_sql": "SELECT first_name , last_name FROM players WHERE hand = 'L' ORDER BY birth_date",
+        "predicted_sql": "select first_name, last_name from players where hand = 'L' order by birth_date",
+        "prompt_len": 945
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What are the full names of all left handed players, in order of birth date?",
+        "gold_sql": "SELECT first_name , last_name FROM players WHERE hand = 'L' ORDER BY birth_date",
+        "predicted_sql": "select first_name || ' ' || last_name as full_name from players where hand = 'L' order by birth_date",
+        "prompt_len": 940
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the first name and country code of the player who did the most number of tours.",
+        "gold_sql": "SELECT T1.country_code , T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id = T2.player_id ORDER BY T2.tours DESC LIMIT 1",
+        "predicted_sql": "select players.first_name, players.country_code from players inner join rankings on players.player_id = rankings.player_id where rankings.tours = (select max(tours) from rankings)",
+        "prompt_len": 941
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What is the first name and country code of the player with the most tours?",
+        "gold_sql": "SELECT T1.country_code , T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id = T2.player_id ORDER BY T2.tours DESC LIMIT 1",
+        "predicted_sql": "select players.first_name, players.country_code from players inner join rankings on players.player_id = rankings.player_id where rankings.tours = (select max(tours) from rankings)",
+        "prompt_len": 939
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the year that has the most number of matches.",
+        "gold_sql": "SELECT YEAR FROM matches GROUP BY YEAR ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select year, count(*) as num_matches from matches group by year order by num_matches desc limit 1",
+        "prompt_len": 934
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Which year had the most matches?",
+        "gold_sql": "SELECT YEAR FROM matches GROUP BY YEAR ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select year, count(*) as num_matches from matches group by year order by num_matches desc limit 1",
+        "prompt_len": 930
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the name and rank points of the winner who won the most times.",
+        "gold_sql": "SELECT winner_name , winner_rank_points FROM matches GROUP BY winner_name ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select winner_name, winner_rank_points from matches join players on matches.winner_id = players.player_id group by winner_id order by count(*) desc limit 1",
+        "prompt_len": 938
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What is the name of the winner who has won the most matches, and how many rank points does this player have?",
+        "gold_sql": "SELECT winner_name , winner_rank_points FROM matches GROUP BY winner_name ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select winner_name, winner_rank_points from matches join players on matches.winner_id = players.player_id group by winner_name order by count(*) desc limit 1",
+        "prompt_len": 947
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the name of the winner who has the highest rank points and participated in the Australian Open tourney.",
+        "gold_sql": "SELECT winner_name FROM matches WHERE tourney_name = 'Australian Open' ORDER BY winner_rank_points DESC LIMIT 1",
+        "predicted_sql": "select winner_name from matches where tourney_name = 'Australian Open' and winner_rank_points = (  select max(winner_rank_points)  from matches  where tourney_name = 'Australian Open' )",
+        "prompt_len": 944
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What is the name of the winner with the most rank points who participated in the Australian Open tournament?",
+        "gold_sql": "SELECT winner_name FROM matches WHERE tourney_name = 'Australian Open' ORDER BY winner_rank_points DESC LIMIT 1",
+        "predicted_sql": "select winner_name from matches where tourney_name = 'Australian Open' order by winner_rank_points desc limit 1",
+        "prompt_len": 943
+    },
+    {
+        "db_id": "wta_1",
+        "question": "find the names of loser and winner who played in the match with greatest number of minutes.",
+        "gold_sql": "SELECT winner_name , loser_name FROM matches ORDER BY minutes DESC LIMIT 1",
+        "predicted_sql": "select loser_name, winner_name from matches where minutes = (select max(minutes) from matches)",
+        "prompt_len": 941
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What are the names of the winner and loser who played in the longest match?",
+        "gold_sql": "SELECT winner_name , loser_name FROM matches ORDER BY minutes DESC LIMIT 1",
+        "predicted_sql": "select winner_name, loser_name from matches where minutes = (select max(minutes) from matches)",
+        "prompt_len": 939
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the average ranking for each player and their first name.",
+        "gold_sql": "SELECT avg(ranking) , T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id = T2.player_id GROUP BY T1.first_name",
+        "predicted_sql": "select players.first_name, avg(rankings.ranking) as avg_ranking from players join rankings on players.player_id = rankings.player_id group by players.player_id",
+        "prompt_len": 935
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What are the first names of all players, and their average rankings?",
+        "gold_sql": "SELECT avg(ranking) , T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id = T2.player_id GROUP BY T1.first_name",
+        "predicted_sql": "select first_name, avg(rankings.ranking) as avg_ranking from players join rankings on players.player_id = rankings.player_id group by players.player_id",
+        "prompt_len": 937
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the total ranking points for each player and their first name.",
+        "gold_sql": "SELECT sum(ranking_points) , T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id = T2.player_id GROUP BY T1.first_name",
+        "predicted_sql": "select players.first_name, sum(rankings.ranking_points) as total_ranking_points from players join rankings on players.player_id = rankings.player_id group by players.player_id",
+        "prompt_len": 936
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What are the first names of all players, and their total ranking points?",
+        "gold_sql": "SELECT sum(ranking_points) , T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id = T2.player_id GROUP BY T1.first_name",
+        "predicted_sql": "select players.first_name, sum(rankings.ranking_points) as total_ranking_points from players join rankings on players.player_id = rankings.player_id group by players.first_name",
+        "prompt_len": 938
+    },
+    {
+        "db_id": "wta_1",
+        "question": "find the number of players for each country.",
+        "gold_sql": "SELECT count(*) , country_code FROM players GROUP BY country_code",
+        "predicted_sql": "select country_code, count(*) as num_players from players group by country_code",
+        "prompt_len": 932
+    },
+    {
+        "db_id": "wta_1",
+        "question": "How many players are from each country?",
+        "gold_sql": "SELECT count(*) , country_code FROM players GROUP BY country_code",
+        "predicted_sql": "select country_code, count(*) as num_players from players group by country_code",
+        "prompt_len": 931
+    },
+    {
+        "db_id": "wta_1",
+        "question": "find the code of the country where has the greatest number of players.",
+        "gold_sql": "SELECT country_code FROM players GROUP BY country_code ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select country_code, count(*) as num_players from players group by country_code order by num_players desc limit 1",
+        "prompt_len": 937
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What is the code of the country with the most players?",
+        "gold_sql": "SELECT country_code FROM players GROUP BY country_code ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select country_code, count(*) as num_players from players group by country_code order by num_players desc limit 1",
+        "prompt_len": 935
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the codes of countries that have more than 50 players.",
+        "gold_sql": "SELECT country_code FROM players GROUP BY country_code HAVING count(*) > 50",
+        "predicted_sql": "select country_code from players group by country_code having count(player_id) > 50",
+        "prompt_len": 936
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What are the codes of countries with more than 50 players?",
+        "gold_sql": "SELECT country_code FROM players GROUP BY country_code HAVING count(*) > 50",
+        "predicted_sql": "select country_code from players group by country_code having count(player_id) > 50",
+        "prompt_len": 936
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the total number of tours for each ranking date.",
+        "gold_sql": "SELECT sum(tours) , ranking_date FROM rankings GROUP BY ranking_date",
+        "predicted_sql": "select ranking_date, sum(tours) as total_tours from rankings group by ranking_date",
+        "prompt_len": 934
+    },
+    {
+        "db_id": "wta_1",
+        "question": "How many total tours were there for each ranking date?",
+        "gold_sql": "SELECT sum(tours) , ranking_date FROM rankings GROUP BY ranking_date",
+        "predicted_sql": "select ranking_date, sum(tours) as total_tours from rankings group by ranking_date",
+        "prompt_len": 934
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the number of matches happened in each year.",
+        "gold_sql": "SELECT count(*) , YEAR FROM matches GROUP BY YEAR",
+        "predicted_sql": "select year, count(*) as num_matches from matches group by year",
+        "prompt_len": 933
+    },
+    {
+        "db_id": "wta_1",
+        "question": "How many matches were played in each year?",
+        "gold_sql": "SELECT count(*) , YEAR FROM matches GROUP BY YEAR",
+        "predicted_sql": "select year, count(*) as num_matches from matches group by year",
+        "prompt_len": 932
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the name and rank of the 3 youngest winners across all matches.",
+        "gold_sql": "SELECT DISTINCT winner_name , winner_rank FROM matches ORDER BY winner_age LIMIT 3",
+        "predicted_sql": "select winner_name, winner_rank, winner_age from matches join players on matches.winner_id = players.player_id order by winner_age limit 3",
+        "prompt_len": 938
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What are the names and ranks of the three youngest winners across all matches?",
+        "gold_sql": "SELECT DISTINCT winner_name , winner_rank FROM matches ORDER BY winner_age LIMIT 3",
+        "predicted_sql": "select winner_name, winner_rank, winner_age from matches join players on matches.winner_id = players.player_id order by winner_age limit 3",
+        "prompt_len": 938
+    },
+    {
+        "db_id": "wta_1",
+        "question": "How many different winners both participated in the WTA Championships and were left handed?",
+        "gold_sql": "SELECT count(DISTINCT winner_name) FROM matches WHERE tourney_name = 'WTA Championships' AND winner_hand = 'L'",
+        "predicted_sql": "select count(distinct winner_id) from matches where tourney_name = 'WTA Championships' and winner_hand = 'L'",
+        "prompt_len": 939
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the number of left handed winners who participated in the WTA Championships.",
+        "gold_sql": "SELECT count(DISTINCT winner_name) FROM matches WHERE tourney_name = 'WTA Championships' AND winner_hand = 'L'",
+        "predicted_sql": "select count(distinct winner_id) from matches where winner_hand = 'L' and tourney_name = 'WTA Championships'",
+        "prompt_len": 938
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the first name, country code and birth date of the winner who has the highest rank points in all matches.",
+        "gold_sql": "SELECT T1.first_name , T1.country_code , T1.birth_date FROM players AS T1 JOIN matches AS T2 ON T1.player_id = T2.winner_id ORDER BY T2.winner_rank_points DESC LIMIT 1",
+        "predicted_sql": "select players.first_name, players.country_code, players.birth_date from players join matches on players.player_id = matches.winner_id where matches.winner_rank_points = (select max(winner_rank_points) from matches)",
+        "prompt_len": 946
+    },
+    {
+        "db_id": "wta_1",
+        "question": "What is the first name, country code, and birth date of the player with the most winner rank points across all matches?",
+        "gold_sql": "SELECT T1.first_name , T1.country_code , T1.birth_date FROM players AS T1 JOIN matches AS T2 ON T1.player_id = T2.winner_id ORDER BY T2.winner_rank_points DESC LIMIT 1",
+        "predicted_sql": "select players.first_name, players.country_code, players.birth_date from players join matches on players.player_id = matches.winner_id where matches.winner_rank_points = (select max(winner_rank_points) from matches)",
+        "prompt_len": 948
+    },
+    {
+        "db_id": "wta_1",
+        "question": "Find the number of players for each hand type.",
+        "gold_sql": "SELECT count(*) , hand FROM players GROUP BY hand",
+        "predicted_sql": "select hand, count(*) as num_players from players group by hand",
+        "prompt_len": 933
+    },
+    {
+        "db_id": "wta_1",
+        "question": "How many players are there for each hand type?",
+        "gold_sql": "SELECT count(*) , hand FROM players GROUP BY hand",
+        "predicted_sql": "select hand, count(*) as num_players from players group by hand",
+        "prompt_len": 933
+    }
+]

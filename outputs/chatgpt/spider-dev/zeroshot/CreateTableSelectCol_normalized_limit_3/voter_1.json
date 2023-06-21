@@ -1,0 +1,107 @@
+[
+    {
+        "db_id": "voter_1",
+        "question": "How many states are there?",
+        "gold_sql": "SELECT count(*) FROM area_code_state",
+        "predicted_sql": "select count(distinct state) from area_code_state",
+        "prompt_len": 348
+    },
+    {
+        "db_id": "voter_1",
+        "question": "List the contestant numbers and names, ordered by contestant name descending.",
+        "gold_sql": "SELECT contestant_number , contestant_name FROM contestants ORDER BY contestant_name DESC",
+        "predicted_sql": "select contestant_number, contestant_name from contestants order by contestant_name desc",
+        "prompt_len": 355
+    },
+    {
+        "db_id": "voter_1",
+        "question": "List the vote ids, phone numbers and states of all votes.",
+        "gold_sql": "SELECT vote_id , phone_number , state FROM votes",
+        "predicted_sql": "select vote_id, phone_number, state from votes",
+        "prompt_len": 355
+    },
+    {
+        "db_id": "voter_1",
+        "question": "What are the maximum and minimum values of area codes?",
+        "gold_sql": "SELECT max(area_code) , min(area_code) FROM area_code_state",
+        "predicted_sql": "select max(area_code), min(area_code) from area_code_state",
+        "prompt_len": 353
+    },
+    {
+        "db_id": "voter_1",
+        "question": "What is last date created of votes from the state 'CA'?",
+        "gold_sql": "SELECT max(created) FROM votes WHERE state = 'CA'",
+        "predicted_sql": "select max(created) from votes where state = 'CA'",
+        "prompt_len": 356
+    },
+    {
+        "db_id": "voter_1",
+        "question": "What are the names of the contestants whose names are not 'Jessie Alloway'",
+        "gold_sql": "SELECT contestant_name FROM contestants WHERE contestant_name != 'Jessie Alloway'",
+        "predicted_sql": "select contestant_name from contestants where contestant_name != 'Jessie Alloway'",
+        "prompt_len": 359
+    },
+    {
+        "db_id": "voter_1",
+        "question": "What are the distinct states and create time of all votes?",
+        "gold_sql": "SELECT DISTINCT state , created FROM votes",
+        "predicted_sql": "select distinct state, created from votes",
+        "prompt_len": 354
+    },
+    {
+        "db_id": "voter_1",
+        "question": "What are the contestant numbers and names of the contestants who had at least two votes?",
+        "gold_sql": "SELECT T1.contestant_number , T1.contestant_name FROM contestants AS T1 JOIN votes AS T2 ON T1.contestant_number = T2.contestant_number GROUP BY T1.contestant_number HAVING count(*) >= 2",
+        "predicted_sql": "select contestant_number, contestant_name from contestants where contestant_number in (   select contestant_number   from votes   group by contestant_number   having count(*) >= 2 )",
+        "prompt_len": 359
+    },
+    {
+        "db_id": "voter_1",
+        "question": "Of all the contestants who got voted, what is the contestant number and name of the contestant who got least votes?",
+        "gold_sql": "SELECT T1.contestant_number , T1.contestant_name FROM contestants AS T1 JOIN votes AS T2 ON T1.contestant_number = T2.contestant_number GROUP BY T1.contestant_number ORDER BY count(*) ASC LIMIT 1",
+        "predicted_sql": "select contestant_number, contestant_name from contestants where contestant_number not in (   select contestant_number   from votes   group by contestant_number   order by count(*) desc   limit 1 )",
+        "prompt_len": 365
+    },
+    {
+        "db_id": "voter_1",
+        "question": "What are the number of votes from state 'NY' or 'CA'?",
+        "gold_sql": "SELECT count(*) FROM votes WHERE state = 'NY' OR state = 'CA'",
+        "predicted_sql": "select count(*) from votes where state in ('NY', 'CA')",
+        "prompt_len": 358
+    },
+    {
+        "db_id": "voter_1",
+        "question": "How many contestants did not get voted?",
+        "gold_sql": "SELECT count(*) FROM contestants WHERE contestant_number NOT IN ( SELECT contestant_number FROM votes )",
+        "predicted_sql": "select count(*) from contestants where contestant_number not in (select contestant_number from votes)",
+        "prompt_len": 350
+    },
+    {
+        "db_id": "voter_1",
+        "question": "What is the area code in which the most voters voted?",
+        "gold_sql": "SELECT T1.area_code FROM area_code_state AS T1 JOIN votes AS T2 ON T1.state = T2.state GROUP BY T1.area_code ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select area_code_state.area_code, count(*) as num_votes from area_code_state join votes on area_code_state.state = votes.state group by area_code_state.area_code order by num_votes desc limit 1",
+        "prompt_len": 354
+    },
+    {
+        "db_id": "voter_1",
+        "question": "What are the create dates, states, and phone numbers of the votes that were for the contestant named 'Tabatha Gehling'?",
+        "gold_sql": "SELECT T2.created , T2.state , T2.phone_number FROM contestants AS T1 JOIN votes AS T2 ON T1.contestant_number = T2.contestant_number WHERE T1.contestant_name = 'Tabatha Gehling'",
+        "predicted_sql": "select votes.created, votes.state, votes.phone_number from votes inner join contestants on votes.contestant_number = contestants.contestant_number where contestants.contestant_name = 'Tabatha Gehling'",
+        "prompt_len": 369
+    },
+    {
+        "db_id": "voter_1",
+        "question": "List the area codes in which voters voted both for the contestant 'Tabatha Gehling' and the contestant 'Kelly Clauss'.",
+        "gold_sql": "SELECT T3.area_code FROM contestants AS T1 JOIN votes AS T2 ON T1.contestant_number = T2.contestant_number JOIN area_code_state AS T3 ON T2.state = T3.state WHERE T1.contestant_name = 'Tabatha Gehling' INTERSECT SELECT T3.area_code FROM contestants AS T1 JOIN votes AS T2 ON T1.contestant_number = T2.contestant_number JOIN area_code_state AS T3 ON T2.state = T3.state WHERE T1.contestant_name = 'Kelly Clauss'",
+        "predicted_sql": "select distinct a.area_code from area_code_state a inner join votes v on a.state = v.state inner join contestants c on v.contestant_number = c.contestant_number where c.contestant_name in ('Tabatha Gehling', 'Kelly Clauss') group by a.area_code having count(distinct v.contestant_number) = 2",
+        "prompt_len": 368
+    },
+    {
+        "db_id": "voter_1",
+        "question": "Return the names of the contestants whose names contain the substring 'Al' .",
+        "gold_sql": "select contestant_name from contestants where contestant_name like \"%al%\"",
+        "predicted_sql": "select contestant_name from contestants where contestant_name like '%Al%'",
+        "prompt_len": 357
+    }
+]

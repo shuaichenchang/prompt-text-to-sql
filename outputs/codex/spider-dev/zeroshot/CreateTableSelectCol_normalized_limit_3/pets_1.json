@@ -1,0 +1,296 @@
+[
+    {
+        "db_id": "pets_1",
+        "question": "Find the number of pets whose weight is heavier than 10.",
+        "gold_sql": "SELECT count(*) FROM pets WHERE weight > 10",
+        "predicted_sql": "select count(*) from pets where weight > 10",
+        "prompt_len": 395
+    },
+    {
+        "db_id": "pets_1",
+        "question": "How many pets have a greater weight than 10?",
+        "gold_sql": "SELECT count(*) FROM pets WHERE weight > 10",
+        "predicted_sql": "select count(*) from pets where weight > 10",
+        "prompt_len": 393
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the weight of the youngest dog.",
+        "gold_sql": "SELECT weight FROM pets ORDER BY pet_age LIMIT 1",
+        "predicted_sql": "select weight from pets where pettype = \"dog\" and pet_age = (select min(pet_age) from pets where pettype = \"dog\")",
+        "prompt_len": 391
+    },
+    {
+        "db_id": "pets_1",
+        "question": "How much does the youngest dog weigh?",
+        "gold_sql": "SELECT weight FROM pets ORDER BY pet_age LIMIT 1",
+        "predicted_sql": "select weight from pets where pettype = \"dog\" and pet_age = (select min(pet_age) from pets where pettype = \"dog\")",
+        "prompt_len": 391
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the maximum weight for each type of pet. List the maximum weight and pet type.",
+        "gold_sql": "SELECT max(weight) , petType FROM pets GROUP BY petType",
+        "predicted_sql": "select pettype, max(weight) from pets group by pettype",
+        "prompt_len": 401
+    },
+    {
+        "db_id": "pets_1",
+        "question": "List the maximum weight and type for each type of pet.",
+        "gold_sql": "SELECT max(weight) , petType FROM pets GROUP BY petType",
+        "predicted_sql": "select pettype, max(weight) from pets group by pettype",
+        "prompt_len": 395
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find number of pets owned by students who are older than 20.",
+        "gold_sql": "SELECT count(*) FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid WHERE T1.age > 20",
+        "predicted_sql": "select count(*) from student, pets, has_pet where student.stuid = has_pet.stuid and pets.petid = has_pet.petid and student.age > 20",
+        "prompt_len": 396
+    },
+    {
+        "db_id": "pets_1",
+        "question": "How many pets are owned by students that have an age greater than 20?",
+        "gold_sql": "SELECT count(*) FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid WHERE T1.age > 20",
+        "predicted_sql": "select count(*) from pets, student, has_pet where student.age > 20 and student.stuid = has_pet.stuid and has_pet.petid = pets.petid",
+        "prompt_len": 398
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the number of dog pets that are raised by female students (with sex F).",
+        "gold_sql": "SELECT count(*) FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T2.petid = T3.petid WHERE T1.sex = 'F' AND T3.pettype = 'dog'",
+        "predicted_sql": "select count(*) from pets, student, has_pet where pets.petid = has_pet.petid and student.stuid = has_pet.stuid and pets.pettype = \"dog\" and student.sex = \"F\"",
+        "prompt_len": 400
+    },
+    {
+        "db_id": "pets_1",
+        "question": "How many dog pets are raised by female students?",
+        "gold_sql": "SELECT count(*) FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T2.petid = T3.petid WHERE T1.sex = 'F' AND T3.pettype = 'dog'",
+        "predicted_sql": "select count(*) from pets, student, has_pet where pets.petid = has_pet.petid and student.stuid = has_pet.stuid and pets.pettype = \"dog\" and student.sex = \"F\"",
+        "prompt_len": 393
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the number of distinct type of pets.",
+        "gold_sql": "SELECT count(DISTINCT pettype) FROM pets",
+        "predicted_sql": "select count(distinct pettype) from pets",
+        "prompt_len": 392
+    },
+    {
+        "db_id": "pets_1",
+        "question": "How many different types of pet are there?",
+        "gold_sql": "SELECT count(DISTINCT pettype) FROM pets",
+        "predicted_sql": "select count(distinct pettype) from pets",
+        "prompt_len": 392
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the first name of students who have cat or dog pet.",
+        "gold_sql": "SELECT DISTINCT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'cat' OR T3.pettype = 'dog'",
+        "predicted_sql": "select fname from student where stuid in (select stuid from has_pet where petid in (select petid from pets where pettype = \"cat\" or pettype = \"dog\"))",
+        "prompt_len": 396
+    },
+    {
+        "db_id": "pets_1",
+        "question": "What are the first names of every student who has a cat or dog as a pet?",
+        "gold_sql": "SELECT DISTINCT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'cat' OR T3.pettype = 'dog'",
+        "predicted_sql": "select fname from student, pets, has_pet where student.stuid = has_pet.stuid and pets.petid = has_pet.petid and (pettype = \"cat\" or pettype = \"dog\")",
+        "prompt_len": 401
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the first name of students who have both cat and dog pets .",
+        "gold_sql": "select t1.fname from student as t1 join has_pet as t2 on t1.stuid = t2.stuid join pets as t3 on t3.petid = t2.petid where t3.pettype = 'cat' intersect select t1.fname from student as t1 join has_pet as t2 on t1.stuid = t2.stuid join pets as t3 on t3.petid = t2.petid where t3.pettype = 'dog'",
+        "predicted_sql": "select fname from student where stuid in (select stuid from has_pet where petid in (select petid from pets where pettype = \"cat\") intersect select stuid from has_pet where petid in (select petid from pets where pettype = \"dog\"))",
+        "prompt_len": 397
+    },
+    {
+        "db_id": "pets_1",
+        "question": "What are the students' first names who have both cats and dogs as pets?",
+        "gold_sql": "SELECT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'cat' INTERSECT SELECT T1.Fname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'dog'",
+        "predicted_sql": "select fname from student where stuid in (select stuid from has_pet where petid in (select petid from pets where pettype = \"cat\") intersect select stuid from has_pet where petid in (select petid from pets where pettype = \"dog\"))",
+        "prompt_len": 399
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the major and age of students who do not have a cat pet.",
+        "gold_sql": "SELECT major , age FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'cat')",
+        "predicted_sql": "select major, age from student where stuid not in (select stuid from has_pet where petid in (select petid from pets where pettype = 'cat'))",
+        "prompt_len": 398
+    },
+    {
+        "db_id": "pets_1",
+        "question": "What major is every student who does not own a cat as a pet, and also how old are they?",
+        "gold_sql": "SELECT major , age FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'cat')",
+        "predicted_sql": "select major, age from student where stuid not in (select stuid from has_pet where petid in (select petid from pets where pettype = \"cat\"))",
+        "prompt_len": 405
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the id of students who do not have a cat pet.",
+        "gold_sql": "SELECT stuid FROM student EXCEPT SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'cat'",
+        "predicted_sql": "select stuid from student where stuid not in (select stuid from has_pet where petid in (select petid from pets where pettype = 'cat'))",
+        "prompt_len": 396
+    },
+    {
+        "db_id": "pets_1",
+        "question": "What are the ids of the students who do not own cats as pets?",
+        "gold_sql": "SELECT stuid FROM student EXCEPT SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'cat'",
+        "predicted_sql": "select stuid from student where stuid not in (select stuid from has_pet where petid in (select petid from pets where pettype = 'cat'))",
+        "prompt_len": 399
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the first name and age of students who have a dog but do not have a cat as a pet.",
+        "gold_sql": "SELECT T1.fname , T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'dog' AND T1.stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'cat')",
+        "predicted_sql": "select fname, age from student where stuid in (select stuid from has_pet where petid in (select petid from pets where pettype = \"dog\") and stuid not in (select stuid from has_pet where petid in (select petid from pets where pettype = \"cat\")))",
+        "prompt_len": 405
+    },
+    {
+        "db_id": "pets_1",
+        "question": "What is the first name of every student who has a dog but does not have a cat?",
+        "gold_sql": "SELECT T1.fname , T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'dog' AND T1.stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'cat')",
+        "predicted_sql": "select fname from student where stuid in (select stuid from has_pet where petid in (select petid from pets where pettype = \"dog\") and stuid not in (select stuid from has_pet where petid in (select petid from pets where pettype = \"cat\")))",
+        "prompt_len": 402
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the type and weight of the youngest pet.",
+        "gold_sql": "SELECT pettype , weight FROM pets ORDER BY pet_age LIMIT 1",
+        "predicted_sql": "select pettype, weight from pets where pet_age = (select min(pet_age) from pets)",
+        "prompt_len": 393
+    },
+    {
+        "db_id": "pets_1",
+        "question": "What type of pet is the youngest animal, and how much does it weigh?",
+        "gold_sql": "SELECT pettype , weight FROM pets ORDER BY pet_age LIMIT 1",
+        "predicted_sql": "select pettype, weight from pets where pet_age = (select min(pet_age) from pets)",
+        "prompt_len": 399
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the id and weight of all pets whose age is older than 1.",
+        "gold_sql": "SELECT petid , weight FROM pets WHERE pet_age > 1",
+        "predicted_sql": "select petid, weight from pets where pet_age > 1",
+        "prompt_len": 398
+    },
+    {
+        "db_id": "pets_1",
+        "question": "What is the id and weight of every pet who is older than 1?",
+        "gold_sql": "SELECT petid , weight FROM pets WHERE pet_age > 1",
+        "predicted_sql": "select petid, weight from pets where pet_age > 1",
+        "prompt_len": 398
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the average and maximum age for each type of pet.",
+        "gold_sql": "SELECT avg(pet_age) , max(pet_age) , pettype FROM pets GROUP BY pettype",
+        "predicted_sql": "select pettype, avg(pet_age), max(pet_age) from pets group by pettype",
+        "prompt_len": 395
+    },
+    {
+        "db_id": "pets_1",
+        "question": "What is the average and maximum age for each pet type?",
+        "gold_sql": "SELECT avg(pet_age) , max(pet_age) , pettype FROM pets GROUP BY pettype",
+        "predicted_sql": "select pettype, avg(pet_age), max(pet_age) from pets group by pettype",
+        "prompt_len": 395
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the average weight for each pet type.",
+        "gold_sql": "SELECT avg(weight) , pettype FROM pets GROUP BY pettype",
+        "predicted_sql": "select pettype, avg(weight) from pets group by pettype",
+        "prompt_len": 392
+    },
+    {
+        "db_id": "pets_1",
+        "question": "What is the average weight for each type of pet?",
+        "gold_sql": "SELECT avg(weight) , pettype FROM pets GROUP BY pettype",
+        "predicted_sql": "select pettype, avg(weight) from pets group by pettype",
+        "prompt_len": 394
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the first name and age of students who have a pet.",
+        "gold_sql": "SELECT DISTINCT T1.fname , T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid",
+        "predicted_sql": "select fname, age from student where stuid in (select stuid from has_pet)",
+        "prompt_len": 396
+    },
+    {
+        "db_id": "pets_1",
+        "question": "What are the different first names and ages of the students who do have pets?",
+        "gold_sql": "SELECT DISTINCT T1.fname , T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid",
+        "predicted_sql": "select fname, age from student where stuid in (select stuid from has_pet)",
+        "prompt_len": 399
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the id of the pet owned by student whose last name is \u2018Smith\u2019.",
+        "gold_sql": "SELECT T2.petid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid WHERE T1.Lname = 'Smith'",
+        "predicted_sql": "select petid from has_pet where stuid in (select stuid from student where lname = 'Smith')",
+        "prompt_len": 402
+    },
+    {
+        "db_id": "pets_1",
+        "question": "What is the id of the pet owned by the student whose last name is 'Smith'?",
+        "gold_sql": "SELECT T2.petid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid WHERE T1.Lname = 'Smith'",
+        "predicted_sql": "select petid from has_pet where stuid in (select stuid from student where lname = 'Smith')",
+        "prompt_len": 401
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the number of pets for each student who has any pet and student id.",
+        "gold_sql": "SELECT count(*) , T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid",
+        "predicted_sql": "select stuid, count(petid) from has_pet group by stuid",
+        "prompt_len": 399
+    },
+    {
+        "db_id": "pets_1",
+        "question": "For students who have pets , how many pets does each student have ? list their ids instead of names .",
+        "gold_sql": "select count(*) , t1.stuid from student as t1 join has_pet as t2 on t1.stuid = t2.stuid group by t1.stuid",
+        "predicted_sql": "select stuid, count(petid) from has_pet group by stuid",
+        "prompt_len": 405
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the first name and gender of student who have more than one pet.",
+        "gold_sql": "SELECT T1.fname , T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING count(*) > 1",
+        "predicted_sql": "select fname, sex from student where stuid in (select stuid from has_pet group by stuid having count(*) > 1)",
+        "prompt_len": 398
+    },
+    {
+        "db_id": "pets_1",
+        "question": "What is the first name and gender of the all the students who have more than one pet?",
+        "gold_sql": "SELECT T1.fname , T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING count(*) > 1",
+        "predicted_sql": "select fname, sex from student where stuid in (select stuid from has_pet group by stuid having count(*) > 1)",
+        "prompt_len": 402
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the last name of the student who has a cat that is age 3.",
+        "gold_sql": "SELECT T1.lname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pet_age = 3 AND T3.pettype = 'cat'",
+        "predicted_sql": "select lname from student where stuid in (select stuid from has_pet where petid in (select petid from pets where pettype = \"cat\" and pet_age = 3))",
+        "prompt_len": 399
+    },
+    {
+        "db_id": "pets_1",
+        "question": "What is the last name of the student who has a cat that is 3 years old?",
+        "gold_sql": "SELECT T1.lname FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pet_age = 3 AND T3.pettype = 'cat'",
+        "predicted_sql": "select lname from student where stuid in (select stuid from has_pet where petid in (select petid from pets where pettype = \"cat\" and pet_age = 3))",
+        "prompt_len": 401
+    },
+    {
+        "db_id": "pets_1",
+        "question": "Find the average age of students who do not have any pet .",
+        "gold_sql": "select avg(age) from student where stuid not in (select stuid from has_pet)",
+        "predicted_sql": "select avg(age) from student where stuid not in (select stuid from has_pet)",
+        "prompt_len": 396
+    },
+    {
+        "db_id": "pets_1",
+        "question": "What is the average age for all students who do not own any pets ?",
+        "gold_sql": "select avg(age) from student where stuid not in (select stuid from has_pet)",
+        "predicted_sql": "select avg(age) from student where stuid not in (select stuid from has_pet)",
+        "prompt_len": 398
+    }
+]

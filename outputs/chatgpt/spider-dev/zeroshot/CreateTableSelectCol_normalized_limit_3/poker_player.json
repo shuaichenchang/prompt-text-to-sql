@@ -1,0 +1,282 @@
+[
+    {
+        "db_id": "poker_player",
+        "question": "How many poker players are there?",
+        "gold_sql": "SELECT count(*) FROM poker_player",
+        "predicted_sql": "select count(*) from poker_player",
+        "prompt_len": 333
+    },
+    {
+        "db_id": "poker_player",
+        "question": "Count the number of poker players.",
+        "gold_sql": "SELECT count(*) FROM poker_player",
+        "predicted_sql": "select count(*) from poker_player",
+        "prompt_len": 333
+    },
+    {
+        "db_id": "poker_player",
+        "question": "List the earnings of poker players in descending order.",
+        "gold_sql": "SELECT Earnings FROM poker_player ORDER BY Earnings DESC",
+        "predicted_sql": "select earnings from poker_player order by earnings desc",
+        "prompt_len": 336
+    },
+    {
+        "db_id": "poker_player",
+        "question": "What are the earnings of poker players, ordered descending by value?",
+        "gold_sql": "SELECT Earnings FROM poker_player ORDER BY Earnings DESC",
+        "predicted_sql": "select earnings from poker_player order by earnings desc",
+        "prompt_len": 339
+    },
+    {
+        "db_id": "poker_player",
+        "question": "List the final tables made and the best finishes of poker players.",
+        "gold_sql": "SELECT Final_Table_Made , Best_Finish FROM poker_player",
+        "predicted_sql": "select final_table_made, best_finish from poker_player",
+        "prompt_len": 339
+    },
+    {
+        "db_id": "poker_player",
+        "question": "What are the final tables made and best finishes for all poker players?",
+        "gold_sql": "SELECT Final_Table_Made , Best_Finish FROM poker_player",
+        "predicted_sql": "select final_table_made, best_finish from poker_player",
+        "prompt_len": 340
+    },
+    {
+        "db_id": "poker_player",
+        "question": "What is the average earnings of poker players?",
+        "gold_sql": "SELECT avg(Earnings) FROM poker_player",
+        "predicted_sql": "select avg(earnings) from poker_player",
+        "prompt_len": 335
+    },
+    {
+        "db_id": "poker_player",
+        "question": "Return the average earnings across all poker players.",
+        "gold_sql": "SELECT avg(Earnings) FROM poker_player",
+        "predicted_sql": "select avg(earnings) from poker_player",
+        "prompt_len": 335
+    },
+    {
+        "db_id": "poker_player",
+        "question": "What is the money rank of the poker player with the highest earnings?",
+        "gold_sql": "SELECT Money_Rank FROM poker_player ORDER BY Earnings DESC LIMIT 1",
+        "predicted_sql": "select p.money_rank from poker_player p where p.earnings = (select max(earnings) from poker_player)",
+        "prompt_len": 340
+    },
+    {
+        "db_id": "poker_player",
+        "question": "Return the money rank of the player with the greatest earnings.",
+        "gold_sql": "SELECT Money_Rank FROM poker_player ORDER BY Earnings DESC LIMIT 1",
+        "predicted_sql": "select money_rank from poker_player where earnings = (select max(earnings) from poker_player)",
+        "prompt_len": 338
+    },
+    {
+        "db_id": "poker_player",
+        "question": "What is the maximum number of final tables made among poker players with earnings less than 200000?",
+        "gold_sql": "SELECT max(Final_Table_Made) FROM poker_player WHERE Earnings < 200000",
+        "predicted_sql": "select max(final_table_made) from poker_player where earnings < 200000",
+        "prompt_len": 346
+    },
+    {
+        "db_id": "poker_player",
+        "question": "Return the maximum final tables made across all poker players who have earnings below 200000.",
+        "gold_sql": "SELECT max(Final_Table_Made) FROM poker_player WHERE Earnings < 200000",
+        "predicted_sql": "select max(final_table_made) from poker_player where earnings < 200000",
+        "prompt_len": 344
+    },
+    {
+        "db_id": "poker_player",
+        "question": "What are the names of poker players?",
+        "gold_sql": "SELECT T1.Name FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID = T2.People_ID",
+        "predicted_sql": "select people.name from people join poker_player on people.people_id = poker_player.people_id",
+        "prompt_len": 334
+    },
+    {
+        "db_id": "poker_player",
+        "question": "Return the names of all the poker players.",
+        "gold_sql": "SELECT T1.Name FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID = T2.People_ID",
+        "predicted_sql": "select people.name from poker_player join people on poker_player.people_id = people.people_id",
+        "prompt_len": 335
+    },
+    {
+        "db_id": "poker_player",
+        "question": "What are the names of poker players whose earnings is higher than 300000?",
+        "gold_sql": "SELECT T1.Name FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID = T2.People_ID WHERE T2.Earnings > 300000",
+        "predicted_sql": "select people.name from poker_player join people on poker_player.people_id = people.people_id where poker_player.earnings > 300000",
+        "prompt_len": 342
+    },
+    {
+        "db_id": "poker_player",
+        "question": "Give the names of poker players who have earnings above 300000.",
+        "gold_sql": "SELECT T1.Name FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID = T2.People_ID WHERE T2.Earnings > 300000",
+        "predicted_sql": "select people.name from poker_player join people on poker_player.people_id = people.people_id where poker_player.earnings > 300000",
+        "prompt_len": 340
+    },
+    {
+        "db_id": "poker_player",
+        "question": "List the names of poker players ordered by the final tables made in ascending order.",
+        "gold_sql": "SELECT T1.Name FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID = T2.People_ID ORDER BY T2.Final_Table_Made",
+        "predicted_sql": "select p.name from poker_player pp join people p on pp.people_id = p.people_id order by pp.final_table_made asc",
+        "prompt_len": 342
+    },
+    {
+        "db_id": "poker_player",
+        "question": "What are the names of poker players, ordered ascending by the number of final tables they have made?",
+        "gold_sql": "SELECT T1.Name FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID = T2.People_ID ORDER BY T2.Final_Table_Made",
+        "predicted_sql": "select p.name from poker_player pp join people p on pp.people_id = p.people_id order by pp.final_table_made asc",
+        "prompt_len": 346
+    },
+    {
+        "db_id": "poker_player",
+        "question": "What is the birth date of the poker player with the lowest earnings?",
+        "gold_sql": "SELECT T1.Birth_Date FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID = T2.People_ID ORDER BY T2.Earnings ASC LIMIT 1",
+        "predicted_sql": "select birth_date from people where people_id = (select people_id from poker_player     where earnings = (select min(earnings) from poker_player))",
+        "prompt_len": 340
+    },
+    {
+        "db_id": "poker_player",
+        "question": "Return the birth date of the poker player with the lowest earnings.",
+        "gold_sql": "SELECT T1.Birth_Date FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID = T2.People_ID ORDER BY T2.Earnings ASC LIMIT 1",
+        "predicted_sql": "select people.birth_date from poker_player join people on poker_player.people_id = people.people_id where poker_player.earnings = (select min(earnings) from poker_player)",
+        "prompt_len": 339
+    },
+    {
+        "db_id": "poker_player",
+        "question": "What is the money rank of the tallest poker player?",
+        "gold_sql": "SELECT T2.Money_Rank FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID = T2.People_ID ORDER BY T1.Height DESC LIMIT 1",
+        "predicted_sql": "select p.money_rank from poker_player p join people pe on p.people_id = pe.people_id where pe.height = (select max(height) from people)",
+        "prompt_len": 337
+    },
+    {
+        "db_id": "poker_player",
+        "question": "Return the money rank of the poker player with the greatest height.",
+        "gold_sql": "SELECT T2.Money_Rank FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID = T2.People_ID ORDER BY T1.Height DESC LIMIT 1",
+        "predicted_sql": "select p.money_rank from poker_player p join people pe on p.people_id = pe.people_id where pe.height = (select max(height) from people)",
+        "prompt_len": 339
+    },
+    {
+        "db_id": "poker_player",
+        "question": "What is the average earnings of poker players with height higher than 200?",
+        "gold_sql": "SELECT avg(T2.Earnings) FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID = T2.People_ID WHERE T1.Height > 200",
+        "predicted_sql": "select avg(earnings) from poker_player join people on poker_player.people_id = people.people_id where height > 200",
+        "prompt_len": 341
+    },
+    {
+        "db_id": "poker_player",
+        "question": "Give average earnings of poker players who are taller than 200.",
+        "gold_sql": "SELECT avg(T2.Earnings) FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID = T2.People_ID WHERE T1.Height > 200",
+        "predicted_sql": "select avg(earnings) from poker_player  join people on poker_player.people_id = people.people_id  where height > 200",
+        "prompt_len": 339
+    },
+    {
+        "db_id": "poker_player",
+        "question": "What are the names of poker players in descending order of earnings?",
+        "gold_sql": "SELECT T1.Name FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID = T2.People_ID ORDER BY T2.Earnings DESC",
+        "predicted_sql": "select p.name from poker_player pp join people p on pp.people_id = p.people_id order by pp.earnings desc",
+        "prompt_len": 339
+    },
+    {
+        "db_id": "poker_player",
+        "question": "Return the names of poker players sorted by their earnings descending.",
+        "gold_sql": "SELECT T1.Name FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID = T2.People_ID ORDER BY T2.Earnings DESC",
+        "predicted_sql": "select people.name from poker_player join people on poker_player.people_id = people.people_id order by poker_player.earnings desc",
+        "prompt_len": 338
+    },
+    {
+        "db_id": "poker_player",
+        "question": "What are different nationalities of people and the corresponding number of people from each nation?",
+        "gold_sql": "SELECT Nationality , COUNT(*) FROM people GROUP BY Nationality",
+        "predicted_sql": "select nationality, count(*) as num_people from people group by nationality",
+        "prompt_len": 343
+    },
+    {
+        "db_id": "poker_player",
+        "question": "How many people are there of each nationality?",
+        "gold_sql": "SELECT Nationality , COUNT(*) FROM people GROUP BY Nationality",
+        "predicted_sql": "select nationality, count(*) as count from people group by nationality",
+        "prompt_len": 335
+    },
+    {
+        "db_id": "poker_player",
+        "question": "What is the most common nationality of people?",
+        "gold_sql": "SELECT Nationality FROM people GROUP BY Nationality ORDER BY COUNT(*) DESC LIMIT 1",
+        "predicted_sql": "select nationality, count(*) as count from people group by nationality order by count desc limit 1",
+        "prompt_len": 335
+    },
+    {
+        "db_id": "poker_player",
+        "question": "Give the nationality that is most common across all people.",
+        "gold_sql": "SELECT Nationality FROM people GROUP BY Nationality ORDER BY COUNT(*) DESC LIMIT 1",
+        "predicted_sql": "select nationality from people group by nationality order by count(*) desc limit 1",
+        "prompt_len": 337
+    },
+    {
+        "db_id": "poker_player",
+        "question": "What are the nationalities that are shared by at least two people?",
+        "gold_sql": "SELECT Nationality FROM people GROUP BY Nationality HAVING COUNT(*) >= 2",
+        "predicted_sql": "select distinct p1.nationality from people p1 inner join people p2 on p1.nationality = p2.nationality and p1.people_id <> p2.people_id",
+        "prompt_len": 340
+    },
+    {
+        "db_id": "poker_player",
+        "question": "Return the nationalities for which there are two or more people.",
+        "gold_sql": "SELECT Nationality FROM people GROUP BY Nationality HAVING COUNT(*) >= 2",
+        "predicted_sql": "select nationality from people group by nationality having count(*) >= 2",
+        "prompt_len": 339
+    },
+    {
+        "db_id": "poker_player",
+        "question": "List the names and birth dates of people in ascending alphabetical order of name.",
+        "gold_sql": "SELECT Name , Birth_Date FROM people ORDER BY Name ASC",
+        "predicted_sql": "select name, birth_date from people order by name asc",
+        "prompt_len": 341
+    },
+    {
+        "db_id": "poker_player",
+        "question": "What are the names and birth dates of people, ordered by their names in alphabetical order?",
+        "gold_sql": "SELECT Name , Birth_Date FROM people ORDER BY Name ASC",
+        "predicted_sql": "select name, birth_date from people order by name asc",
+        "prompt_len": 344
+    },
+    {
+        "db_id": "poker_player",
+        "question": "Show names of people whose nationality is not \"Russia\".",
+        "gold_sql": "SELECT Name FROM people WHERE Nationality != \"Russia\"",
+        "predicted_sql": "select name from people where nationality != \"Russia\"",
+        "prompt_len": 337
+    },
+    {
+        "db_id": "poker_player",
+        "question": "What are the names of people who are not from Russia?",
+        "gold_sql": "SELECT Name FROM people WHERE Nationality != \"Russia\"",
+        "predicted_sql": "select name from people where nationality != \"Russia\"",
+        "prompt_len": 338
+    },
+    {
+        "db_id": "poker_player",
+        "question": "List the names of people that are not poker players.",
+        "gold_sql": "SELECT Name FROM people WHERE People_ID NOT IN (SELECT People_ID FROM poker_player)",
+        "predicted_sql": "select name from people where people_id not in (select people_id from poker_player)",
+        "prompt_len": 337
+    },
+    {
+        "db_id": "poker_player",
+        "question": "What are the names of people who do not play poker?",
+        "gold_sql": "SELECT Name FROM people WHERE People_ID NOT IN (SELECT People_ID FROM poker_player)",
+        "predicted_sql": "select people.name from people left join poker_player on people.people_id = poker_player.people_id where poker_player.people_id is null",
+        "prompt_len": 338
+    },
+    {
+        "db_id": "poker_player",
+        "question": "How many distinct nationalities are there?",
+        "gold_sql": "SELECT count(DISTINCT Nationality) FROM people",
+        "predicted_sql": "select count(distinct nationality) from people",
+        "prompt_len": 334
+    },
+    {
+        "db_id": "poker_player",
+        "question": "Count the number of different nationalities.",
+        "gold_sql": "SELECT count(DISTINCT Nationality) FROM people",
+        "predicted_sql": "select count(distinct nationality) from people",
+        "prompt_len": 334
+    }
+]

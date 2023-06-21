@@ -1,0 +1,268 @@
+[
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "How many employees are there?",
+        "gold_sql": "SELECT count(*) FROM employee",
+        "predicted_sql": "select count(*) from employee",
+        "prompt_len": 576
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Count the number of employees",
+        "gold_sql": "SELECT count(*) FROM employee",
+        "predicted_sql": "select count(*) from employee",
+        "prompt_len": 575
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Sort employee names by their age in ascending order.",
+        "gold_sql": "SELECT name FROM employee ORDER BY age",
+        "predicted_sql": "select name from employee order by age asc",
+        "prompt_len": 580
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "List the names of employees and sort in ascending order of age.",
+        "gold_sql": "SELECT name FROM employee ORDER BY age",
+        "predicted_sql": "select name, age from employee order by age asc",
+        "prompt_len": 583
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "What is the number of employees from each city?",
+        "gold_sql": "SELECT count(*) , city FROM employee GROUP BY city",
+        "predicted_sql": "select city, count(*) from employee group by city",
+        "prompt_len": 580
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Count the number of employees for each city.",
+        "gold_sql": "SELECT count(*) , city FROM employee GROUP BY city",
+        "predicted_sql": "select city, count(*) from employee group by city",
+        "prompt_len": 579
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Which cities do more than one employee under age 30 come from?",
+        "gold_sql": "SELECT city FROM employee WHERE age < 30 GROUP BY city HAVING count(*) > 1",
+        "predicted_sql": "select city from employee where age < 30 group by city having count(*) > 1",
+        "prompt_len": 583
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Find the cities that have more than one employee under age 30.",
+        "gold_sql": "SELECT city FROM employee WHERE age < 30 GROUP BY city HAVING count(*) > 1",
+        "predicted_sql": "select city from employee where age < 30 group by city having count(*) > 1",
+        "prompt_len": 583
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Find the number of shops in each location.",
+        "gold_sql": "SELECT count(*) , LOCATION FROM shop GROUP BY LOCATION",
+        "predicted_sql": "select location, count(*) from shop group by location",
+        "prompt_len": 579
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "How many shops are there in each location?",
+        "gold_sql": "SELECT count(*) , LOCATION FROM shop GROUP BY LOCATION",
+        "predicted_sql": "select location, count(*) from shop group by location",
+        "prompt_len": 579
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Find the manager name and district of the shop whose number of products is the largest.",
+        "gold_sql": "SELECT manager_name , district FROM shop ORDER BY number_products DESC LIMIT 1",
+        "predicted_sql": "select manager_name, district from shop where number_products = (select max(number_products) from shop)",
+        "prompt_len": 587
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "What are the manager name and district of the shop that sells the largest number of products?",
+        "gold_sql": "SELECT manager_name , district FROM shop ORDER BY number_products DESC LIMIT 1",
+        "predicted_sql": "select manager_name, district from shop where number_products = (select max(number_products) from shop)",
+        "prompt_len": 588
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "find the minimum and maximum number of products of all stores.",
+        "gold_sql": "SELECT min(Number_products) , max(Number_products) FROM shop",
+        "predicted_sql": "select min(number_products), max(number_products) from shop",
+        "prompt_len": 582
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "What are the minimum and maximum number of products across all the shops?",
+        "gold_sql": "SELECT min(Number_products) , max(Number_products) FROM shop",
+        "predicted_sql": "select min(number_products), max(number_products) from shop",
+        "prompt_len": 584
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Return the name, location and district of all shops in descending order of number of products.",
+        "gold_sql": "SELECT name , LOCATION , district FROM shop ORDER BY number_products DESC",
+        "predicted_sql": "select name, location, district from shop order by number_products desc",
+        "prompt_len": 588
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Sort all the shops by number products in descending order, and return the name, location and district of each shop.",
+        "gold_sql": "SELECT name , LOCATION , district FROM shop ORDER BY number_products DESC",
+        "predicted_sql": "select name, location, district from shop order by number_products desc",
+        "prompt_len": 593
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Find the names of stores whose number products is more than the average number of products.",
+        "gold_sql": "SELECT name FROM shop WHERE number_products > (SELECT avg(number_products) FROM shop)",
+        "predicted_sql": "select name from shop where number_products > (select avg(number_products) from shop)",
+        "prompt_len": 587
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Which shops' number products is above the average? Give me the shop names.",
+        "gold_sql": "SELECT name FROM shop WHERE number_products > (SELECT avg(number_products) FROM shop)",
+        "predicted_sql": "select name from shop where number_products > (select avg(number_products) from shop)",
+        "prompt_len": 586
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "find the name of employee who was awarded the most times in the evaluation.",
+        "gold_sql": "SELECT t1.name FROM employee AS t1 JOIN evaluation AS t2 ON t1.Employee_ID = t2.Employee_ID GROUP BY t2.Employee_ID ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select name from employee where employee_id in (select employee_id from evaluation group by employee_id order by count(*) desc limit 1)",
+        "prompt_len": 585
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Which employee received the most awards in evaluations? Give me the employee name.",
+        "gold_sql": "SELECT t1.name FROM employee AS t1 JOIN evaluation AS t2 ON t1.Employee_ID = t2.Employee_ID GROUP BY t2.Employee_ID ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select name from employee where employee_id in (select employee_id from evaluation group by employee_id order by count(*) desc limit 1)",
+        "prompt_len": 585
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Find the name of the employee who got the highest one time bonus.",
+        "gold_sql": "SELECT t1.name FROM employee AS t1 JOIN evaluation AS t2 ON t1.Employee_ID = t2.Employee_ID ORDER BY t2.bonus DESC LIMIT 1",
+        "predicted_sql": "select name from employee where employee_id = (select employee_id from evaluation where bonus = (select max(bonus) from evaluation))",
+        "prompt_len": 584
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Which employee received the biggest bonus? Give me the employee name.",
+        "gold_sql": "SELECT t1.name FROM employee AS t1 JOIN evaluation AS t2 ON t1.Employee_ID = t2.Employee_ID ORDER BY t2.bonus DESC LIMIT 1",
+        "predicted_sql": "select name from employee where employee_id = (select employee_id from evaluation where bonus = (select max(bonus) from evaluation))",
+        "prompt_len": 583
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Find the names of employees who never won any award in the evaluation.",
+        "gold_sql": "SELECT name FROM employee WHERE Employee_ID NOT IN (SELECT Employee_ID FROM evaluation)",
+        "predicted_sql": "select name from employee where employee_id not in (select employee_id from evaluation)",
+        "prompt_len": 584
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "What are the names of the employees who never received any evaluation?",
+        "gold_sql": "SELECT name FROM employee WHERE Employee_ID NOT IN (SELECT Employee_ID FROM evaluation)",
+        "predicted_sql": "select name from employee where employee_id not in (select employee_id from evaluation)",
+        "prompt_len": 583
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "What is the name of the shop that is hiring the largest number of employees?",
+        "gold_sql": "SELECT t2.name FROM hiring AS t1 JOIN shop AS t2 ON t1.shop_id = t2.shop_id GROUP BY t1.shop_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select name from shop where shop_id = (select shop_id from hiring group by shop_id order by count(*) desc limit 1)",
+        "prompt_len": 586
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Which shop has the most employees? Give me the shop name.",
+        "gold_sql": "SELECT t2.name FROM hiring AS t1 JOIN shop AS t2 ON t1.shop_id = t2.shop_id GROUP BY t1.shop_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select name from shop where shop_id = (select shop_id from hiring group by shop_id order by count(*) desc limit 1)",
+        "prompt_len": 583
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Find the name of the shops that do not hire any employee.",
+        "gold_sql": "SELECT name FROM shop WHERE shop_id NOT IN (SELECT shop_id FROM hiring)",
+        "predicted_sql": "select name from shop where shop_id not in (select shop_id from hiring)",
+        "prompt_len": 583
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Which shops run with no employees? Find the shop names",
+        "gold_sql": "SELECT name FROM shop WHERE shop_id NOT IN (SELECT shop_id FROM hiring)",
+        "predicted_sql": "select name from shop where shop_id not in (select shop_id from hiring)",
+        "prompt_len": 581
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Find the number of employees hired in each shop; show the shop name as well.",
+        "gold_sql": "SELECT count(*) , t2.name FROM hiring AS t1 JOIN shop AS t2 ON t1.shop_id = t2.shop_id GROUP BY t2.name",
+        "predicted_sql": "select shop.name, count(*) as number_of_employees from shop, hiring where shop.shop_id = hiring.shop_id group by shop.name",
+        "prompt_len": 587
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "For each shop, return the number of employees working there and the name of the shop.",
+        "gold_sql": "SELECT count(*) , t2.name FROM hiring AS t1 JOIN shop AS t2 ON t1.shop_id = t2.shop_id GROUP BY t2.name",
+        "predicted_sql": "select shop.name, count(hiring.employee_id) as number_of_employees from shop join hiring on shop.shop_id = hiring.shop_id group by shop.name",
+        "prompt_len": 588
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "What is total bonus given in all evaluations?",
+        "gold_sql": "SELECT sum(bonus) FROM evaluation",
+        "predicted_sql": "select sum(bonus) from evaluation",
+        "prompt_len": 579
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Find the total amount of bonus given in all the evaluations.",
+        "gold_sql": "SELECT sum(bonus) FROM evaluation",
+        "predicted_sql": "select sum(bonus) from evaluation",
+        "prompt_len": 582
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Give me all the information about hiring.",
+        "gold_sql": "SELECT * FROM hiring",
+        "predicted_sql": "select * from hiring",
+        "prompt_len": 578
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "What is all the information about hiring?",
+        "gold_sql": "SELECT * FROM hiring",
+        "predicted_sql": "select * from hiring",
+        "prompt_len": 578
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Which district has both stores with less than 3000 products and stores with more than 10000 products?",
+        "gold_sql": "SELECT district FROM shop WHERE Number_products < 3000 INTERSECT SELECT district FROM shop WHERE Number_products > 10000",
+        "predicted_sql": "select distinct district from shop where number_products < 3000 or number_products > 10000",
+        "prompt_len": 588
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Find the districts in which there are both shops selling less than 3000 products and shops selling more than 10000 products.",
+        "gold_sql": "SELECT district FROM shop WHERE Number_products < 3000 INTERSECT SELECT district FROM shop WHERE Number_products > 10000",
+        "predicted_sql": "select distinct district from shop where number_products < 3000 or number_products > 10000",
+        "prompt_len": 592
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "How many different store locations are there?",
+        "gold_sql": "SELECT count(DISTINCT LOCATION) FROM shop",
+        "predicted_sql": "select count(distinct location) from shop",
+        "prompt_len": 578
+    },
+    {
+        "db_id": "employee_hire_evaluation",
+        "question": "Count the number of distinct store locations.",
+        "gold_sql": "SELECT count(DISTINCT LOCATION) FROM shop",
+        "predicted_sql": "select count(distinct location) from shop",
+        "prompt_len": 578
+    }
+]

@@ -1,0 +1,317 @@
+[
+    {
+        "db_id": "concert_singer",
+        "question": "How many singers do we have?",
+        "gold_sql": "SELECT count(*) FROM singer",
+        "predicted_sql": "select count(*) from singer",
+        "prompt_len": 615
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What is the total number of singers?",
+        "gold_sql": "SELECT count(*) FROM singer",
+        "predicted_sql": "select count(*) from singer",
+        "prompt_len": 616
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "Show name, country, age for all singers ordered by age from the oldest to the youngest.",
+        "gold_sql": "SELECT name , country , age FROM singer ORDER BY age DESC",
+        "predicted_sql": "select name, country, age from singer order by age desc",
+        "prompt_len": 627
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What are the names, countries, and ages for every singer in descending order of age?",
+        "gold_sql": "SELECT name , country , age FROM singer ORDER BY age DESC",
+        "predicted_sql": "select name, country, age from singer order by age desc",
+        "prompt_len": 626
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What is the average, minimum, and maximum age of all singers from France?",
+        "gold_sql": "SELECT avg(age) , min(age) , max(age) FROM singer WHERE country = 'France'",
+        "predicted_sql": "select avg(age), min(age), max(age) from singer where country = \"France\"",
+        "prompt_len": 624
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What is the average, minimum, and maximum age for all French singers?",
+        "gold_sql": "SELECT avg(age) , min(age) , max(age) FROM singer WHERE country = 'France'",
+        "predicted_sql": "select avg(age), min(age), max(age) from singer where country = \"France\"",
+        "prompt_len": 623
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "Show the name and the release year of the song by the youngest singer.",
+        "gold_sql": "SELECT song_name , song_release_year FROM singer ORDER BY age LIMIT 1",
+        "predicted_sql": "select song_name, song_release_year from singer where age = (select min(age) from singer)",
+        "prompt_len": 623
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What are the names and release years for all the songs of the youngest singer?",
+        "gold_sql": "SELECT song_name , song_release_year FROM singer ORDER BY age LIMIT 1",
+        "predicted_sql": "select song_name, song_release_year from singer where age = (select min(age) from singer)",
+        "prompt_len": 624
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What are all distinct countries where singers above age 20 are from?",
+        "gold_sql": "SELECT DISTINCT country FROM singer WHERE age > 20",
+        "predicted_sql": "select distinct country from singer where age > 20",
+        "prompt_len": 621
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What are  the different countries with singers above age 20?",
+        "gold_sql": "SELECT DISTINCT country FROM singer WHERE age > 20",
+        "predicted_sql": "select distinct country from singer where age > 20",
+        "prompt_len": 620
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "Show all countries and the number of singers in each country.",
+        "gold_sql": "SELECT country , count(*) FROM singer GROUP BY country",
+        "predicted_sql": "select country, count(*) from singer group by country",
+        "prompt_len": 620
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "How many singers are from each country?",
+        "gold_sql": "SELECT country , count(*) FROM singer GROUP BY country",
+        "predicted_sql": "select country, count(*) from singer group by country",
+        "prompt_len": 616
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "List all song names by singers above the average age.",
+        "gold_sql": "SELECT song_name FROM singer WHERE age > (SELECT avg(age) FROM singer)",
+        "predicted_sql": "select song_name from singer where age > (select avg(age) from singer)",
+        "prompt_len": 619
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What are all the song names by singers who are older than average?",
+        "gold_sql": "SELECT song_name FROM singer WHERE age > (SELECT avg(age) FROM singer)",
+        "predicted_sql": "select song_name from singer where age > (select avg(age) from singer)",
+        "prompt_len": 622
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "Show location and name for all stadiums with a capacity between 5000 and 10000.",
+        "gold_sql": "SELECT LOCATION , name FROM stadium WHERE capacity BETWEEN 5000 AND 10000",
+        "predicted_sql": "select location, name from stadium where capacity between 5000 and 10000",
+        "prompt_len": 623
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What are the locations and names of all stations with capacity between 5000 and 10000?",
+        "gold_sql": "SELECT LOCATION , name FROM stadium WHERE capacity BETWEEN 5000 AND 10000",
+        "predicted_sql": "select location, name from stadium where capacity between 5000 and 10000",
+        "prompt_len": 624
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What is the maximum capacity and the average of all stadiums ?",
+        "gold_sql": "select max(capacity), average from stadium",
+        "predicted_sql": "select max(capacity), avg(capacity) from stadium",
+        "prompt_len": 620
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What is the average and maximum capacities for all stadiums ?",
+        "gold_sql": "select avg(capacity) , max(capacity) from stadium",
+        "predicted_sql": "select avg(capacity), max(capacity) from stadium",
+        "prompt_len": 619
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What is the name and capacity for the stadium with highest average attendance?",
+        "gold_sql": "SELECT name , capacity FROM stadium ORDER BY average DESC LIMIT 1",
+        "predicted_sql": "select name, capacity from stadium where average = (select max(average) from stadium)",
+        "prompt_len": 622
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What is the name and capacity for the stadium with the highest average attendance?",
+        "gold_sql": "SELECT name , capacity FROM stadium ORDER BY average DESC LIMIT 1",
+        "predicted_sql": "select name, capacity from stadium where average = (select max(average) from stadium)",
+        "prompt_len": 623
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "How many concerts are there in year 2014 or 2015?",
+        "gold_sql": "SELECT count(*) FROM concert WHERE YEAR = 2014 OR YEAR = 2015",
+        "predicted_sql": "select count(*) from concert where year = 2014 or year = 2015",
+        "prompt_len": 619
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "How many concerts occurred in 2014 or 2015?",
+        "gold_sql": "SELECT count(*) FROM concert WHERE YEAR = 2014 OR YEAR = 2015",
+        "predicted_sql": "select count(*) from concert where year = 2014 or year = 2015",
+        "prompt_len": 617
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "Show the stadium name and the number of concerts in each stadium.",
+        "gold_sql": "SELECT T2.name , count(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id",
+        "predicted_sql": "select name, count(concert_id) from stadium join concert on stadium.stadium_id = concert.stadium_id group by name",
+        "prompt_len": 621
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "For each stadium, how many concerts play there?",
+        "gold_sql": "SELECT T2.name , count(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id",
+        "predicted_sql": "select stadium.name, count(concert.concert_id) from stadium join concert on stadium.stadium_id = concert.stadium_id group by stadium.name",
+        "prompt_len": 618
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "Show the stadium name and capacity with most number of concerts in year 2014 or after.",
+        "gold_sql": "SELECT T2.name , T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year >= 2014 GROUP BY T2.stadium_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select name, capacity from stadium where stadium_id in (select stadium_id from concert where year >= 2014)",
+        "prompt_len": 625
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What is the name and capacity of the stadium with the most concerts after 2013 ?",
+        "gold_sql": "select t2.name , t2.capacity from concert as t1 join stadium as t2 on t1.stadium_id = t2.stadium_id where t1.year > 2013 group by t2.stadium_id order by count(*) desc limit 1",
+        "predicted_sql": "select name, capacity from stadium where stadium_id in (select stadium_id from concert where year > 2013)",
+        "prompt_len": 624
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "Which year has most number of concerts?",
+        "gold_sql": "SELECT YEAR FROM concert GROUP BY YEAR ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select year, count(*) as number_of_concerts from concert group by year order by number_of_concerts desc limit 1",
+        "prompt_len": 616
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What is the year that had the most concerts?",
+        "gold_sql": "SELECT YEAR FROM concert GROUP BY YEAR ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select year, count(*) as count from concert group by year order by count desc limit 1",
+        "prompt_len": 618
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "Show the stadium names without any concert.",
+        "gold_sql": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)",
+        "predicted_sql": "select name from stadium where stadium_id not in (select stadium_id from concert)",
+        "prompt_len": 616
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What are the names of the stadiums without any concerts?",
+        "gold_sql": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)",
+        "predicted_sql": "select name from stadium where stadium_id not in (select stadium_id from concert)",
+        "prompt_len": 619
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "Show countries where a singer above age 40 and a singer below 30 are from.",
+        "gold_sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30",
+        "predicted_sql": "select distinct country from singer where age > 40 or age < 30",
+        "prompt_len": 624
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "Show names for all stadiums except for stadiums having a concert in year 2014.",
+        "gold_sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014",
+        "predicted_sql": "select name from stadium where stadium_id not in (select stadium_id from concert where year = 2014)",
+        "prompt_len": 623
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What are the names of all stadiums that did not have a concert in 2014?",
+        "gold_sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014",
+        "predicted_sql": "select name from stadium where stadium_id not in (select stadium_id from concert where year = 2014)",
+        "prompt_len": 624
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "Show the name and theme for all concerts and the number of singers in each concert.",
+        "gold_sql": "SELECT T2.concert_name , T2.theme , count(*) FROM singer_in_concert AS T1 JOIN concert AS T2 ON T1.concert_id = T2.concert_id GROUP BY T2.concert_id",
+        "predicted_sql": "select concert_name, theme, count(singer_id) from concert, singer_in_concert where concert.concert_id = singer_in_concert.concert_id group by concert_name",
+        "prompt_len": 625
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What are the names , themes , and number of singers for every concert ?",
+        "gold_sql": "select t2.concert_name , t2.theme , count(*) from singer_in_concert as t1 join concert as t2 on t1.concert_id = t2.concert_id group by t2.concert_id",
+        "predicted_sql": "select concert_name, theme, count(singer_id) from concert, singer_in_concert where concert.concert_id = singer_in_concert.concert_id group by concert_name, theme",
+        "prompt_len": 623
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "List singer names and number of concerts for each singer.",
+        "gold_sql": "SELECT T2.name , count(*) FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id GROUP BY T2.singer_id",
+        "predicted_sql": "select singer.name, count(singer_in_concert.concert_id) as number_of_concerts from singer join singer_in_concert on singer.singer_id = singer_in_concert.singer_id group by singer.name",
+        "prompt_len": 619
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What are the names of the singers and number of concerts for each person?",
+        "gold_sql": "SELECT T2.name , count(*) FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id GROUP BY T2.singer_id",
+        "predicted_sql": "select singer.name, count(singer_in_concert.concert_id) as number_of_concerts from singer join singer_in_concert on singer.singer_id = singer_in_concert.singer_id group by singer.name",
+        "prompt_len": 623
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "List all singer names in concerts in year 2014.",
+        "gold_sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014",
+        "predicted_sql": "select singer.name from singer, singer_in_concert, concert where singer.singer_id = singer_in_concert.singer_id and singer_in_concert.concert_id = concert.concert_id and concert.year = 2014",
+        "prompt_len": 618
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What are the names of the singers who performed in a concert in 2014?",
+        "gold_sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014",
+        "predicted_sql": "select name from singer where singer_id in (select singer_id from singer_in_concert where concert_id in (select concert_id from concert where year = 2014))",
+        "prompt_len": 623
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "what is the name and nation of the singer who have a song having 'Hey' in its name?",
+        "gold_sql": "SELECT name , country FROM singer WHERE song_name LIKE '%Hey%'",
+        "predicted_sql": "select name, country from singer where song_name like '%Hey%'",
+        "prompt_len": 629
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What is the name and country of origin of every singer who has a song with the word 'Hey' in its title?",
+        "gold_sql": "SELECT name , country FROM singer WHERE song_name LIKE '%Hey%'",
+        "predicted_sql": "select name, country from singer where song_name like '%Hey%'",
+        "prompt_len": 633
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "Find the name and location of the stadiums which some concerts happened in the years of both 2014 and 2015.",
+        "gold_sql": "SELECT T2.name , T2.location FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.Year = 2014 INTERSECT SELECT T2.name , T2.location FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.Year = 2015",
+        "predicted_sql": "select name, location from stadium where stadium_id in (select stadium_id from concert where year in ('2014','2015'))",
+        "prompt_len": 629
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What are the names and locations of the stadiums that had concerts that occurred in both 2014 and 2015?",
+        "gold_sql": "SELECT T2.name , T2.location FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.Year = 2014 INTERSECT SELECT T2.name , T2.location FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.Year = 2015",
+        "predicted_sql": "select name, location from stadium where stadium_id in (select stadium_id from concert where year in ('2014', '2015') group by stadium_id having count(*) = 2)",
+        "prompt_len": 628
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "Find the number of concerts happened in the stadium with the highest capacity .",
+        "gold_sql": "select count(*) from concert where stadium_id = (select stadium_id from stadium order by capacity desc limit 1)",
+        "predicted_sql": "select count(*) from concert where stadium_id = (select stadium_id from stadium where capacity = (select max(capacity) from stadium))",
+        "prompt_len": 622
+    },
+    {
+        "db_id": "concert_singer",
+        "question": "What are the number of concerts that occurred in the stadium with the largest capacity ?",
+        "gold_sql": "select count(*) from concert where stadium_id = (select stadium_id from stadium order by capacity desc limit 1)",
+        "predicted_sql": "select count(*) from concert where stadium_id = (select stadium_id from stadium where capacity = (select max(capacity) from stadium))",
+        "prompt_len": 624
+    }
+]

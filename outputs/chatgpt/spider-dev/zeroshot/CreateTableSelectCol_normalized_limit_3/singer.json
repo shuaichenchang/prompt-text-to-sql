@@ -1,0 +1,212 @@
+[
+    {
+        "db_id": "singer",
+        "question": "How many singers are there?",
+        "gold_sql": "SELECT count(*) FROM singer",
+        "predicted_sql": "select count(*) from singer",
+        "prompt_len": 307
+    },
+    {
+        "db_id": "singer",
+        "question": "What is the count of singers?",
+        "gold_sql": "SELECT count(*) FROM singer",
+        "predicted_sql": "select count(*) from singer",
+        "prompt_len": 308
+    },
+    {
+        "db_id": "singer",
+        "question": "List the name of singers in ascending order of net worth.",
+        "gold_sql": "SELECT Name FROM singer ORDER BY Net_Worth_Millions ASC",
+        "predicted_sql": "select name from singer order by net_worth_millions asc",
+        "prompt_len": 313
+    },
+    {
+        "db_id": "singer",
+        "question": "What are the names of singers ordered by ascending net worth?",
+        "gold_sql": "SELECT Name FROM singer ORDER BY Net_Worth_Millions ASC",
+        "predicted_sql": "select name from singer order by net_worth_millions asc",
+        "prompt_len": 313
+    },
+    {
+        "db_id": "singer",
+        "question": "What are the birth year and citizenship of singers?",
+        "gold_sql": "SELECT Birth_Year , Citizenship FROM singer",
+        "predicted_sql": "select birth_year, citizenship from singer",
+        "prompt_len": 311
+    },
+    {
+        "db_id": "singer",
+        "question": "What are the birth years and citizenships of the singers?",
+        "gold_sql": "SELECT Birth_Year , Citizenship FROM singer",
+        "predicted_sql": "select birth_year, citizenship from singer",
+        "prompt_len": 313
+    },
+    {
+        "db_id": "singer",
+        "question": "List the name of singers whose citizenship is not \"France\".",
+        "gold_sql": "SELECT Name FROM singer WHERE Citizenship != \"France\"",
+        "predicted_sql": "select name from singer where citizenship != \"France\"",
+        "prompt_len": 313
+    },
+    {
+        "db_id": "singer",
+        "question": "What are the names of the singers who are not French citizens?",
+        "gold_sql": "SELECT Name FROM singer WHERE Citizenship != \"France\"",
+        "predicted_sql": "select name from singer where citizenship != 'France'",
+        "prompt_len": 314
+    },
+    {
+        "db_id": "singer",
+        "question": "Show the name of singers whose birth year is either 1948 or 1949?",
+        "gold_sql": "SELECT Name FROM singer WHERE Birth_Year = 1948 OR Birth_Year = 1949",
+        "predicted_sql": "select name from singer where birth_year = 1948 or birth_year = 1949",
+        "prompt_len": 319
+    },
+    {
+        "db_id": "singer",
+        "question": "What are the names of the singers whose birth years are either 1948 or 1949?",
+        "gold_sql": "SELECT Name FROM singer WHERE Birth_Year = 1948 OR Birth_Year = 1949",
+        "predicted_sql": "select name from singer where birth_year = 1948 or birth_year = 1949",
+        "prompt_len": 321
+    },
+    {
+        "db_id": "singer",
+        "question": "What is the name of the singer with the largest net worth?",
+        "gold_sql": "SELECT Name FROM singer ORDER BY Net_Worth_Millions DESC LIMIT 1",
+        "predicted_sql": "select name from singer where net_worth_millions = (select max(net_worth_millions) from singer)",
+        "prompt_len": 314
+    },
+    {
+        "db_id": "singer",
+        "question": "What is the name of the singer who is worth the most?",
+        "gold_sql": "SELECT Name FROM singer ORDER BY Net_Worth_Millions DESC LIMIT 1",
+        "predicted_sql": "select name from singer order by net_worth_millions desc limit 1",
+        "prompt_len": 314
+    },
+    {
+        "db_id": "singer",
+        "question": "Show different citizenship of singers and the number of singers of each citizenship.",
+        "gold_sql": "SELECT Citizenship , COUNT(*) FROM singer GROUP BY Citizenship",
+        "predicted_sql": "select citizenship, count(*) as num_singers from singer group by citizenship",
+        "prompt_len": 315
+    },
+    {
+        "db_id": "singer",
+        "question": "For each citizenship, how many singers are from that country?",
+        "gold_sql": "SELECT Citizenship , COUNT(*) FROM singer GROUP BY Citizenship",
+        "predicted_sql": "select citizenship, count(*) as num_singers from singer group by citizenship",
+        "prompt_len": 313
+    },
+    {
+        "db_id": "singer",
+        "question": "Please show the most common citizenship of singers.",
+        "gold_sql": "SELECT Citizenship FROM singer GROUP BY Citizenship ORDER BY COUNT(*) DESC LIMIT 1",
+        "predicted_sql": "select citizenship, count(*) as count from singer group by citizenship order by count desc limit 1",
+        "prompt_len": 310
+    },
+    {
+        "db_id": "singer",
+        "question": "What is the most common singer citizenship ?",
+        "gold_sql": "select citizenship from singer group by citizenship order by count(*) desc limit 1",
+        "predicted_sql": "select citizenship, count(*) as count from singer group by citizenship order by count desc limit 1",
+        "prompt_len": 309
+    },
+    {
+        "db_id": "singer",
+        "question": "Show different citizenships and the maximum net worth of singers of each citizenship.",
+        "gold_sql": "SELECT Citizenship , max(Net_Worth_Millions) FROM singer GROUP BY Citizenship",
+        "predicted_sql": "select citizenship, max(net_worth_millions) as max_net_worth from singer group by citizenship",
+        "prompt_len": 316
+    },
+    {
+        "db_id": "singer",
+        "question": "For each citizenship, what is the maximum net worth?",
+        "gold_sql": "SELECT Citizenship , max(Net_Worth_Millions) FROM singer GROUP BY Citizenship",
+        "predicted_sql": "select citizenship, max(net_worth_millions)  from singer  group by citizenship",
+        "prompt_len": 312
+    },
+    {
+        "db_id": "singer",
+        "question": "Show titles of songs and names of singers.",
+        "gold_sql": "SELECT T2.Title , T1.Name FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID = T2.Singer_ID",
+        "predicted_sql": "select song.title, singer.name from song join singer on song.singer_id = singer.singer_id",
+        "prompt_len": 310
+    },
+    {
+        "db_id": "singer",
+        "question": "What are the song titles and singer names?",
+        "gold_sql": "SELECT T2.Title , T1.Name FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID = T2.Singer_ID",
+        "predicted_sql": "select song.title, singer.name from song join singer on song.singer_id = singer.singer_id",
+        "prompt_len": 310
+    },
+    {
+        "db_id": "singer",
+        "question": "Show distinct names of singers that have songs with sales more than 300000.",
+        "gold_sql": "SELECT DISTINCT T1.Name FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID = T2.Singer_ID WHERE T2.Sales > 300000",
+        "predicted_sql": "select distinct s.name from singer s inner join song so on s.singer_id = so.singer_id where so.sales > 300000",
+        "prompt_len": 317
+    },
+    {
+        "db_id": "singer",
+        "question": "what are the different names of the singers that have sales more than 300000?",
+        "gold_sql": "SELECT DISTINCT T1.Name FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID = T2.Singer_ID WHERE T2.Sales > 300000",
+        "predicted_sql": "select singer.name from singer join song on singer.singer_id = song.singer_id where song.sales > 300000",
+        "prompt_len": 318
+    },
+    {
+        "db_id": "singer",
+        "question": "Show the names of singers that have more than one song.",
+        "gold_sql": "SELECT T1.Name FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID = T2.Singer_ID GROUP BY T1.Name HAVING COUNT(*) > 1",
+        "predicted_sql": "select s.name from singer s inner join song so on s.singer_id = so.singer_id group by s.singer_id having count(so.song_id) > 1",
+        "prompt_len": 313
+    },
+    {
+        "db_id": "singer",
+        "question": "What are the names of the singers that have more than one songs?",
+        "gold_sql": "SELECT T1.Name FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID = T2.Singer_ID GROUP BY T1.Name HAVING COUNT(*) > 1",
+        "predicted_sql": "select s.name from singer s inner join song so on s.singer_id = so.singer_id group by s.singer_id having count(so.song_id) > 1",
+        "prompt_len": 315
+    },
+    {
+        "db_id": "singer",
+        "question": "Show the names of singers and the total sales of their songs.",
+        "gold_sql": "SELECT T1.Name , sum(T2.Sales) FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID = T2.Singer_ID GROUP BY T1.Name",
+        "predicted_sql": "select singer.name, sum(song.sales) as total_sales from singer join song on singer.singer_id = song.singer_id group by singer.name",
+        "prompt_len": 314
+    },
+    {
+        "db_id": "singer",
+        "question": "For each singer name, what is the total sales for their songs?",
+        "gold_sql": "SELECT T1.Name , sum(T2.Sales) FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID = T2.Singer_ID GROUP BY T1.Name",
+        "predicted_sql": "select singer.name, sum(song.sales) as total_sales from singer join song on singer.singer_id = song.singer_id group by singer.name",
+        "prompt_len": 315
+    },
+    {
+        "db_id": "singer",
+        "question": "List the name of singers that do not have any song.",
+        "gold_sql": "SELECT Name FROM singer WHERE Singer_ID NOT IN (SELECT Singer_ID FROM song)",
+        "predicted_sql": "select singer.name from singer left join song on singer.singer_id = song.singer_id where song.singer_id is null",
+        "prompt_len": 313
+    },
+    {
+        "db_id": "singer",
+        "question": "What is the sname of every sing that does not have any song?",
+        "gold_sql": "SELECT Name FROM singer WHERE Singer_ID NOT IN (SELECT Singer_ID FROM song)",
+        "predicted_sql": "select name from singer where singer_id not in (select singer_id from song)",
+        "prompt_len": 316
+    },
+    {
+        "db_id": "singer",
+        "question": "Show the citizenship shared by singers with birth year before 1945 and after 1955.",
+        "gold_sql": "SELECT Citizenship FROM singer WHERE Birth_Year < 1945 INTERSECT SELECT Citizenship FROM singer WHERE Birth_Year > 1955",
+        "predicted_sql": "select citizenship  from singer  where birth_year < 1945 or birth_year > 1955",
+        "prompt_len": 320
+    },
+    {
+        "db_id": "singer",
+        "question": "What are the citizenships that are shared by singers with a birth year before 1945 and after 1955?",
+        "gold_sql": "SELECT Citizenship FROM singer WHERE Birth_Year < 1945 INTERSECT SELECT Citizenship FROM singer WHERE Birth_Year > 1955",
+        "predicted_sql": "select distinct citizenship from singer where birth_year < 1945 or birth_year > 1955",
+        "prompt_len": 325
+    }
+]

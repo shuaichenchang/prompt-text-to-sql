@@ -1,0 +1,4 @@
+sqlparse==0.4.2
+openai==0.27.6
+tqdm==4.65.0
+tiktoken==0.3.0

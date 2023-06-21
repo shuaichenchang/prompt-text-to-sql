@@ -1,0 +1,842 @@
+[
+    {
+        "db_id": "world_1",
+        "question": "What are the names of all the countries that became independent after 1950?",
+        "gold_sql": "SELECT Name FROM country WHERE IndepYear > 1950",
+        "predicted_sql": "select name from country where indepyear > 1950",
+        "prompt_len": 782
+    },
+    {
+        "db_id": "world_1",
+        "question": "Give the names of the nations that were founded after 1950.",
+        "gold_sql": "SELECT Name FROM country WHERE IndepYear > 1950",
+        "predicted_sql": "select name from country where indepyear > 1950",
+        "prompt_len": 780
+    },
+    {
+        "db_id": "world_1",
+        "question": "How many countries have a republic as their form of government?",
+        "gold_sql": "SELECT count(*) FROM country WHERE GovernmentForm = \"Republic\"",
+        "predicted_sql": "select count(*) from country where governmentform like '%Republic%'",
+        "prompt_len": 778
+    },
+    {
+        "db_id": "world_1",
+        "question": "How many countries have governments that are republics?",
+        "gold_sql": "SELECT count(*) FROM country WHERE GovernmentForm = \"Republic\"",
+        "predicted_sql": "select count(*) from country where governmentform like '%Republic%'",
+        "prompt_len": 776
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the total surface area of the countries in the Caribbean region?",
+        "gold_sql": "SELECT sum(SurfaceArea) FROM country WHERE Region = \"Caribbean\"",
+        "predicted_sql": "select sum(surfacearea) from country where region = 'Caribbean'",
+        "prompt_len": 780
+    },
+    {
+        "db_id": "world_1",
+        "question": "How much surface area do the countires in the Carribean cover together?",
+        "gold_sql": "SELECT sum(SurfaceArea) FROM country WHERE Region = \"Caribbean\"",
+        "predicted_sql": "select sum(surfacearea) from country where region = 'Caribbean'",
+        "prompt_len": 782
+    },
+    {
+        "db_id": "world_1",
+        "question": "Which continent is Anguilla in?",
+        "gold_sql": "SELECT Continent FROM country WHERE Name = \"Anguilla\"",
+        "predicted_sql": "select continent from country where name = \"Anguilla\"",
+        "prompt_len": 774
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the continent name which Anguilla belongs to?",
+        "gold_sql": "SELECT Continent FROM country WHERE Name = \"Anguilla\"",
+        "predicted_sql": "select continent from country where name = \"Anguilla\"",
+        "prompt_len": 778
+    },
+    {
+        "db_id": "world_1",
+        "question": "Which region is the city Kabul located in?",
+        "gold_sql": "SELECT Region FROM country AS T1 JOIN city AS T2 ON T1.Code = T2.CountryCode WHERE T2.Name = \"Kabul\"",
+        "predicted_sql": "select country.region from city join country on city.countrycode = country.code where city.name = \"Kabul\"",
+        "prompt_len": 775
+    },
+    {
+        "db_id": "world_1",
+        "question": "What region is Kabul in?",
+        "gold_sql": "SELECT Region FROM country AS T1 JOIN city AS T2 ON T1.Code = T2.CountryCode WHERE T2.Name = \"Kabul\"",
+        "predicted_sql": "select region from country where code = (select countrycode from city where name = \"Kabul\")",
+        "prompt_len": 772
+    },
+    {
+        "db_id": "world_1",
+        "question": "Which language is the most popular in Aruba?",
+        "gold_sql": "SELECT T2.Language FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Name = \"Aruba\" ORDER BY Percentage DESC LIMIT 1",
+        "predicted_sql": "select language from countrylanguage where countrycode = \"ABW\" order by percentage desc limit 1",
+        "prompt_len": 776
+    },
+    {
+        "db_id": "world_1",
+        "question": "What language is predominantly spoken in Aruba?",
+        "gold_sql": "SELECT T2.Language FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Name = \"Aruba\" ORDER BY Percentage DESC LIMIT 1",
+        "predicted_sql": "select language from countrylanguage where countrycode = \"ABW\" and isofficial = \"T\"",
+        "prompt_len": 775
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the population and life expectancies in Brazil?",
+        "gold_sql": "SELECT Population , LifeExpectancy FROM country WHERE Name = \"Brazil\"",
+        "predicted_sql": "select population, lifeexpectancy from country where name = \"Brazil\"",
+        "prompt_len": 777
+    },
+    {
+        "db_id": "world_1",
+        "question": "Give me Brazil\u2019s population and life expectancies.",
+        "gold_sql": "SELECT Population , LifeExpectancy FROM country WHERE Name = \"Brazil\"",
+        "predicted_sql": "select population, lifeexpectancy from country where name = 'Brazil'",
+        "prompt_len": 776
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the region and population of Angola?",
+        "gold_sql": "SELECT Population , Region FROM country WHERE Name = \"Angola\"",
+        "predicted_sql": "select region, population from country where name = 'Angola'",
+        "prompt_len": 775
+    },
+    {
+        "db_id": "world_1",
+        "question": "What region does Angola belong to and what is its population?",
+        "gold_sql": "SELECT Population , Region FROM country WHERE Name = \"Angola\"",
+        "predicted_sql": "select region, population from country where name = 'Angola'",
+        "prompt_len": 778
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the average expected life expectancy for countries in the region of Central Africa?",
+        "gold_sql": "SELECT avg(LifeExpectancy) FROM country WHERE Region = \"Central Africa\"",
+        "predicted_sql": "select avg(lifeexpectancy) from country where region = 'Central Africa'",
+        "prompt_len": 782
+    },
+    {
+        "db_id": "world_1",
+        "question": "How long is the people\u2019s average life expectancy in Central Africa?",
+        "gold_sql": "SELECT avg(LifeExpectancy) FROM country WHERE Region = \"Central Africa\"",
+        "predicted_sql": "select avg(lifeexpectancy) from country where region = 'Central Africa'",
+        "prompt_len": 779
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the name of country that has the shortest life expectancy in Asia?",
+        "gold_sql": "SELECT Name FROM country WHERE Continent = \"Asia\" ORDER BY LifeExpectancy LIMIT 1",
+        "predicted_sql": "select country.name from country where continent = 'Asia' order by lifeexpectancy limit 1",
+        "prompt_len": 781
+    },
+    {
+        "db_id": "world_1",
+        "question": "Give the name of the country in Asia with the lowest life expectancy.",
+        "gold_sql": "SELECT Name FROM country WHERE Continent = \"Asia\" ORDER BY LifeExpectancy LIMIT 1",
+        "predicted_sql": "select name from country where continent = 'Asia' and lifeexpectancy = (select min(lifeexpectancy) from country where continent = 'Asia')",
+        "prompt_len": 780
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the total population and maximum GNP in Asia?",
+        "gold_sql": "SELECT sum(Population) , max(GNP) FROM country WHERE Continent = \"Asia\"",
+        "predicted_sql": "select sum(population), max(gnp) from country where continent = 'Asia'",
+        "prompt_len": 778
+    },
+    {
+        "db_id": "world_1",
+        "question": "How many people live in Asia, and what is the largest GNP among them?",
+        "gold_sql": "SELECT sum(Population) , max(GNP) FROM country WHERE Continent = \"Asia\"",
+        "predicted_sql": "select sum(population), max(gnp) from country where continent = 'Asia'",
+        "prompt_len": 783
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the average life expectancy in African countries that are republics?",
+        "gold_sql": "SELECT avg(LifeExpectancy) FROM country WHERE Continent = \"Africa\" AND GovernmentForm = \"Republic\"",
+        "predicted_sql": "select avg(lifeexpectancy) from country where continent = 'Africa' and governmentform = 'Republic'",
+        "prompt_len": 780
+    },
+    {
+        "db_id": "world_1",
+        "question": "Give the average life expectancy for countries in Africa which are republics?",
+        "gold_sql": "SELECT avg(LifeExpectancy) FROM country WHERE Continent = \"Africa\" AND GovernmentForm = \"Republic\"",
+        "predicted_sql": "select avg(lifeexpectancy) from country where continent = 'Africa' and governmentform = 'Republic'",
+        "prompt_len": 780
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the total surface area of the continents Asia and Europe?",
+        "gold_sql": "SELECT sum(SurfaceArea) FROM country WHERE Continent = \"Asia\" OR Continent = \"Europe\"",
+        "predicted_sql": "select sum(surfacearea) from country where continent in ('Asia', 'Europe')",
+        "prompt_len": 779
+    },
+    {
+        "db_id": "world_1",
+        "question": "Give the total surface area covered by countries in Asia or Europe.",
+        "gold_sql": "SELECT sum(SurfaceArea) FROM country WHERE Continent = \"Asia\" OR Continent = \"Europe\"",
+        "predicted_sql": "select sum(surfacearea) from country where continent in ('Asia', 'Europe')",
+        "prompt_len": 779
+    },
+    {
+        "db_id": "world_1",
+        "question": "How many people live in Gelderland district?",
+        "gold_sql": "SELECT sum(Population) FROM city WHERE District = \"Gelderland\"",
+        "predicted_sql": "select sum(population) from city where district = 'Gelderland'",
+        "prompt_len": 775
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the total population of Gelderland district?",
+        "gold_sql": "SELECT sum(Population) FROM city WHERE District = \"Gelderland\"",
+        "predicted_sql": "select sum(population) from city where district = 'Gelderland'",
+        "prompt_len": 776
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the average GNP and total population in all nations whose government is US territory?",
+        "gold_sql": "SELECT avg(GNP) , sum(population) FROM country WHERE GovernmentForm = \"US Territory\"",
+        "predicted_sql": "select avg(gnp), sum(population) from country where governmentform like '%US territory%'",
+        "prompt_len": 784
+    },
+    {
+        "db_id": "world_1",
+        "question": "Give the mean GNP and total population of nations which are considered US territory.",
+        "gold_sql": "SELECT avg(GNP) , sum(population) FROM country WHERE GovernmentForm = \"US Territory\"",
+        "predicted_sql": "select avg(gnp) as mean_gnp, sum(population) as total_population from country where continent = 'North America' and governmentform like '%Territory%'",
+        "prompt_len": 782
+    },
+    {
+        "db_id": "world_1",
+        "question": "How many unique languages are spoken in the world?",
+        "gold_sql": "SELECT count(DISTINCT LANGUAGE) FROM countrylanguage",
+        "predicted_sql": "select count(distinct language) from countrylanguage",
+        "prompt_len": 776
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the number of distinct languages used around the world?",
+        "gold_sql": "SELECT count(DISTINCT LANGUAGE) FROM countrylanguage",
+        "predicted_sql": "select count(distinct language) from countrylanguage",
+        "prompt_len": 778
+    },
+    {
+        "db_id": "world_1",
+        "question": "How many type of governments are in Africa?",
+        "gold_sql": "SELECT count(DISTINCT GovernmentForm) FROM country WHERE Continent = \"Africa\"",
+        "predicted_sql": "select count(distinct governmentform) from country where continent = 'Africa'",
+        "prompt_len": 775
+    },
+    {
+        "db_id": "world_1",
+        "question": "How many different forms of governments are there in Africa?",
+        "gold_sql": "SELECT count(DISTINCT GovernmentForm) FROM country WHERE Continent = \"Africa\"",
+        "predicted_sql": "select count(distinct governmentform) from country where continent = 'Africa'",
+        "prompt_len": 777
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the total number of languages used in Aruba?",
+        "gold_sql": "SELECT COUNT(T2.Language) FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Name = \"Aruba\"",
+        "predicted_sql": "select count(*) from countrylanguage where countrycode = 'ABW'",
+        "prompt_len": 778
+    },
+    {
+        "db_id": "world_1",
+        "question": "How many languages are spoken in Aruba?",
+        "gold_sql": "SELECT COUNT(T2.Language) FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Name = \"Aruba\"",
+        "predicted_sql": "select count(*) from countrylanguage where countrycode = 'ABW'",
+        "prompt_len": 775
+    },
+    {
+        "db_id": "world_1",
+        "question": "How many official languages does Afghanistan have?",
+        "gold_sql": "SELECT COUNT(*) FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Name = \"Afghanistan\" AND IsOfficial = \"T\"",
+        "predicted_sql": "select count(*) from countrylanguage where countrycode = 'AFG' and isofficial = 'T'",
+        "prompt_len": 774
+    },
+    {
+        "db_id": "world_1",
+        "question": "How many official languages are spoken in Afghanistan?",
+        "gold_sql": "SELECT COUNT(*) FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Name = \"Afghanistan\" AND IsOfficial = \"T\"",
+        "predicted_sql": "select count(*) from countrylanguage where countrycode = 'AFG' and isofficial = 'T'",
+        "prompt_len": 775
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is name of the country that speaks the largest number of languages?",
+        "gold_sql": "SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode GROUP BY T1.Name ORDER BY COUNT(*) DESC LIMIT 1",
+        "predicted_sql": "select country.name from country inner join (  select countrycode, count(*) as num_languages  from countrylanguage  group by countrycode  order by num_languages desc  limit 1 ) as lang_count on country.code = lang_count.countrycode",
+        "prompt_len": 780
+    },
+    {
+        "db_id": "world_1",
+        "question": "Give the name of the nation that uses the greatest amount of languages.",
+        "gold_sql": "SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode GROUP BY T1.Name ORDER BY COUNT(*) DESC LIMIT 1",
+        "predicted_sql": "select country.name from country inner join (  select countrycode, count(*) as num_languages  from countrylanguage  group by countrycode  order by num_languages desc  limit 1 ) as max_languages on country.code = max_languages.countrycode",
+        "prompt_len": 780
+    },
+    {
+        "db_id": "world_1",
+        "question": "Which continent has the most diverse languages?",
+        "gold_sql": "SELECT T1.Continent FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode GROUP BY T1.Continent ORDER BY COUNT(*) DESC LIMIT 1",
+        "predicted_sql": "select continent, count(distinct language) as num_languages from countrylanguage join country on country.code = countrylanguage.countrycode group by continent order by num_languages desc limit 1",
+        "prompt_len": 774
+    },
+    {
+        "db_id": "world_1",
+        "question": "Which continent speaks the most languages?",
+        "gold_sql": "SELECT T1.Continent FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode GROUP BY T1.Continent ORDER BY COUNT(*) DESC LIMIT 1",
+        "predicted_sql": "select continent, count(distinct language) as num_languages from countrylanguage join country on country.code = countrylanguage.countrycode group by continent order by num_languages desc limit 1",
+        "prompt_len": 773
+    },
+    {
+        "db_id": "world_1",
+        "question": "How many countries speak both English and Dutch?",
+        "gold_sql": "SELECT COUNT(*) FROM (SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"English\" INTERSECT SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"Dutch\")",
+        "predicted_sql": "select count(*) from countrylanguage cl inner join country c on cl.countrycode = c.code where cl.language in ('English', 'Dutch') and cl.isofficial = 'T' group by cl.countrycode having count(distinct cl.language) = 2",
+        "prompt_len": 775
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the number of nations that use English and Dutch?",
+        "gold_sql": "SELECT COUNT(*) FROM (SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"English\" INTERSECT SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"Dutch\")",
+        "predicted_sql": "select count(distinct countrycode) from countrylanguage where language in ('English', 'Dutch')",
+        "prompt_len": 778
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the names of nations speak both English and French?",
+        "gold_sql": "SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"English\" INTERSECT SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"French\"",
+        "predicted_sql": "select c.name from country c inner join countrylanguage cl on c.code = cl.countrycode where cl.language in ('English', 'French') group by c.name having count(distinct cl.language) = 2",
+        "prompt_len": 778
+    },
+    {
+        "db_id": "world_1",
+        "question": "Give the names of nations that speak both English and French.",
+        "gold_sql": "SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"English\" INTERSECT SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"French\"",
+        "predicted_sql": "select c.name from country c inner join countrylanguage cl on c.code = cl.countrycode where cl.language = 'English' and cl.isofficial = 'T' and exists (select 1 from countrylanguage where countrycode = c.code and language = 'French' and isofficial = 'T')",
+        "prompt_len": 778
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the names of nations where both English and French are official languages?",
+        "gold_sql": "SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"English\" AND T2.IsOfficial = \"T\" INTERSECT SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"French\" AND T2.IsOfficial = \"T\"",
+        "predicted_sql": "select c.name from country c inner join countrylanguage cl1 on c.code = cl1.countrycode and cl1.language = 'English' and cl1.isofficial = 'T' inner join countrylanguage cl2 on c.code = cl2.countrycode and cl2.language = 'French' and cl2.isofficial = 'T'",
+        "prompt_len": 781
+    },
+    {
+        "db_id": "world_1",
+        "question": "Give the names of countries with English and French as official languages.",
+        "gold_sql": "SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"English\" AND T2.IsOfficial = \"T\" INTERSECT SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"French\" AND T2.IsOfficial = \"T\"",
+        "predicted_sql": "select c.name from country c inner join countrylanguage cl on c.code = cl.countrycode where cl.language in ('English', 'French') and cl.isofficial = 'T' group by c.name having count(distinct cl.language) = 2",
+        "prompt_len": 779
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the number of distinct continents where Chinese is spoken?",
+        "gold_sql": "SELECT COUNT( DISTINCT Continent) FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"Chinese\"",
+        "predicted_sql": "select count(distinct c.continent) as num_continents from countrylanguage cl inner join country c on cl.countrycode = c.code where cl.language = 'Chinese'",
+        "prompt_len": 778
+    },
+    {
+        "db_id": "world_1",
+        "question": "How many continents speak Chinese?",
+        "gold_sql": "SELECT COUNT( DISTINCT Continent) FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"Chinese\"",
+        "predicted_sql": "select count(distinct country.continent) from countrylanguage inner join country on countrylanguage.countrycode = country.code where countrylanguage.language = 'Chinese'",
+        "prompt_len": 772
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the regions that use English or Dutch?",
+        "gold_sql": "SELECT DISTINCT T1.Region FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"English\" OR T2.Language = \"Dutch\"",
+        "predicted_sql": "select distinct region from country inner join countrylanguage on country.code = countrylanguage.countrycode where language in ('English', 'Dutch')",
+        "prompt_len": 776
+    },
+    {
+        "db_id": "world_1",
+        "question": "Which regions speak Dutch or English?",
+        "gold_sql": "SELECT DISTINCT T1.Region FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"English\" OR T2.Language = \"Dutch\"",
+        "predicted_sql": "select distinct region from country inner join countrylanguage on country.code = countrylanguage.countrycode where language in ('Dutch', 'English')",
+        "prompt_len": 773
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the countries where either English or Dutch is the official language ?",
+        "gold_sql": "select t1.name from country as t1 join countrylanguage as t2 on t1.code = t2.countrycode where t2.language = \"english\" and isofficial = \"t\" union select t1.name from country as t1 join countrylanguage as t2 on t1.code = t2.countrycode where t2.language = \"dutch\" and isofficial = \"t\"",
+        "predicted_sql": "select country.name from country inner join countrylanguage on country.code = countrylanguage.countrycode where (countrylanguage.language = 'English' or countrylanguage.language = 'Dutch') and countrylanguage.isofficial = 'T'",
+        "prompt_len": 780
+    },
+    {
+        "db_id": "world_1",
+        "question": "Which countries have either English or Dutch as an official language?",
+        "gold_sql": "SELECT * FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"English\" AND IsOfficial = \"T\" UNION SELECT * FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"Dutch\" AND IsOfficial = \"T\"",
+        "predicted_sql": "select country.name from country inner join countrylanguage on country.code = countrylanguage.countrycode where (countrylanguage.language = 'English' or countrylanguage.language = 'Dutch') and countrylanguage.isofficial = 'T'",
+        "prompt_len": 778
+    },
+    {
+        "db_id": "world_1",
+        "question": "Which language is the most popular on the Asian continent?",
+        "gold_sql": "SELECT T2.Language FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Continent = \"Asia\" GROUP BY T2.Language ORDER BY COUNT (*) DESC LIMIT 1",
+        "predicted_sql": "select language from countrylanguage cl join country c on cl.countrycode = c.code where c.continent = 'Asia' order by percentage desc limit 1",
+        "prompt_len": 777
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the language that is used by the largest number of Asian nations?",
+        "gold_sql": "SELECT T2.Language FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Continent = \"Asia\" GROUP BY T2.Language ORDER BY COUNT (*) DESC LIMIT 1",
+        "predicted_sql": "select language, count(*) as num_countries from countrylanguage cl join country c on cl.countrycode = c.code where c.continent = 'Asia' and cl.isofficial = 'T' group by language order by num_countries desc limit 1",
+        "prompt_len": 781
+    },
+    {
+        "db_id": "world_1",
+        "question": "Which languages are spoken by only one country in republic governments?",
+        "gold_sql": "SELECT T2.Language FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.GovernmentForm = \"Republic\" GROUP BY T2.Language HAVING COUNT(*) = 1",
+        "predicted_sql": "select distinct language from countrylanguage cl inner join country c on cl.countrycode = c.code where c.governmentform = 'Republic' and not exists (  select 1  from countrylanguage cl2  where cl2.language = cl.language  and cl2.countrycode != cl.countrycode ) ",
+        "prompt_len": 778
+    },
+    {
+        "db_id": "world_1",
+        "question": "What languages are only used by a single country with a republic government?",
+        "gold_sql": "SELECT T2.Language FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.GovernmentForm = \"Republic\" GROUP BY T2.Language HAVING COUNT(*) = 1",
+        "predicted_sql": "select language from countrylanguage cl inner join country c on cl.countrycode = c.code where c.governmentform = 'Republic' group by language having count(distinct cl.countrycode) = 1",
+        "prompt_len": 780
+    },
+    {
+        "db_id": "world_1",
+        "question": "Find the city with the largest population that uses English.",
+        "gold_sql": "SELECT T1.Name , T1.Population FROM city AS T1 JOIN countrylanguage AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.Language = \"English\" ORDER BY T1.Population DESC LIMIT 1",
+        "predicted_sql": "select city.name, city.population from city join countrylanguage on city.countrycode = countrylanguage.countrycode where countrylanguage.language = 'English' and countrylanguage.isofficial = 'T' order by city.population desc limit 1",
+        "prompt_len": 777
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the most populace city that speaks English?",
+        "gold_sql": "SELECT T1.Name , T1.Population FROM city AS T1 JOIN countrylanguage AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.Language = \"English\" ORDER BY T1.Population DESC LIMIT 1",
+        "predicted_sql": "select city.name, city.population from city inner join countrylanguage on city.countrycode = countrylanguage.countrycode where countrylanguage.language = 'English' and countrylanguage.isofficial = 'T' order by city.population desc limit 1",
+        "prompt_len": 776
+    },
+    {
+        "db_id": "world_1",
+        "question": "Find the name, population and expected life length of asian country with the largest area?",
+        "gold_sql": "SELECT Name , Population , LifeExpectancy FROM country WHERE Continent = \"Asia\" ORDER BY SurfaceArea DESC LIMIT 1",
+        "predicted_sql": "select country.name, country.population, country.lifeexpectancy from country where continent = 'Asia' order by surfacearea desc limit 1",
+        "prompt_len": 783
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the name, population, and life expectancy of the largest Asian country by land?",
+        "gold_sql": "SELECT Name , Population , LifeExpectancy FROM country WHERE Continent = \"Asia\" ORDER BY SurfaceArea DESC LIMIT 1",
+        "predicted_sql": "select c.name, c.population, c.lifeexpectancy from country c where c.continent = 'Asia' order by c.surfacearea desc limit 1",
+        "prompt_len": 784
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is average life expectancy in the countries where English is not the official language?",
+        "gold_sql": "SELECT avg(LifeExpectancy) FROM country WHERE Name NOT IN (SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"English\" AND T2.IsOfficial = \"T\")",
+        "predicted_sql": "select avg(lifeexpectancy) from country where code in (select countrycode from countrylanguage where language != 'English' and isofficial = 'F')",
+        "prompt_len": 782
+    },
+    {
+        "db_id": "world_1",
+        "question": "Give the mean life expectancy of countries in which English is not the official language.",
+        "gold_sql": "SELECT avg(LifeExpectancy) FROM country WHERE Name NOT IN (SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"English\" AND T2.IsOfficial = \"T\")",
+        "predicted_sql": "select avg(lifeexpectancy) from country where code in (select countrycode from countrylanguage where language != 'English' and isofficial = 'F')",
+        "prompt_len": 782
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the total number of people living in the nations that do not use English?",
+        "gold_sql": "SELECT sum(Population) FROM country WHERE Name NOT IN (SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"English\")",
+        "predicted_sql": "select sum(population) from country where code not in (select countrycode from countrylanguage where language = 'English' and isofficial = 'T')",
+        "prompt_len": 783
+    },
+    {
+        "db_id": "world_1",
+        "question": "How many people live in countries that do not speak English?",
+        "gold_sql": "SELECT sum(Population) FROM country WHERE Name NOT IN (SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = \"English\")",
+        "predicted_sql": "select sum(population) from country where code not in (select countrycode from countrylanguage where language = 'English' and isofficial = 'T')",
+        "prompt_len": 778
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the official language spoken in the country whose head of state is Beatrix?",
+        "gold_sql": "SELECT T2.Language FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.HeadOfState = \"Beatrix\" AND T2.IsOfficial = \"T\"",
+        "predicted_sql": "select language from countrylanguage cl join country c on cl.countrycode = c.code where c.headofstate = 'Beatrix' and cl.isofficial = 'T'",
+        "prompt_len": 783
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the official language used in the country the name of whose head of state is Beatrix.",
+        "gold_sql": "SELECT T2.Language FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.HeadOfState = \"Beatrix\" AND T2.IsOfficial = \"T\"",
+        "predicted_sql": "select language from countrylanguage cl join country c on cl.countrycode = c.code where c.headofstate = 'Beatrix' and cl.isofficial = 'T'",
+        "prompt_len": 786
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the total number of unique official languages spoken in the countries that are founded before 1930?",
+        "gold_sql": "SELECT count(DISTINCT T2.Language) FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE IndepYear < 1930 AND T2.IsOfficial = \"T\"",
+        "predicted_sql": "select count(distinct language) from countrylanguage cl inner join country c on cl.countrycode = c.code where c.indepyear < 1930 and cl.isofficial = 'T'",
+        "prompt_len": 787
+    },
+    {
+        "db_id": "world_1",
+        "question": "For the countries founded before 1930, what is the total number of distinct official languages?",
+        "gold_sql": "SELECT count(DISTINCT T2.Language) FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE IndepYear < 1930 AND T2.IsOfficial = \"T\"",
+        "predicted_sql": "select count(distinct language) from countrylanguage cl inner join country c on cl.countrycode = c.code where c.indepyear < 1930 and cl.isofficial = 'T'",
+        "prompt_len": 785
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the countries that have greater surface area than any country in Europe?",
+        "gold_sql": "SELECT Name FROM country WHERE SurfaceArea > (SELECT min(SurfaceArea) FROM country WHERE Continent = \"Europe\")",
+        "predicted_sql": "select c.name from country c where c.surfacearea > (select max(surfacearea) from country where continent = 'Europe')",
+        "prompt_len": 781
+    },
+    {
+        "db_id": "world_1",
+        "question": "Which countries have greater area than that of any country in Europe?",
+        "gold_sql": "SELECT Name FROM country WHERE SurfaceArea > (SELECT min(SurfaceArea) FROM country WHERE Continent = \"Europe\")",
+        "predicted_sql": "select country.name from country where surfacearea > (  select max(surfacearea)  from country  where continent = 'Europe' )",
+        "prompt_len": 779
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the African countries that have a  population less than any country in Asia?",
+        "gold_sql": "SELECT Name FROM country WHERE Continent = \"Africa\" AND population < (SELECT max(population) FROM country WHERE Continent = \"Asia\")",
+        "predicted_sql": "select c.name from country c where c.continent = 'Africa' and c.population < (select min(population) from country where continent = 'Asia')",
+        "prompt_len": 783
+    },
+    {
+        "db_id": "world_1",
+        "question": "Which African countries have a smaller population than that of any country in Asia?",
+        "gold_sql": "SELECT Name FROM country WHERE Continent = \"Africa\" AND population < (SELECT min(population) FROM country WHERE Continent = \"Asia\")",
+        "predicted_sql": "select country.name from country where continent = 'Africa' and population < (select min(population) from country where continent = 'Asia')",
+        "prompt_len": 781
+    },
+    {
+        "db_id": "world_1",
+        "question": "Which Asian countries have a population that is larger than any country in Africa?",
+        "gold_sql": "SELECT Name FROM country WHERE Continent = \"Asia\" AND population > (SELECT max(population) FROM country WHERE Continent = \"Africa\")",
+        "predicted_sql": "select country.name from country where continent = 'Asia' and population > (select max(population) from country where continent = 'Africa')",
+        "prompt_len": 781
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the Asian countries which have a population larger than that of any country in Africa?",
+        "gold_sql": "SELECT Name FROM country WHERE Continent = \"Asia\" AND population > (SELECT min(population) FROM country WHERE Continent = \"Africa\")",
+        "predicted_sql": "select c.name from country c where c.continent = 'Asia' and c.population > (select max(population) from country where continent = 'Africa')",
+        "prompt_len": 784
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the country codes for countries that do not speak English?",
+        "gold_sql": "SELECT CountryCode FROM countrylanguage EXCEPT SELECT CountryCode FROM countrylanguage WHERE LANGUAGE = \"English\"",
+        "predicted_sql": "select distinct countrycode from countrylanguage where language != 'English'",
+        "prompt_len": 779
+    },
+    {
+        "db_id": "world_1",
+        "question": "Return the country codes for countries that do not speak English.",
+        "gold_sql": "SELECT CountryCode FROM countrylanguage EXCEPT SELECT CountryCode FROM countrylanguage WHERE LANGUAGE = \"English\"",
+        "predicted_sql": "select distinct countrycode from countrylanguage where language != 'English'",
+        "prompt_len": 778
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the country codes of countries where people use languages other than English?",
+        "gold_sql": "SELECT DISTINCT CountryCode FROM countrylanguage WHERE LANGUAGE != \"English\"",
+        "predicted_sql": "select distinct countrycode from countrylanguage where language != 'English'",
+        "prompt_len": 781
+    },
+    {
+        "db_id": "world_1",
+        "question": "Give the country codes for countries in which people speak langauges that are not English.",
+        "gold_sql": "SELECT DISTINCT CountryCode FROM countrylanguage WHERE LANGUAGE != \"English\"",
+        "predicted_sql": "select distinct countrycode from countrylanguage where language != 'English'",
+        "prompt_len": 784
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the codes of the countries that do not speak English and whose government forms are not Republic?",
+        "gold_sql": "SELECT Code FROM country WHERE GovernmentForm != \"Republic\" EXCEPT SELECT CountryCode FROM countrylanguage WHERE LANGUAGE = \"English\"",
+        "predicted_sql": "select country.code from country where country.code not in (   select countrylanguage.countrycode   from countrylanguage   where countrylanguage.language = 'English' ) and country.governmentform != 'Republic'",
+        "prompt_len": 786
+    },
+    {
+        "db_id": "world_1",
+        "question": "Return the codes of countries that do not speak English and do not have Republics for governments.",
+        "gold_sql": "SELECT Code FROM country WHERE GovernmentForm != \"Republic\" EXCEPT SELECT CountryCode FROM countrylanguage WHERE LANGUAGE = \"English\"",
+        "predicted_sql": "select code from country where code not in (   select countrycode from countrylanguage where language = 'English' ) and governmentform not like '%Republic%'",
+        "prompt_len": 785
+    },
+    {
+        "db_id": "world_1",
+        "question": "Which cities are in European countries where English is not the official language?",
+        "gold_sql": "SELECT DISTINCT T2.Name FROM country AS T1 JOIN city AS T2 ON T2.CountryCode = T1.Code WHERE T1.Continent = 'Europe' AND T1.Name NOT IN (SELECT T3.Name FROM country AS T3 JOIN countrylanguage AS T4 ON T3.Code = T4.CountryCode WHERE T4.IsOfficial = 'T' AND T4.Language = 'English')",
+        "predicted_sql": "select city.name from city join country on city.countrycode = country.code join countrylanguage on country.code = countrylanguage.countrycode where country.continent = 'Europe' and countrylanguage.language = 'English' and countrylanguage.isofficial = 'F'",
+        "prompt_len": 780
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the names of cities in Europe for which English is not the official language?",
+        "gold_sql": "SELECT DISTINCT T2.Name FROM country AS T1 JOIN city AS T2 ON T2.CountryCode = T1.Code WHERE T1.Continent = 'Europe' AND T1.Name NOT IN (SELECT T3.Name FROM country AS T3 JOIN countrylanguage AS T4 ON T3.Code = T4.CountryCode WHERE T4.IsOfficial = 'T' AND T4.Language = 'English')",
+        "predicted_sql": "select city.name from city inner join countrylanguage on city.countrycode = countrylanguage.countrycode inner join country on city.countrycode = country.code where country.continent = 'Europe' and countrylanguage.language != 'English' and countrylanguage.isofficial = 'F'",
+        "prompt_len": 783
+    },
+    {
+        "db_id": "world_1",
+        "question": "Which unique cities are in Asian countries where Chinese is the official language ?",
+        "gold_sql": "select distinct t3.name from country as t1 join countrylanguage as t2 on t1.code = t2.countrycode join city as t3 on t1.code = t3.countrycode where t2.isofficial = 't' and t2.language = 'chinese' and t1.continent = \"asia\"",
+        "predicted_sql": "select city.name from city inner join countrylanguage on city.countrycode = countrylanguage.countrycode inner join country on city.countrycode = country.code where country.continent = 'Asia' and countrylanguage.language = 'Chinese' and countrylanguage.isofficial = 'T'",
+        "prompt_len": 780
+    },
+    {
+        "db_id": "world_1",
+        "question": "Return the different names of cities that are in Asia and for which Chinese is the official language.",
+        "gold_sql": "SELECT DISTINCT T3.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode JOIN city AS T3 ON T1.Code = T3.CountryCode WHERE T2.IsOfficial = 'T' AND T2.Language = 'Chinese' AND T1.Continent = \"Asia\"",
+        "predicted_sql": "select city.name from city join countrylanguage on city.countrycode = countrylanguage.countrycode join country on city.countrycode = country.code where country.continent = 'Asia' and countrylanguage.language = 'Chinese' and countrylanguage.isofficial = 'T'",
+        "prompt_len": 785
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the name, independence year, and surface area of the country with the smallest population?",
+        "gold_sql": "SELECT Name , SurfaceArea , IndepYear FROM country ORDER BY Population LIMIT 1",
+        "predicted_sql": "select name, indepyear, surfacearea from country where population = (select min(population) from country)",
+        "prompt_len": 785
+    },
+    {
+        "db_id": "world_1",
+        "question": "Give the name, year of independence, and surface area of the country that has the lowest population.",
+        "gold_sql": "SELECT Name , SurfaceArea , IndepYear FROM country ORDER BY Population LIMIT 1",
+        "predicted_sql": "select country.name, country.indepyear, country.surfacearea from country where population = (select min(population) from country) limit 1",
+        "prompt_len": 786
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the population, name and leader of the country with the largest area?",
+        "gold_sql": "SELECT Name , population , HeadOfState FROM country ORDER BY SurfaceArea DESC LIMIT 1",
+        "predicted_sql": "select country.population, country.name, country.headofstate from country where surfacearea = (select max(surfacearea) from country)",
+        "prompt_len": 782
+    },
+    {
+        "db_id": "world_1",
+        "question": "Give the name, population, and head of state for the country that has the largest area.",
+        "gold_sql": "SELECT Name , population , HeadOfState FROM country ORDER BY SurfaceArea DESC LIMIT 1",
+        "predicted_sql": "select country.name, country.population, country.headofstate from country where surfacearea = (select max(surfacearea) from country)",
+        "prompt_len": 785
+    },
+    {
+        "db_id": "world_1",
+        "question": "Return the country name and the numbers of languages spoken for each country that speaks at least 3 languages.",
+        "gold_sql": "SELECT COUNT(T2.Language) , T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode GROUP BY T1.Name HAVING COUNT(*) > 2",
+        "predicted_sql": "select country.name, count(countrylanguage.language) as num_languages from country inner join countrylanguage on country.code = countrylanguage.countrycode group by country.code having num_languages >= 3",
+        "prompt_len": 787
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the names of countries that speak more than 2 languages, as well as how many languages they speak?",
+        "gold_sql": "SELECT COUNT(T2.Language) , T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode GROUP BY T1.Name HAVING COUNT(*) > 2",
+        "predicted_sql": "select country.name, count(countrylanguage.language) as num_languages from country inner join countrylanguage on country.code = countrylanguage.countrycode group by country.code having num_languages > 2",
+        "prompt_len": 789
+    },
+    {
+        "db_id": "world_1",
+        "question": "Find the number of cities in each district whose population is greater than the average population of cities?",
+        "gold_sql": "SELECT count(*) , District FROM city WHERE Population > (SELECT avg(Population) FROM city) GROUP BY District",
+        "predicted_sql": "select district, count(*) as num_cities from city where population > (select avg(population) from city) group by district",
+        "prompt_len": 785
+    },
+    {
+        "db_id": "world_1",
+        "question": "How many cities in each district have a population that is above the average population across all cities?",
+        "gold_sql": "SELECT count(*) , District FROM city WHERE Population > (SELECT avg(Population) FROM city) GROUP BY District",
+        "predicted_sql": "select district, count(*) as num_cities from city where population > (select avg(population) from city) group by district",
+        "prompt_len": 785
+    },
+    {
+        "db_id": "world_1",
+        "question": "Find the government form name and total population for each government form whose average life expectancy is longer than 72.",
+        "gold_sql": "SELECT sum(Population) , GovernmentForm FROM country GROUP BY GovernmentForm HAVING avg(LifeExpectancy) > 72",
+        "predicted_sql": "select governmentform, sum(population) as total_population from country where lifeexpectancy > 72 group by governmentform",
+        "prompt_len": 788
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the different government forms and what is the total population of each for government forms that have an average life expectancy greater than 72?",
+        "gold_sql": "SELECT sum(Population) , GovernmentForm FROM country GROUP BY GovernmentForm HAVING avg(LifeExpectancy) > 72",
+        "predicted_sql": "select governmentform, sum(population) as total_population from country where lifeexpectancy > 72 group by governmentform",
+        "prompt_len": 794
+    },
+    {
+        "db_id": "world_1",
+        "question": "Find the average life expectancy and total population for each continent where the average life expectancy is shorter than 72?",
+        "gold_sql": "SELECT sum(Population) , avg(LifeExpectancy) , Continent FROM country GROUP BY Continent HAVING avg(LifeExpectancy) < 72",
+        "predicted_sql": "select continent, avg(lifeexpectancy), sum(population) from country where lifeexpectancy < 72 group by continent",
+        "prompt_len": 788
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the different continents and the total popuation and average life expectancy corresponding to each, for continents that have an average life expectancy less than 72?",
+        "gold_sql": "SELECT sum(Population) , avg(LifeExpectancy) , Continent FROM country GROUP BY Continent HAVING avg(LifeExpectancy) < 72",
+        "predicted_sql": "select continent, sum(population) as total_population, avg(lifeexpectancy) as avg_life_expectancy from country where continent in (  select continent  from country  group by continent  having avg(lifeexpectancy) < 72 ) group by continent",
+        "prompt_len": 797
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the names and areas of countries with the top 5 largest area?",
+        "gold_sql": "SELECT Name , SurfaceArea FROM country ORDER BY SurfaceArea DESC LIMIT 5",
+        "predicted_sql": "select name, surfacearea from country order by surfacearea desc limit 5",
+        "prompt_len": 782
+    },
+    {
+        "db_id": "world_1",
+        "question": "Return the names and surface areas of the 5 largest countries.",
+        "gold_sql": "SELECT Name , SurfaceArea FROM country ORDER BY SurfaceArea DESC LIMIT 5",
+        "predicted_sql": "select name, surfacearea from country order by surfacearea desc limit 5",
+        "prompt_len": 779
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are names of countries with the top 3 largest population?",
+        "gold_sql": "SELECT Name FROM country ORDER BY Population DESC LIMIT 3",
+        "predicted_sql": "select name from country order by population desc limit 3",
+        "prompt_len": 779
+    },
+    {
+        "db_id": "world_1",
+        "question": "Return the names of the 3 most populated countries.",
+        "gold_sql": "SELECT Name FROM country ORDER BY Population DESC LIMIT 3",
+        "predicted_sql": "select name from country order by population desc limit 3",
+        "prompt_len": 777
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the names of the nations with the 3 lowest populations?",
+        "gold_sql": "SELECT Name FROM country ORDER BY Population ASC LIMIT 3",
+        "predicted_sql": "select name from country order by population asc limit 3",
+        "prompt_len": 780
+    },
+    {
+        "db_id": "world_1",
+        "question": "Return the names of the 3 countries with the fewest people.",
+        "gold_sql": "SELECT Name FROM country ORDER BY Population ASC LIMIT 3",
+        "predicted_sql": "select name from country order by population limit 3",
+        "prompt_len": 780
+    },
+    {
+        "db_id": "world_1",
+        "question": "how many countries are in Asia?",
+        "gold_sql": "SELECT count(*) FROM country WHERE continent = \"Asia\"",
+        "predicted_sql": "select count(*) from country where continent = 'Asia'",
+        "prompt_len": 773
+    },
+    {
+        "db_id": "world_1",
+        "question": "Count the number of countries in Asia.",
+        "gold_sql": "SELECT count(*) FROM country WHERE continent = \"Asia\"",
+        "predicted_sql": "select count(*) from country where continent = 'Asia'",
+        "prompt_len": 774
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the names of the countries that are in the continent of Europe and have a population of 80000?",
+        "gold_sql": "SELECT Name FROM country WHERE continent = \"Europe\" AND Population = \"80000\"",
+        "predicted_sql": "select name from country where continent = 'Europe' and population = 80000",
+        "prompt_len": 789
+    },
+    {
+        "db_id": "world_1",
+        "question": "Give the names of countries that are in Europe and have a population equal to 80000.",
+        "gold_sql": "SELECT Name FROM country WHERE continent = \"Europe\" AND Population = \"80000\"",
+        "predicted_sql": "select name from country where continent = 'Europe' and population = 80000",
+        "prompt_len": 785
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the total population and average area of countries in the continent of North America whose area is bigger than 3000 ?",
+        "gold_sql": "select sum(population) , avg(surfacearea) from country where continent = \"north america\" and surfacearea > 3000",
+        "predicted_sql": "select sum(population), avg(surfacearea)  from country  where continent = 'North America' and surfacearea > 3000",
+        "prompt_len": 791
+    },
+    {
+        "db_id": "world_1",
+        "question": "Give the total population and average surface area corresponding to countries in North America that have a surface area greater than 3000 .",
+        "gold_sql": "select sum(population) , avg(surfacearea) from country where continent = \"north america\" and surfacearea > 3000",
+        "predicted_sql": "select sum(population), avg(surfacearea) from country where continent = 'North America' and surfacearea > 3000",
+        "prompt_len": 791
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the cities whose population is between 160000 and 900000?",
+        "gold_sql": "SELECT name FROM city WHERE Population BETWEEN 160000 AND 900000",
+        "predicted_sql": "select * from city where population between 160000 and 900000",
+        "prompt_len": 782
+    },
+    {
+        "db_id": "world_1",
+        "question": "Return the names of cities that have a population between 160000 and 900000 .",
+        "gold_sql": "select name from city where population between 160000 and 900000",
+        "predicted_sql": "select name from city where population between 160000 and 900000",
+        "prompt_len": 784
+    },
+    {
+        "db_id": "world_1",
+        "question": "Which language is spoken by the largest number of countries?",
+        "gold_sql": "SELECT LANGUAGE FROM countrylanguage GROUP BY LANGUAGE ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select language, count(distinct countrycode) as num_countries from countrylanguage group by language order by num_countries desc limit 1",
+        "prompt_len": 777
+    },
+    {
+        "db_id": "world_1",
+        "question": "Give the language that is spoken in the most countries.",
+        "gold_sql": "SELECT LANGUAGE FROM countrylanguage GROUP BY LANGUAGE ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select language, count(distinct countrycode) as num_countries from countrylanguage group by language order by num_countries desc limit 1",
+        "prompt_len": 777
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the language spoken by the largest percentage of people in each country?",
+        "gold_sql": "SELECT LANGUAGE , CountryCode , max(Percentage) FROM countrylanguage GROUP BY CountryCode",
+        "predicted_sql": "select country.name, countrylanguage.language from country inner join countrylanguage on country.code = countrylanguage.countrycode where countrylanguage.percentage = (  select max(percentage)  from countrylanguage  where countrycode = country.code )",
+        "prompt_len": 781
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the country codes of the different countries, and what are the languages spoken by the greatest percentage of people for each?",
+        "gold_sql": "SELECT LANGUAGE , CountryCode , max(Percentage) FROM countrylanguage GROUP BY CountryCode",
+        "predicted_sql": "select country.code, countrylanguage.language from country inner join countrylanguage on country.code = countrylanguage.countrycode where countrylanguage.percentage = (  select max(percentage)  from countrylanguage  where countrylanguage.countrycode = country.code ) order by country.code",
+        "prompt_len": 791
+    },
+    {
+        "db_id": "world_1",
+        "question": "What is the total number of countries where Spanish is spoken by the largest percentage of people?",
+        "gold_sql": "SELECT count(*) , max(Percentage) FROM countrylanguage WHERE LANGUAGE = \"Spanish\" GROUP BY CountryCode",
+        "predicted_sql": "select count(*) from ( select countrycode, max(percentage) as max_percentage from countrylanguage where language = 'Spanish' group by countrycode having max_percentage = ( select max(percentage) from countrylanguage where language = 'Spanish' ) ) as temp",
+        "prompt_len": 784
+    },
+    {
+        "db_id": "world_1",
+        "question": "Count the number of countries for which Spanish is the predominantly spoken language.",
+        "gold_sql": "SELECT count(*) , max(Percentage) FROM countrylanguage WHERE LANGUAGE = \"Spanish\" GROUP BY CountryCode",
+        "predicted_sql": "select count(*) from countrylanguage where language = 'Spanish' and isofficial = 'T'",
+        "prompt_len": 780
+    },
+    {
+        "db_id": "world_1",
+        "question": "What are the codes of countries where Spanish is spoken by the largest percentage of people?",
+        "gold_sql": "SELECT CountryCode , max(Percentage) FROM countrylanguage WHERE LANGUAGE = \"Spanish\" GROUP BY CountryCode",
+        "predicted_sql": "select countrycode from countrylanguage where language = 'Spanish' order by percentage desc limit 1",
+        "prompt_len": 783
+    },
+    {
+        "db_id": "world_1",
+        "question": "Return the codes of countries for which Spanish is the predominantly spoken language.",
+        "gold_sql": "SELECT CountryCode , max(Percentage) FROM countrylanguage WHERE LANGUAGE = \"Spanish\" GROUP BY CountryCode",
+        "predicted_sql": "select countrycode from countrylanguage where language = \"Spanish\" and percentage > 50",
+        "prompt_len": 780
+    }
+]

@@ -1,0 +1,128 @@
+[
+    {
+        "db_id": "museum_visit",
+        "question": "How many visitors below age 30 are there?",
+        "gold_sql": "SELECT count(*) FROM visitor WHERE age < 30",
+        "predicted_sql": "select count(*) from visitor where age < 30",
+        "prompt_len": 354
+    },
+    {
+        "db_id": "museum_visit",
+        "question": "Find the names of the visitors whose membership level is higher than 4, and order the results by the level from high to low.",
+        "gold_sql": "SELECT name FROM visitor WHERE Level_of_membership > 4 ORDER BY Level_of_membership DESC",
+        "predicted_sql": "select name from visitor where level_of_membership > 4 order by level_of_membership desc",
+        "prompt_len": 371
+    },
+    {
+        "db_id": "museum_visit",
+        "question": "What is the average age of the visitors whose membership level is not higher than 4?",
+        "gold_sql": "SELECT avg(age) FROM visitor WHERE Level_of_membership <= 4",
+        "predicted_sql": "select avg(age) from visitor where level_of_membership <= 4",
+        "prompt_len": 362
+    },
+    {
+        "db_id": "museum_visit",
+        "question": "Find the name and membership level of the visitors whose membership level is higher than 4, and sort by their age from old to young.",
+        "gold_sql": "SELECT name , Level_of_membership FROM visitor WHERE Level_of_membership > 4 ORDER BY age DESC",
+        "predicted_sql": "select visitor.name, visitor.level_of_membership from visitor where visitor.level_of_membership > 4 order by visitor.age desc",
+        "prompt_len": 372
+    },
+    {
+        "db_id": "museum_visit",
+        "question": "Find the id and name of the museum that has the most staff members?",
+        "gold_sql": "SELECT museum_id , name FROM museum ORDER BY num_of_staff DESC LIMIT 1",
+        "predicted_sql": "select museum_id, name from museum where num_of_staff = (select max(num_of_staff) from museum)",
+        "prompt_len": 359
+    },
+    {
+        "db_id": "museum_visit",
+        "question": "Find the average number of staff working for the museums that were open before 2009.",
+        "gold_sql": "SELECT avg(num_of_staff) FROM museum WHERE open_year < 2009",
+        "predicted_sql": "select avg(num_of_staff) from museum where open_year < 2009",
+        "prompt_len": 362
+    },
+    {
+        "db_id": "museum_visit",
+        "question": "What are the opening year and staff number of the museum named Plaza Museum?",
+        "gold_sql": "SELECT Num_of_Staff , Open_Year FROM museum WHERE name = 'Plaza Museum'",
+        "predicted_sql": "select open_year, num_of_staff from museum where name = \"Plaza Museum\"",
+        "prompt_len": 359
+    },
+    {
+        "db_id": "museum_visit",
+        "question": "find the names of museums which have more staff than the minimum staff number of all museums opened after 2010.",
+        "gold_sql": "SELECT name FROM museum WHERE num_of_staff > (SELECT min(num_of_staff) FROM museum WHERE open_year > 2010)",
+        "predicted_sql": "select name from museum  where num_of_staff > (select min(num_of_staff) from museum where open_year > 2010)",
+        "prompt_len": 367
+    },
+    {
+        "db_id": "museum_visit",
+        "question": "find the id, name and age for visitors who visited some museums more than once.",
+        "gold_sql": "SELECT t1.id , t1.name , t1.age FROM visitor AS t1 JOIN visit AS t2 ON t1.id = t2.visitor_id GROUP BY t1.id HAVING count(*) > 1",
+        "predicted_sql": "select visitor.id, visitor.name, visitor.age from visitor inner join visit on visitor.id = visit.visitor_id group by visitor.id having count(distinct visit.museum_id) > 1",
+        "prompt_len": 361
+    },
+    {
+        "db_id": "museum_visit",
+        "question": "What are the id, name and membership level of visitors who have spent the largest amount of money in total in all museum tickets?",
+        "gold_sql": "SELECT t2.visitor_id , t1.name , t1.Level_of_membership FROM visitor AS t1 JOIN visit AS t2 ON t1.id = t2.visitor_id GROUP BY t2.visitor_id ORDER BY sum(t2.Total_spent) DESC LIMIT 1",
+        "predicted_sql": "select visitor.id, visitor.name, visitor.level_of_membership from visitor inner join visit on visitor.id = visit.visitor_id group by visitor.id order by sum(total_spent) desc limit 1",
+        "prompt_len": 370
+    },
+    {
+        "db_id": "museum_visit",
+        "question": "What are the id and name of the museum visited most times?",
+        "gold_sql": "SELECT t2.Museum_ID , t1.name FROM museum AS t1 JOIN visit AS t2 ON t1.Museum_ID = t2.Museum_ID GROUP BY t2.Museum_ID ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select museum_id, name, count(*) as num_visits from visit join museum on visit.museum_id = museum.museum_id group by museum_id order by num_visits desc limit 1",
+        "prompt_len": 357
+    },
+    {
+        "db_id": "museum_visit",
+        "question": "What is the name of the museum that had no visitor yet?",
+        "gold_sql": "SELECT name FROM museum WHERE Museum_ID NOT IN (SELECT museum_id FROM visit)",
+        "predicted_sql": "select m.name from museum m left join visit v on m.museum_id = v.museum_id where v.visitor_id is null",
+        "prompt_len": 357
+    },
+    {
+        "db_id": "museum_visit",
+        "question": "Find the name and age of the visitor who bought the most tickets at once.",
+        "gold_sql": "SELECT t1.name , t1.age FROM visitor AS t1 JOIN visit AS t2 ON t1.id = t2.visitor_id ORDER BY t2.num_of_ticket DESC LIMIT 1",
+        "predicted_sql": "select visitor.name, visitor.age from visitor join visit on visitor.id = visit.visitor_id where visit.num_of_ticket = (select max(num_of_ticket) from visit)",
+        "prompt_len": 360
+    },
+    {
+        "db_id": "museum_visit",
+        "question": "What are the average and maximum number of tickets bought in all visits?",
+        "gold_sql": "SELECT avg(num_of_ticket) , max(num_of_ticket) FROM visit",
+        "predicted_sql": "select avg(num_of_ticket), max(num_of_ticket) from visit",
+        "prompt_len": 358
+    },
+    {
+        "db_id": "museum_visit",
+        "question": "What is the total ticket expense of the visitors whose membership level is 1?",
+        "gold_sql": "SELECT sum(t2.Total_spent) FROM visitor AS t1 JOIN visit AS t2 ON t1.id = t2.visitor_id WHERE t1.Level_of_membership = 1",
+        "predicted_sql": "select sum(total_spent) from visit  inner join visitor on visit.visitor_id = visitor.id  where visitor.level_of_membership = 1",
+        "prompt_len": 360
+    },
+    {
+        "db_id": "museum_visit",
+        "question": "What is the name of the visitor who visited both a museum opened before 2009 and a museum opened after 2011?",
+        "gold_sql": "SELECT t1.name FROM visitor AS t1 JOIN visit AS t2 ON t1.id = t2.visitor_id JOIN museum AS t3 ON t3.Museum_ID = t2.Museum_ID WHERE t3.open_year < 2009 INTERSECT SELECT t1.name FROM visitor AS t1 JOIN visit AS t2 ON t1.id = t2.visitor_id JOIN museum AS t3 ON t3.Museum_ID = t2.Museum_ID WHERE t3.open_year > 2011",
+        "predicted_sql": "select visitor.name from visitor inner join visit on visitor.id = visit.visitor_id inner join museum on visit.museum_id = museum.museum_id where museum.open_year < 2009 and museum.open_year > 2011",
+        "prompt_len": 370
+    },
+    {
+        "db_id": "museum_visit",
+        "question": "Find the number of visitors who did not visit any museum opened after 2010.",
+        "gold_sql": "SELECT count(*) FROM visitor WHERE id NOT IN (SELECT t2.visitor_id FROM museum AS t1 JOIN visit AS t2 ON t1.Museum_ID = t2.Museum_ID WHERE t1.open_year > 2010)",
+        "predicted_sql": "select count(*) from visitor where id not in (   select visitor_id from visit   where museum_id in (  select museum_id from museum  where open_year > 2010   ) )",
+        "prompt_len": 361
+    },
+    {
+        "db_id": "museum_visit",
+        "question": "How many museums were opened after 2013 or before 2008?",
+        "gold_sql": "SELECT count(*) FROM museum WHERE open_year > 2013 OR open_year < 2008",
+        "predicted_sql": "select count(*) from museum where open_year > 2013 or open_year < 2008",
+        "prompt_len": 359
+    }
+]

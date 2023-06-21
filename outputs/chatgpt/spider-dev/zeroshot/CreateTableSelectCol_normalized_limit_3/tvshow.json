@@ -1,0 +1,436 @@
+[
+    {
+        "db_id": "tvshow",
+        "question": "List the title of all cartoons in alphabetical order.",
+        "gold_sql": "SELECT Title FROM Cartoon ORDER BY title",
+        "predicted_sql": "select title from cartoon order by title asc",
+        "prompt_len": 652
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What are the titles of the cartoons sorted alphabetically?",
+        "gold_sql": "SELECT Title FROM Cartoon ORDER BY title",
+        "predicted_sql": "select title from cartoon order by title asc",
+        "prompt_len": 653
+    },
+    {
+        "db_id": "tvshow",
+        "question": "List all cartoon directed by \"Ben Jones\".",
+        "gold_sql": "SELECT Title FROM Cartoon WHERE Directed_by = \"Ben Jones\"",
+        "predicted_sql": "select * from cartoon where directed_by = \"Ben Jones\"",
+        "prompt_len": 651
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What are the names of all cartoons directed by Ben Jones?",
+        "gold_sql": "SELECT Title FROM Cartoon WHERE Directed_by = \"Ben Jones\"",
+        "predicted_sql": "select title from cartoon where directed_by = \"Ben Jones\"",
+        "prompt_len": 654
+    },
+    {
+        "db_id": "tvshow",
+        "question": "How many cartoons were written by \"Joseph Kuhr\"?",
+        "gold_sql": "SELECT count(*) FROM Cartoon WHERE Written_by = \"Joseph Kuhr\"",
+        "predicted_sql": "select count(*) from cartoon where written_by = \"Joseph Kuhr\"",
+        "prompt_len": 654
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is the number of cartoones written by Joseph Kuhr?",
+        "gold_sql": "SELECT count(*) FROM Cartoon WHERE Written_by = \"Joseph Kuhr\"",
+        "predicted_sql": "select count(*) from cartoon where written_by = \"Joseph Kuhr\"",
+        "prompt_len": 656
+    },
+    {
+        "db_id": "tvshow",
+        "question": "list all cartoon titles and their directors ordered by their air date",
+        "gold_sql": "SELECT title , Directed_by FROM Cartoon ORDER BY Original_air_date",
+        "predicted_sql": "select title, directed_by  from cartoon  order by original_air_date",
+        "prompt_len": 655
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is the name and directors of all the cartoons that are ordered by air date?",
+        "gold_sql": "SELECT title , Directed_by FROM Cartoon ORDER BY Original_air_date",
+        "predicted_sql": "select cartoon.title, cartoon.directed_by from cartoon order by cartoon.original_air_date",
+        "prompt_len": 659
+    },
+    {
+        "db_id": "tvshow",
+        "question": "List the title of all cartoon directed by \"Ben Jones\" or \"Brandon Vietti\".",
+        "gold_sql": "SELECT Title FROM Cartoon WHERE Directed_by = \"Ben Jones\" OR Directed_by = \"Brandon Vietti\"",
+        "predicted_sql": "select title from cartoon where directed_by = \"Ben Jones\" or directed_by = \"Brandon Vietti\"",
+        "prompt_len": 660
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What are the titles of all cartoons directed by Ben Jones or Brandon Vietti?",
+        "gold_sql": "SELECT Title FROM Cartoon WHERE Directed_by = \"Ben Jones\" OR Directed_by = \"Brandon Vietti\"",
+        "predicted_sql": "select title from cartoon where directed_by = 'Ben Jones' or directed_by = 'Brandon Vietti'",
+        "prompt_len": 658
+    },
+    {
+        "db_id": "tvshow",
+        "question": "Which country has the most of TV Channels? List the country and number of TV Channels it has.",
+        "gold_sql": "SELECT Country , count(*) FROM TV_Channel GROUP BY Country ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select country, count(*) as num_channels from tv_channel group by country order by num_channels desc limit 1",
+        "prompt_len": 662
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is the country with the most number of TV Channels and how many does it have?",
+        "gold_sql": "SELECT Country , count(*) FROM TV_Channel GROUP BY Country ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select country, count(*) as num_channels from tv_channel group by country order by num_channels desc limit 1",
+        "prompt_len": 660
+    },
+    {
+        "db_id": "tvshow",
+        "question": "List the number of different series names and contents in the TV Channel table.",
+        "gold_sql": "SELECT count(DISTINCT series_name) , count(DISTINCT content) FROM TV_Channel",
+        "predicted_sql": "select count(distinct series_name) as num_series_names, count(distinct content) as num_contents from tv_channel",
+        "prompt_len": 657
+    },
+    {
+        "db_id": "tvshow",
+        "question": "How many different series and contents are listed in the TV Channel table?",
+        "gold_sql": "SELECT count(DISTINCT series_name) , count(DISTINCT content) FROM TV_Channel",
+        "predicted_sql": "select count(distinct series_name), count(distinct content) from tv_channel",
+        "prompt_len": 656
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is the content of TV Channel with serial name \"Sky Radio\"?",
+        "gold_sql": "SELECT Content FROM TV_Channel WHERE series_name = \"Sky Radio\"",
+        "predicted_sql": "select content from tv_channel where series_name = \"Sky Radio\"",
+        "prompt_len": 657
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is the content of the series Sky Radio?",
+        "gold_sql": "SELECT Content FROM TV_Channel WHERE series_name = \"Sky Radio\"",
+        "predicted_sql": "select content from tv_channel where series_name = \"Sky Radio\"",
+        "prompt_len": 652
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is the Package Option of TV Channel with serial name \"Sky Radio\"?",
+        "gold_sql": "SELECT Package_Option FROM TV_Channel WHERE series_name = \"Sky Radio\"",
+        "predicted_sql": "select package_option from tv_channel where series_name = \"Sky Radio\"",
+        "prompt_len": 658
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What are the Package Options of the TV Channels whose series names are Sky Radio?",
+        "gold_sql": "SELECT Package_Option FROM TV_Channel WHERE series_name = \"Sky Radio\"",
+        "predicted_sql": "select package_option from tv_channel where series_name = \"Sky Radio\"",
+        "prompt_len": 658
+    },
+    {
+        "db_id": "tvshow",
+        "question": "How many TV Channel using language English?",
+        "gold_sql": "SELECT count(*) FROM TV_Channel WHERE LANGUAGE = \"English\"",
+        "predicted_sql": "select count(*) from tv_channel where language = \"English\"",
+        "prompt_len": 650
+    },
+    {
+        "db_id": "tvshow",
+        "question": "How many TV Channels use the English language?",
+        "gold_sql": "SELECT count(*) FROM TV_Channel WHERE LANGUAGE = \"English\"",
+        "predicted_sql": "select count(*) from tv_channel where language = \"English\"",
+        "prompt_len": 651
+    },
+    {
+        "db_id": "tvshow",
+        "question": "List the language used least number of TV Channel. List language and number of TV Channel.",
+        "gold_sql": "SELECT LANGUAGE , count(*) FROM TV_Channel GROUP BY LANGUAGE ORDER BY count(*) ASC LIMIT 1",
+        "predicted_sql": "select language, count(*) as num_channels from tv_channel group by language order by num_channels limit 1",
+        "prompt_len": 660
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What are the languages used by the least number of TV Channels and how many channels use it?",
+        "gold_sql": "SELECT LANGUAGE , count(*) FROM TV_Channel GROUP BY LANGUAGE ORDER BY count(*) ASC LIMIT 1",
+        "predicted_sql": "select language, count(*) as num_channels from tv_channel group by language order by num_channels limit 1",
+        "prompt_len": 661
+    },
+    {
+        "db_id": "tvshow",
+        "question": "List each language and the number of TV Channels using it.",
+        "gold_sql": "SELECT LANGUAGE , count(*) FROM TV_Channel GROUP BY LANGUAGE",
+        "predicted_sql": "select language, count(*) as num_channels from tv_channel group by language",
+        "prompt_len": 654
+    },
+    {
+        "db_id": "tvshow",
+        "question": "For each language, list the number of TV Channels that use it.",
+        "gold_sql": "SELECT LANGUAGE , count(*) FROM TV_Channel GROUP BY LANGUAGE",
+        "predicted_sql": "select language, count(distinct id) as num_channels from tv_channel group by language",
+        "prompt_len": 656
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is the TV Channel that shows the cartoon \"The Rise of the Blue Beetle!\"? List the TV Channel's series name.",
+        "gold_sql": "SELECT T1.series_name FROM TV_Channel AS T1 JOIN Cartoon AS T2 ON T1.id = T2.Channel WHERE T2.Title = \"The Rise of the Blue Beetle!\"",
+        "predicted_sql": "select tv_channel.series_name from tv_channel join cartoon on tv_channel.id = cartoon.channel where cartoon.title = \"The Rise of the Blue Beetle!\"",
+        "prompt_len": 668
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is the series name of the TV Channel that shows the cartoon \"The Rise of the Blue Beetle\"?",
+        "gold_sql": "SELECT T1.series_name FROM TV_Channel AS T1 JOIN Cartoon AS T2 ON T1.id = T2.Channel WHERE T2.Title = \"The Rise of the Blue Beetle!\"",
+        "predicted_sql": "select tv_channel.series_name from tv_channel join cartoon on tv_channel.id = cartoon.channel where cartoon.title = \"The Rise of the Blue Beetle!\"",
+        "prompt_len": 664
+    },
+    {
+        "db_id": "tvshow",
+        "question": "List the title of all  Cartoons showed on TV Channel with series name \"Sky Radio\".",
+        "gold_sql": "SELECT T2.Title FROM TV_Channel AS T1 JOIN Cartoon AS T2 ON T1.id = T2.Channel WHERE T1.series_name = \"Sky Radio\"",
+        "predicted_sql": "select cartoon.title  from cartoon  inner join tv_channel on cartoon.channel = tv_channel.id  where tv_channel.series_name = \"Sky Radio\"",
+        "prompt_len": 661
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is the title of all the cartools that are on the TV Channel with the series name \"Sky Radio\"?",
+        "gold_sql": "SELECT T2.Title FROM TV_Channel AS T1 JOIN Cartoon AS T2 ON T1.id = T2.Channel WHERE T1.series_name = \"Sky Radio\"",
+        "predicted_sql": "select cartoon.title  from cartoon  join tv_channel on cartoon.channel = tv_channel.id  where tv_channel.series_name = \"Sky Radio\"",
+        "prompt_len": 666
+    },
+    {
+        "db_id": "tvshow",
+        "question": "List the Episode of all TV series sorted by rating.",
+        "gold_sql": "SELECT Episode FROM TV_series ORDER BY rating",
+        "predicted_sql": "select episode from tv_series order by rating desc",
+        "prompt_len": 653
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What are all of the episodes ordered by ratings?",
+        "gold_sql": "SELECT Episode FROM TV_series ORDER BY rating",
+        "predicted_sql": "select episode from tv_series order by rating desc",
+        "prompt_len": 652
+    },
+    {
+        "db_id": "tvshow",
+        "question": "List top 3 highest Rating  TV series. List the TV series's Episode and Rating.",
+        "gold_sql": "SELECT Episode , Rating FROM TV_series ORDER BY Rating DESC LIMIT 3",
+        "predicted_sql": "select episode, rating  from tv_series  order by rating desc  limit 3",
+        "prompt_len": 661
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What are 3 most highly rated episodes in the TV series table and what were those ratings?",
+        "gold_sql": "SELECT Episode , Rating FROM TV_series ORDER BY Rating DESC LIMIT 3",
+        "predicted_sql": "select episode, rating from tv_series order by rating desc limit 3",
+        "prompt_len": 661
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is minimum and maximum share of TV series?",
+        "gold_sql": "SELECT max(SHARE) , min(SHARE) FROM TV_series",
+        "predicted_sql": "select min(share), max(share) from tv_series",
+        "prompt_len": 652
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is the maximum and minimum share for the TV series?",
+        "gold_sql": "SELECT max(SHARE) , min(SHARE) FROM TV_series",
+        "predicted_sql": "select max(share), min(share) from tv_series",
+        "prompt_len": 654
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is the air date of TV series with Episode \"A Love of a Lifetime\"?",
+        "gold_sql": "SELECT Air_Date FROM TV_series WHERE Episode = \"A Love of a Lifetime\"",
+        "predicted_sql": "select air_date from tv_series where episode = \"A Love of a Lifetime\"",
+        "prompt_len": 660
+    },
+    {
+        "db_id": "tvshow",
+        "question": "When did the episode \"A Love of a Lifetime\" air?",
+        "gold_sql": "SELECT Air_Date FROM TV_series WHERE Episode = \"A Love of a Lifetime\"",
+        "predicted_sql": "select air_date from tv_series where episode = \"A Love of a Lifetime\"",
+        "prompt_len": 655
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is Weekly Rank of TV series with Episode \"A Love of a Lifetime\"?",
+        "gold_sql": "SELECT Weekly_Rank FROM TV_series WHERE Episode = \"A Love of a Lifetime\"",
+        "predicted_sql": "select weekly_rank from tv_series where episode = \"A Love of a Lifetime\"",
+        "prompt_len": 659
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is the weekly rank for the episode \"A Love of a Lifetime\"?",
+        "gold_sql": "SELECT Weekly_Rank FROM TV_series WHERE Episode = \"A Love of a Lifetime\"",
+        "predicted_sql": "select weekly_rank from tv_series where episode = \"A Love of a Lifetime\"",
+        "prompt_len": 658
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is the TV Channel of TV series with Episode \"A Love of a Lifetime\"? List the TV Channel's series name.",
+        "gold_sql": "SELECT T1.series_name FROM TV_Channel AS T1 JOIN TV_series AS T2 ON T1.id = T2.Channel WHERE T2.Episode = \"A Love of a Lifetime\"",
+        "predicted_sql": "select tv_channel.series_name from tv_channel join tv_series on tv_channel.id = tv_series.channel where tv_series.episode = \"A Love of a Lifetime\"",
+        "prompt_len": 667
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is the name of the series that has the episode \"A Love of a Lifetime\"?",
+        "gold_sql": "SELECT T1.series_name FROM TV_Channel AS T1 JOIN TV_series AS T2 ON T1.id = T2.Channel WHERE T2.Episode = \"A Love of a Lifetime\"",
+        "predicted_sql": "select series_name from tv_channel join tv_series on tv_channel.id = tv_series.channel where episode = \"A Love of a Lifetime\"",
+        "prompt_len": 661
+    },
+    {
+        "db_id": "tvshow",
+        "question": "List the Episode of all  TV series showed on TV Channel with series name \"Sky Radio\".",
+        "gold_sql": "SELECT T2.Episode FROM TV_Channel AS T1 JOIN TV_series AS T2 ON T1.id = T2.Channel WHERE T1.series_name = \"Sky Radio\"",
+        "predicted_sql": "select tv_series.episode  from tv_series  inner join tv_channel on tv_series.channel = tv_channel.id  where tv_channel.series_name = \"Sky Radio\"",
+        "prompt_len": 661
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is the episode for the TV series named \"Sky Radio\"?",
+        "gold_sql": "SELECT T2.Episode FROM TV_Channel AS T1 JOIN TV_series AS T2 ON T1.id = T2.Channel WHERE T1.series_name = \"Sky Radio\"",
+        "predicted_sql": "select tv_series.episode from tv_series join tv_channel on tv_series.channel = tv_channel.id where tv_channel.series_name = \"Sky Radio\"",
+        "prompt_len": 656
+    },
+    {
+        "db_id": "tvshow",
+        "question": "Find the number of cartoons directed by each of the listed directors.",
+        "gold_sql": "SELECT count(*) , Directed_by FROM cartoon GROUP BY Directed_by",
+        "predicted_sql": "select directed_by, count(*) as num_cartoons from cartoon group by directed_by",
+        "prompt_len": 655
+    },
+    {
+        "db_id": "tvshow",
+        "question": "How many cartoons did each director create?",
+        "gold_sql": "SELECT count(*) , Directed_by FROM cartoon GROUP BY Directed_by",
+        "predicted_sql": "select directed_by, count(*) as num_cartoons from cartoon group by directed_by",
+        "prompt_len": 650
+    },
+    {
+        "db_id": "tvshow",
+        "question": "Find the production code and channel of the most recently aired cartoon .",
+        "gold_sql": "select production_code , channel from cartoon order by original_air_date desc limit 1",
+        "predicted_sql": "select production_code, channel  from cartoon  where original_air_date = (select max(original_air_date) from cartoon)",
+        "prompt_len": 655
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is the produdction code and channel of the most recent cartoon ?",
+        "gold_sql": "select production_code , channel from cartoon order by original_air_date desc limit 1",
+        "predicted_sql": "select production_code, channel from cartoon where original_air_date = (select max(original_air_date) from cartoon)",
+        "prompt_len": 657
+    },
+    {
+        "db_id": "tvshow",
+        "question": "Find the package choice and series name of the TV channel that has high definition TV.",
+        "gold_sql": "SELECT package_option , series_name FROM TV_Channel WHERE hight_definition_TV = \"yes\"",
+        "predicted_sql": "select tv_channel.package_option, tv_channel.series_name from tv_channel where tv_channel.hight_definition_tv = 'yes'",
+        "prompt_len": 659
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What are the package options and the name of the series for the TV Channel that supports high definition TV?",
+        "gold_sql": "SELECT package_option , series_name FROM TV_Channel WHERE hight_definition_TV = \"yes\"",
+        "predicted_sql": "select package_option, series_name from tv_channel where hight_definition_tv = 'yes'",
+        "prompt_len": 663
+    },
+    {
+        "db_id": "tvshow",
+        "question": "which countries' tv channels are playing some cartoon written by Todd Casey?",
+        "gold_sql": "SELECT T1.country FROM TV_Channel AS T1 JOIN cartoon AS T2 ON T1.id = T2.Channel WHERE T2.written_by = 'Todd Casey'",
+        "predicted_sql": "select distinct c.channel from cartoon c join tv_channel ch on c.channel = ch.id where c.written_by = 'Todd Casey' and ch.country is not null",
+        "prompt_len": 656
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What are the countries that have cartoons on TV that were written by Todd Casey?",
+        "gold_sql": "SELECT T1.country FROM TV_Channel AS T1 JOIN cartoon AS T2 ON T1.id = T2.Channel WHERE T2.written_by = 'Todd Casey'",
+        "predicted_sql": "select distinct tv_channel.country from tv_channel join cartoon on tv_channel.id = cartoon.channel where cartoon.written_by = 'Todd Casey'",
+        "prompt_len": 658
+    },
+    {
+        "db_id": "tvshow",
+        "question": "which countries' tv channels are not playing any cartoon written by Todd Casey?",
+        "gold_sql": "SELECT country FROM TV_Channel EXCEPT SELECT T1.country FROM TV_Channel AS T1 JOIN cartoon AS T2 ON T1.id = T2.Channel WHERE T2.written_by = 'Todd Casey'",
+        "predicted_sql": "select distinct c.channel from cartoon c join tv_channel ch on c.channel = ch.id where c.written_by != 'Todd Casey' group by c.channel having count(distinct c.id) = 0",
+        "prompt_len": 657
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What are the countries that are not playing cartoons written by Todd Casey?",
+        "gold_sql": "SELECT country FROM TV_Channel EXCEPT SELECT T1.country FROM TV_Channel AS T1 JOIN cartoon AS T2 ON T1.id = T2.Channel WHERE T2.written_by = 'Todd Casey'",
+        "predicted_sql": "select distinct country from tv_channel where id not in (   select channel   from cartoon   where written_by = 'Todd Casey' )",
+        "prompt_len": 656
+    },
+    {
+        "db_id": "tvshow",
+        "question": "Find the series name and country of the tv channel that is playing some cartoons directed by Ben Jones and Michael Chang?",
+        "gold_sql": "SELECT T1.series_name , T1.country FROM TV_Channel AS T1 JOIN cartoon AS T2 ON T1.id = T2.Channel WHERE T2.directed_by = 'Michael Chang' INTERSECT SELECT T1.series_name , T1.country FROM TV_Channel AS T1 JOIN cartoon AS T2 ON T1.id = T2.Channel WHERE T2.directed_by = 'Ben Jones'",
+        "predicted_sql": "select tv_channel.series_name, tv_channel.country from tv_channel join cartoon on tv_channel.id = cartoon.channel where cartoon.directed_by in ('Ben Jones', 'Michael Chang')",
+        "prompt_len": 665
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is the series name and country of all TV channels that are playing cartoons directed by Ben Jones and cartoons directed by Michael Chang?",
+        "gold_sql": "SELECT T1.series_name , T1.country FROM TV_Channel AS T1 JOIN cartoon AS T2 ON T1.id = T2.Channel WHERE T2.directed_by = 'Michael Chang' INTERSECT SELECT T1.series_name , T1.country FROM TV_Channel AS T1 JOIN cartoon AS T2 ON T1.id = T2.Channel WHERE T2.directed_by = 'Ben Jones'",
+        "predicted_sql": "select tv_channel.series_name, tv_channel.country from tv_channel join cartoon on tv_channel.id = cartoon.channel where cartoon.directed_by in ('Ben Jones', 'Michael Chang') group by tv_channel.series_name, tv_channel.country",
+        "prompt_len": 668
+    },
+    {
+        "db_id": "tvshow",
+        "question": "find the pixel aspect ratio and nation of the tv channels that do not use English.",
+        "gold_sql": "SELECT Pixel_aspect_ratio_PAR , country FROM tv_channel WHERE LANGUAGE != 'English'",
+        "predicted_sql": "select pixel_aspect_ratio_par, country from tv_channel where language != 'English'",
+        "prompt_len": 659
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What is the pixel aspect ratio and country of origin for all TV channels that do not use English?",
+        "gold_sql": "SELECT Pixel_aspect_ratio_PAR , country FROM tv_channel WHERE LANGUAGE != 'English'",
+        "predicted_sql": "select pixel_aspect_ratio_par, country from tv_channel where language != \"English\"",
+        "prompt_len": 662
+    },
+    {
+        "db_id": "tvshow",
+        "question": "find id of the tv channels that from the countries where have more than two tv channels.",
+        "gold_sql": "SELECT id FROM tv_channel GROUP BY country HAVING count(*) > 2",
+        "predicted_sql": "select tv_channel.id from tv_channel where country in (  select country  from tv_channel  group by country  having count(*) > 2 )",
+        "prompt_len": 660
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What are the ids of all tv channels that have more than 2 TV channels?",
+        "gold_sql": "SELECT id FROM tv_channel GROUP BY country HAVING count(*) > 2",
+        "predicted_sql": "select id from tv_channel group by id having count(id) > 2",
+        "prompt_len": 659
+    },
+    {
+        "db_id": "tvshow",
+        "question": "find the id of tv channels that do not play any cartoon directed by Ben Jones.",
+        "gold_sql": "SELECT id FROM TV_Channel EXCEPT SELECT channel FROM cartoon WHERE directed_by = 'Ben Jones'",
+        "predicted_sql": "select tv_channel.id from tv_channel where tv_channel.id not in (   select cartoon.channel   from cartoon   where cartoon.directed_by = 'Ben Jones' )",
+        "prompt_len": 659
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What are the ids of the TV channels that do not have any cartoons directed by Ben Jones?",
+        "gold_sql": "SELECT id FROM TV_Channel EXCEPT SELECT channel FROM cartoon WHERE directed_by = 'Ben Jones'",
+        "predicted_sql": "select tv_channel.id from tv_channel where tv_channel.id not in (   select cartoon.channel   from cartoon   where cartoon.directed_by = 'Ben Jones' )",
+        "prompt_len": 661
+    },
+    {
+        "db_id": "tvshow",
+        "question": "find the package option of the tv channel that do not have any cartoon directed by Ben Jones.",
+        "gold_sql": "SELECT package_option FROM TV_Channel WHERE id NOT IN (SELECT channel FROM cartoon WHERE directed_by = 'Ben Jones')",
+        "predicted_sql": "select package_option  from tv_channel  where id not in (  select channel   from cartoon   where directed_by = 'Ben Jones' )",
+        "prompt_len": 661
+    },
+    {
+        "db_id": "tvshow",
+        "question": "What are the package options of all tv channels that are not playing any cartoons directed by Ben Jones?",
+        "gold_sql": "SELECT package_option FROM TV_Channel WHERE id NOT IN (SELECT channel FROM cartoon WHERE directed_by = 'Ben Jones')",
+        "predicted_sql": "select tv_channel.package_option from tv_channel where tv_channel.id not in (   select cartoon.channel   from cartoon   where cartoon.directed_by = 'Ben Jones' )",
+        "prompt_len": 662
+    }
+]

@@ -1,0 +1,562 @@
+[
+    {
+        "db_id": "flight_2",
+        "question": "Which country does Airline \"JetBlue Airways\" belong to?",
+        "gold_sql": "SELECT Country FROM AIRLINES WHERE Airline = \"JetBlue Airways\"",
+        "predicted_sql": "select country from airlines where airline = \"JetBlue Airways\"",
+        "prompt_len": 332
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What country is Jetblue Airways affiliated with?",
+        "gold_sql": "SELECT Country FROM AIRLINES WHERE Airline = \"JetBlue Airways\"",
+        "predicted_sql": "select airlines.country from airlines where airlines.airline = \"Jetblue Airways\"",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What is the abbreviation of Airline \"JetBlue Airways\"?",
+        "gold_sql": "SELECT Abbreviation FROM AIRLINES WHERE Airline = \"JetBlue Airways\"",
+        "predicted_sql": "select abbreviation from airlines where airline = \"JetBlue Airways\"",
+        "prompt_len": 332
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Which abbreviation corresponds to Jetblue Airways?",
+        "gold_sql": "SELECT Abbreviation FROM AIRLINES WHERE Airline = \"JetBlue Airways\"",
+        "predicted_sql": "select abbreviation from airlines where airline = \"Jetblue Airways\"",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "flight_2",
+        "question": "List all airline names and their abbreviations in \"USA\".",
+        "gold_sql": "SELECT Airline , Abbreviation FROM AIRLINES WHERE Country = \"USA\"",
+        "predicted_sql": "select airline, abbreviation from airlines where country = \"USA\"",
+        "prompt_len": 331
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What are the airline names and abbreviations for airlines in the USA?",
+        "gold_sql": "SELECT Airline , Abbreviation FROM AIRLINES WHERE Country = \"USA\"",
+        "predicted_sql": "select airline, abbreviation from airlines where country = \"USA\"",
+        "prompt_len": 333
+    },
+    {
+        "db_id": "flight_2",
+        "question": "List the airport code and name in the city of Anthony.",
+        "gold_sql": "SELECT AirportCode , AirportName FROM AIRPORTS WHERE city = \"Anthony\"",
+        "predicted_sql": "select airportcode, airportname from airports where city = \"Anthony\"",
+        "prompt_len": 331
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Give the airport code and airport name corresonding to the city Anthony.",
+        "gold_sql": "SELECT AirportCode , AirportName FROM AIRPORTS WHERE city = \"Anthony\"",
+        "predicted_sql": "select airportcode, airportname from airports where city = \"Anthony\"",
+        "prompt_len": 334
+    },
+    {
+        "db_id": "flight_2",
+        "question": "How many airlines do we have?",
+        "gold_sql": "SELECT count(*) FROM AIRLINES",
+        "predicted_sql": "select count(*) from airlines",
+        "prompt_len": 326
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What is the total number of airlines?",
+        "gold_sql": "SELECT count(*) FROM AIRLINES",
+        "predicted_sql": "select count(*) from airlines",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "flight_2",
+        "question": "How many airports do we have?",
+        "gold_sql": "SELECT count(*) FROM AIRPORTS",
+        "predicted_sql": "select count(*) from airports",
+        "prompt_len": 326
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Return the number of  airports.",
+        "gold_sql": "SELECT count(*) FROM AIRPORTS",
+        "predicted_sql": "select count(*) from airports",
+        "prompt_len": 326
+    },
+    {
+        "db_id": "flight_2",
+        "question": "How many flights do we have?",
+        "gold_sql": "SELECT count(*) FROM FLIGHTS",
+        "predicted_sql": "select count(*) from flights",
+        "prompt_len": 326
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Return the number of flights.",
+        "gold_sql": "SELECT count(*) FROM FLIGHTS",
+        "predicted_sql": "select count(*) from flights",
+        "prompt_len": 325
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Which airline has abbreviation 'UAL'?",
+        "gold_sql": "SELECT Airline FROM AIRLINES WHERE Abbreviation = \"UAL\"",
+        "predicted_sql": "select airline from airlines where abbreviation = 'UAL'",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Give the airline with abbreviation 'UAL'.",
+        "gold_sql": "SELECT Airline FROM AIRLINES WHERE Abbreviation = \"UAL\"",
+        "predicted_sql": "select airline from airlines where abbreviation = 'UAL'",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "flight_2",
+        "question": "How many airlines are from USA?",
+        "gold_sql": "SELECT count(*) FROM AIRLINES WHERE Country = \"USA\"",
+        "predicted_sql": "select count(*) from airlines where country = \"USA\"",
+        "prompt_len": 326
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Return the number of airlines in the USA.",
+        "gold_sql": "SELECT count(*) FROM AIRLINES WHERE Country = \"USA\"",
+        "predicted_sql": "select count(*) from airlines where country = \"USA\"",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Which city and country is the Alton airport at?",
+        "gold_sql": "SELECT City , Country FROM AIRPORTS WHERE AirportName = \"Alton\"",
+        "predicted_sql": "select city, country from airports where airportcode = \"ALN\"",
+        "prompt_len": 330
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Give the city and country for the Alton airport.",
+        "gold_sql": "SELECT City , Country FROM AIRPORTS WHERE AirportName = \"Alton\"",
+        "predicted_sql": "select city, country from airports where airportcode = \"ALN\"",
+        "prompt_len": 330
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What is the airport name for airport 'AKO'?",
+        "gold_sql": "SELECT AirportName FROM AIRPORTS WHERE AirportCode = \"AKO\"",
+        "predicted_sql": "select airportname from airports where airportcode = 'AKO'",
+        "prompt_len": 331
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Return the name of the airport with code 'AKO'.",
+        "gold_sql": "SELECT AirportName FROM AIRPORTS WHERE AirportCode = \"AKO\"",
+        "predicted_sql": "select airportname from airports where airportcode = 'AKO'",
+        "prompt_len": 331
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What are airport names at City 'Aberdeen'?",
+        "gold_sql": "SELECT AirportName FROM AIRPORTS WHERE City = \"Aberdeen\"",
+        "predicted_sql": "select airportname from airports where city = 'Aberdeen'",
+        "prompt_len": 331
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What are the names of airports in Aberdeen?",
+        "gold_sql": "SELECT AirportName FROM AIRPORTS WHERE City = \"Aberdeen\"",
+        "predicted_sql": "select airportname from airports where city = \"Aberdeen\"",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "flight_2",
+        "question": "How many flights depart from 'APG'?",
+        "gold_sql": "SELECT count(*) FROM FLIGHTS WHERE SourceAirport = \"APG\"",
+        "predicted_sql": "select count(*) from flights where sourceairport = 'APG'",
+        "prompt_len": 329
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Count the number of flights departing from 'APG'.",
+        "gold_sql": "SELECT count(*) FROM FLIGHTS WHERE SourceAirport = \"APG\"",
+        "predicted_sql": "select count(*) from flights where sourceairport = 'APG'",
+        "prompt_len": 330
+    },
+    {
+        "db_id": "flight_2",
+        "question": "How many flights have destination ATO?",
+        "gold_sql": "SELECT count(*) FROM FLIGHTS WHERE DestAirport = \"ATO\"",
+        "predicted_sql": "select count(*) from flights where destairport = 'ATO'",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Count the number of flights into ATO.",
+        "gold_sql": "SELECT count(*) FROM FLIGHTS WHERE DestAirport = \"ATO\"",
+        "predicted_sql": "select count(*) from flights where destairport = 'ATO'",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "flight_2",
+        "question": "How many flights depart from City Aberdeen?",
+        "gold_sql": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.SourceAirport = T2.AirportCode WHERE T2.City = \"Aberdeen\"",
+        "predicted_sql": "select count(*) from flights where sourceairport in (select airportcode from airports where city = \"Aberdeen\")",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Return the number of flights departing from Aberdeen.",
+        "gold_sql": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.SourceAirport = T2.AirportCode WHERE T2.City = \"Aberdeen\"",
+        "predicted_sql": "select count(*) from flights where sourceairport in (select airportcode from airports where city = \"Aberdeen\")",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "flight_2",
+        "question": "How many flights arriving in Aberdeen city?",
+        "gold_sql": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.DestAirport = T2.AirportCode WHERE T2.City = \"Aberdeen\"",
+        "predicted_sql": "select count(*) from flights join airports on flights.destairport = airports.airportcode where airports.city = \"Aberdeen\"",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Return the number of flights arriving in Aberdeen.",
+        "gold_sql": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.DestAirport = T2.AirportCode WHERE T2.City = \"Aberdeen\"",
+        "predicted_sql": "select count(*) from flights join airports on flights.destairport = airports.airportcode where airports.city = \"Aberdeen\"",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "flight_2",
+        "question": "How many flights depart from City 'Aberdeen' and have destination City 'Ashley'?",
+        "gold_sql": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.DestAirport = T2.AirportCode JOIN AIRPORTS AS T3 ON T1.SourceAirport = T3.AirportCode WHERE T2.City = \"Ashley\" AND T3.City = \"Aberdeen\"",
+        "predicted_sql": "select count(*) from flights where sourceairport = (select airportcode from airports where city = 'Aberdeen') and destairport = (select airportcode from airports where city = 'Ashley')",
+        "prompt_len": 339
+    },
+    {
+        "db_id": "flight_2",
+        "question": "How many flights fly from Aberdeen to Ashley?",
+        "gold_sql": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.DestAirport = T2.AirportCode JOIN AIRPORTS AS T3 ON T1.SourceAirport = T3.AirportCode WHERE T2.City = \"Ashley\" AND T3.City = \"Aberdeen\"",
+        "predicted_sql": "select count(*) from flights where sourceairport = 'AAF' and destairport = 'ASY'",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "flight_2",
+        "question": "How many flights does airline 'JetBlue Airways' have?",
+        "gold_sql": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRLINES AS T2 ON T1.Airline = T2.uid WHERE T2.Airline = \"JetBlue Airways\"",
+        "predicted_sql": "select count(*) from flights where airline = (select uid from airlines where airline = 'JetBlue Airways')",
+        "prompt_len": 331
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Give the number of Jetblue Airways flights.",
+        "gold_sql": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRLINES AS T2 ON T1.Airline = T2.uid WHERE T2.Airline = \"JetBlue Airways\"",
+        "predicted_sql": "select count(*) from flights where airline = (select uid from airlines where airline = \"Jetblue Airways\")",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "flight_2",
+        "question": "How many 'United Airlines' flights go to Airport 'ASY'?",
+        "gold_sql": "SELECT count(*) FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T2.Airline = T1.uid WHERE T1.Airline = \"United Airlines\" AND T2.DestAirport = \"ASY\"",
+        "predicted_sql": "select count(*) from flights  join airlines on flights.airline = airlines.uid  join airports on flights.destairport = airports.airportcode  where airlines.airline = 'United Airlines' and airports.airportcode = 'ASY'",
+        "prompt_len": 333
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Count the number of United Airlines flights arriving in ASY Airport.",
+        "gold_sql": "SELECT count(*) FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T2.Airline = T1.uid WHERE T1.Airline = \"United Airlines\" AND T2.DestAirport = \"ASY\"",
+        "predicted_sql": "select count(*)  from flights  where airline = 1 and destairport = 'ASY'",
+        "prompt_len": 332
+    },
+    {
+        "db_id": "flight_2",
+        "question": "How many 'United Airlines' flights depart from Airport 'AHD'?",
+        "gold_sql": "SELECT count(*) FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T2.Airline = T1.uid WHERE T1.Airline = \"United Airlines\" AND T2.SourceAirport = \"AHD\"",
+        "predicted_sql": "select count(*) from flights  where airline = (select uid from airlines where airline = 'United Airlines')  and sourceairport = 'AHD'",
+        "prompt_len": 334
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Return the number of United Airlines flights leaving from AHD Airport.",
+        "gold_sql": "SELECT count(*) FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T2.Airline = T1.uid WHERE T1.Airline = \"United Airlines\" AND T2.SourceAirport = \"AHD\"",
+        "predicted_sql": "select count(*)  from flights  where airline = 1  and sourceairport = 'AHD'",
+        "prompt_len": 332
+    },
+    {
+        "db_id": "flight_2",
+        "question": "How many United Airlines flights go to City 'Aberdeen'?",
+        "gold_sql": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.DestAirport = T2.AirportCode JOIN AIRLINES AS T3 ON T3.uid = T1.Airline WHERE T2.City = \"Aberdeen\" AND T3.Airline = \"United Airlines\"",
+        "predicted_sql": "select count(*) from flights  join airlines on flights.airline = airlines.uid  join airports on flights.destairport = airports.airportcode  where airlines.airline = 'United Airlines' and airports.city = 'Aberdeen'",
+        "prompt_len": 333
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Count the number of United Airlines flights that arrive in Aberdeen.",
+        "gold_sql": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.DestAirport = T2.AirportCode JOIN AIRLINES AS T3 ON T3.uid = T1.Airline WHERE T2.City = \"Aberdeen\" AND T3.Airline = \"United Airlines\"",
+        "predicted_sql": "select count(*) from flights where airline = 1 and destairport in (select airportcode from airports where city = \"Aberdeen\")",
+        "prompt_len": 331
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Which city has most number of arriving flights?",
+        "gold_sql": "SELECT T1.City FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode = T2.DestAirport GROUP BY T1.City ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select destairport, count(*) as num_arrivals from flights join airports on flights.destairport = airports.airportcode group by destairport order by num_arrivals desc limit 1",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Which city has the most frequent destination airport?",
+        "gold_sql": "SELECT T1.City FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode = T2.DestAirport GROUP BY T1.City ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select destairport, count(*) as freq_dest from flights join airports on flights.destairport = airports.airportcode group by destairport order by freq_dest desc limit 1",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Which city has most number of departing flights?",
+        "gold_sql": "SELECT T1.City FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode = T2.SourceAirport GROUP BY T1.City ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select sourceairport, count(*) as num_flights from flights join airports on flights.sourceairport = airports.airportcode group by sourceairport order by num_flights desc limit 1",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Which city is the most frequent source airport?",
+        "gold_sql": "SELECT T1.City FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode = T2.SourceAirport GROUP BY T1.City ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select sourceairport, count(*) as frequency from flights join airports on flights.sourceairport = airports.airportcode group by sourceairport order by frequency desc limit 1",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What is the code of airport that has the highest number of flights?",
+        "gold_sql": "SELECT T1.AirportCode FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode = T2.DestAirport OR T1.AirportCode = T2.SourceAirport GROUP BY T1.AirportCode ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select destairport, count(*) as num_flights from flights group by destairport order by num_flights desc limit 1",
+        "prompt_len": 333
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What is the airport code of the airport with the most flights?",
+        "gold_sql": "SELECT T1.AirportCode FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode = T2.DestAirport OR T1.AirportCode = T2.SourceAirport GROUP BY T1.AirportCode ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select destairport, count(*) as num_flights from flights group by destairport order by num_flights desc limit 1",
+        "prompt_len": 332
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What is the code of airport that has fewest number of flights?",
+        "gold_sql": "SELECT T1.AirportCode FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode = T2.DestAirport OR T1.AirportCode = T2.SourceAirport GROUP BY T1.AirportCode ORDER BY count(*) LIMIT 1",
+        "predicted_sql": "select airportcode from airports where airportcode not in (   select sourceairport   from flights   union   select destairport   from flights ) order by airportcode limit 1",
+        "prompt_len": 333
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Give the code of the airport with the least flights.",
+        "gold_sql": "SELECT T1.AirportCode FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode = T2.DestAirport OR T1.AirportCode = T2.SourceAirport GROUP BY T1.AirportCode ORDER BY count(*) LIMIT 1",
+        "predicted_sql": "select sourceairport, count(*) as num_flights from flights group by sourceairport order by num_flights limit 1",
+        "prompt_len": 330
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Which airline has most number of flights?",
+        "gold_sql": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline GROUP BY T1.Airline ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select airline, count(*) as num_flights from flights group by airline order by num_flights desc limit 1",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What airline serves the most flights?",
+        "gold_sql": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline GROUP BY T1.Airline ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select airline, count(*) as num_flights from flights group by airline order by num_flights desc limit 1",
+        "prompt_len": 326
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Find the abbreviation and country of the airline that has fewest number of flights?",
+        "gold_sql": "SELECT T1.Abbreviation , T1.Country FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline GROUP BY T1.Airline ORDER BY count(*) LIMIT 1",
+        "predicted_sql": "select abbreviation, country from airlines where uid = (   select airline   from flights   group by airline   order by count(*) asc   limit 1 )",
+        "prompt_len": 335
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What is the abbreviation of the airilne has the fewest flights and what country is it in?",
+        "gold_sql": "SELECT T1.Abbreviation , T1.Country FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline GROUP BY T1.Airline ORDER BY count(*) LIMIT 1",
+        "predicted_sql": "select abbreviation, country from airlines where uid = (   select airline   from flights   group by airline   order by count(*) asc   limit 1 )",
+        "prompt_len": 340
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What are airlines that have some flight departing from airport 'AHD'?",
+        "gold_sql": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline WHERE T2.SourceAirport = \"AHD\"",
+        "predicted_sql": "select distinct a.airline from flights f join airports a on f.sourceairport = a.airportcode where a.airportcode = 'AHD'",
+        "prompt_len": 334
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Which airlines have a flight with source airport AHD?",
+        "gold_sql": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline WHERE T2.SourceAirport = \"AHD\"",
+        "predicted_sql": "select airlines.airline from airlines join flights on airlines.uid = flights.airline join airports on flights.sourceairport = airports.airportcode where airports.airportname = \"AHD\"",
+        "prompt_len": 330
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What are airlines that have flights arriving at airport 'AHD'?",
+        "gold_sql": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline WHERE T2.DestAirport = \"AHD\"",
+        "predicted_sql": "select airlines.airline from airlines join flights on airlines.uid = flights.airline where flights.destairport = 'AHD'",
+        "prompt_len": 333
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Which airlines have a flight with destination airport AHD?",
+        "gold_sql": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline WHERE T2.DestAirport = \"AHD\"",
+        "predicted_sql": "select airline.airline from flights join airports on flights.destairport = airports.airportcode join airlines on flights.airline = airlines.uid where airports.airportcode = \"AHD\"",
+        "prompt_len": 330
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Find all airlines that have flights from both airports 'APG' and 'CVO'.",
+        "gold_sql": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline WHERE T2.SourceAirport = \"APG\" INTERSECT SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline WHERE T2.SourceAirport = \"CVO\"",
+        "predicted_sql": "select distinct a.airline from flights a inner join flights b on a.airline = b.airline where a.sourceairport = 'APG' and b.sourceairport = 'CVO'",
+        "prompt_len": 337
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Which airlines have departing flights from both APG and CVO airports?",
+        "gold_sql": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline WHERE T2.SourceAirport = \"APG\" INTERSECT SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline WHERE T2.SourceAirport = \"CVO\"",
+        "predicted_sql": "select distinct a.airline from flights f join airports a on f.sourceairport = a.airportcode where f.sourceairport in ('APG', 'CVO') and f.airline in (   select airline   from flights   join airports on flights.destairport = airports.airportcode   where airports.city in ('APG', 'CVO')   group by airline   having count(distinct airports.city) = 2 )",
+        "prompt_len": 333
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Find all airlines that have flights from airport 'CVO' but not from 'APG'.",
+        "gold_sql": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline WHERE T2.SourceAirport = \"CVO\" EXCEPT SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline WHERE T2.SourceAirport = \"APG\"",
+        "predicted_sql": "select airlines.airline from airlines join flights on airlines.uid = flights.airline where flights.sourceairport = 'CVO' and airlines.airline not in (  select airlines.airline  from airlines  join flights on airlines.uid = flights.airline  where flights.sourceairport = 'APG' )",
+        "prompt_len": 338
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Which airlines have departures from CVO but not from APG airports?",
+        "gold_sql": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline WHERE T2.SourceAirport = \"CVO\" EXCEPT SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline WHERE T2.SourceAirport = \"APG\"",
+        "predicted_sql": "select distinct airline from flights where sourceairport = 'CVO' and airline not in (   select airline   from flights   where sourceairport = 'APG' )",
+        "prompt_len": 334
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Find all airlines that have at least 10 flights.",
+        "gold_sql": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline GROUP BY T1.Airline HAVING count(*) > 10",
+        "predicted_sql": "select airline, count(*) as num_flights from flights group by airline having num_flights >= 10",
+        "prompt_len": 330
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Which airlines have at least 10 flights?",
+        "gold_sql": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline GROUP BY T1.Airline HAVING count(*) > 10",
+        "predicted_sql": "select airline, count(*) as num_flights from flights group by airline having num_flights >= 10",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Find all airlines that have fewer than 200 flights.",
+        "gold_sql": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline GROUP BY T1.Airline HAVING count(*) < 200",
+        "predicted_sql": "select airline, count(*) as num_flights from flights group by airline having num_flights < 200",
+        "prompt_len": 330
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Which airlines have less than 200 flights?",
+        "gold_sql": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline GROUP BY T1.Airline HAVING count(*) < 200",
+        "predicted_sql": "select airline, count(*) as num_flights from flights group by airline having num_flights < 200",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What are flight numbers of Airline \"United Airlines\"?",
+        "gold_sql": "SELECT T1.FlightNo FROM FLIGHTS AS T1 JOIN AIRLINES AS T2 ON T2.uid = T1.Airline WHERE T2.Airline = \"United Airlines\"",
+        "predicted_sql": "select flights.flightno  from flights  join airlines on flights.airline = airlines.uid  where airlines.airline = \"United Airlines\"",
+        "prompt_len": 331
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Which flight numbers correspond to United Airlines flights?",
+        "gold_sql": "SELECT T1.FlightNo FROM FLIGHTS AS T1 JOIN AIRLINES AS T2 ON T2.uid = T1.Airline WHERE T2.Airline = \"United Airlines\"",
+        "predicted_sql": "select flightno from flights where airline = (select uid from airlines where airline = \"United Airlines\")",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What are flight numbers of flights departing from Airport \"APG\"?",
+        "gold_sql": "SELECT FlightNo FROM FLIGHTS WHERE SourceAirport = \"APG\"",
+        "predicted_sql": "select flights.flightno from flights where flights.sourceairport = \"APG\"",
+        "prompt_len": 333
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Give the flight numbers of flights leaving from APG.",
+        "gold_sql": "SELECT FlightNo FROM FLIGHTS WHERE SourceAirport = \"APG\"",
+        "predicted_sql": "select flights.flightno from flights join airports on flights.sourceairport = airports.airportcode where airports.airportcode = \"APG\"",
+        "prompt_len": 330
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What are flight numbers of flights arriving at Airport \"APG\"?",
+        "gold_sql": "SELECT FlightNo FROM FLIGHTS WHERE DestAirport = \"APG\"",
+        "predicted_sql": "select flights.flightno from flights join airports on flights.destairport = airports.airportcode where airports.airportcode = \"APG\"",
+        "prompt_len": 333
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Give the flight numbers of flights landing at APG.",
+        "gold_sql": "SELECT FlightNo FROM FLIGHTS WHERE DestAirport = \"APG\"",
+        "predicted_sql": "select flights.flightno from flights join airports on flights.destairport = airports.airportcode where airports.airportcode = \"APG\"",
+        "prompt_len": 330
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What are flight numbers of flights departing from City \"Aberdeen \"?",
+        "gold_sql": "SELECT T1.FlightNo FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.SourceAirport = T2.AirportCode WHERE T2.City = \"Aberdeen\"",
+        "predicted_sql": "select flights.flightno from flights join airports on flights.sourceairport = airports.airportcode where airports.city = \"Aberdeen\"",
+        "prompt_len": 334
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Give the flight numbers of flights leaving from Aberdeen.",
+        "gold_sql": "SELECT T1.FlightNo FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.SourceAirport = T2.AirportCode WHERE T2.City = \"Aberdeen\"",
+        "predicted_sql": "select flights.flightno from flights join airports on flights.sourceairport = airports.airportcode where airports.city = \"Aberdeen\"",
+        "prompt_len": 329
+    },
+    {
+        "db_id": "flight_2",
+        "question": "What are flight numbers of flights arriving at City \"Aberdeen\"?",
+        "gold_sql": "SELECT T1.FlightNo FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.DestAirport = T2.AirportCode WHERE T2.City = \"Aberdeen\"",
+        "predicted_sql": "select flights.flightno from flights join airports on flights.destairport = airports.airportcode where airports.city = \"Aberdeen\"",
+        "prompt_len": 334
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Give the flight numbers of flights arriving in Aberdeen.",
+        "gold_sql": "SELECT T1.FlightNo FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.DestAirport = T2.AirportCode WHERE T2.City = \"Aberdeen\"",
+        "predicted_sql": "select flights.flightno from flights join airports on flights.destairport = airports.airportcode where airports.city = \"Aberdeen\"",
+        "prompt_len": 329
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Find the number of flights landing in the city of Aberdeen or Abilene.",
+        "gold_sql": "SELECT count(*) FROM Flights AS T1 JOIN Airports AS T2 ON T1.DestAirport = T2.AirportCode WHERE T2.city = \"Aberdeen\" OR T2.city = \"Abilene\"",
+        "predicted_sql": "select count(*) from flights where destairport in (select airportcode from airports where city = 'Aberdeen' or city = 'Abilene')",
+        "prompt_len": 335
+    },
+    {
+        "db_id": "flight_2",
+        "question": "How many flights land in Aberdeen or Abilene?",
+        "gold_sql": "SELECT count(*) FROM Flights AS T1 JOIN Airports AS T2 ON T1.DestAirport = T2.AirportCode WHERE T2.city = \"Aberdeen\" OR T2.city = \"Abilene\"",
+        "predicted_sql": "select count(*) from flights where destairport in ('AAF', 'ABI')",
+        "prompt_len": 330
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Find the name of airports which do not have any flight in and out.",
+        "gold_sql": "SELECT AirportName FROM Airports WHERE AirportCode NOT IN (SELECT SourceAirport FROM Flights UNION SELECT DestAirport FROM Flights)",
+        "predicted_sql": "select airportname from airports where airportcode not in (select sourceairport from flights) and airportcode not in (select destairport from flights)",
+        "prompt_len": 334
+    },
+    {
+        "db_id": "flight_2",
+        "question": "Which airports do not have departing or arriving flights?",
+        "gold_sql": "SELECT AirportName FROM Airports WHERE AirportCode NOT IN (SELECT SourceAirport FROM Flights UNION SELECT DestAirport FROM Flights)",
+        "predicted_sql": "select airportname from airports where airportcode not in (select sourceairport from flights) and airportcode not in (select destairport from flights)",
+        "prompt_len": 329
+    }
+]

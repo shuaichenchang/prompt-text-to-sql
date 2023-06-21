@@ -1,0 +1,394 @@
+[
+    {
+        "db_id": "network_1",
+        "question": "How many high schoolers are there?",
+        "gold_sql": "SELECT count(*) FROM Highschooler",
+        "predicted_sql": "select count(*) from highschooler",
+        "prompt_len": 324
+    },
+    {
+        "db_id": "network_1",
+        "question": "Count the number of high schoolers.",
+        "gold_sql": "SELECT count(*) FROM Highschooler",
+        "predicted_sql": "select count(*) from highschooler",
+        "prompt_len": 324
+    },
+    {
+        "db_id": "network_1",
+        "question": "Show the names and grades of each high schooler.",
+        "gold_sql": "SELECT name , grade FROM Highschooler",
+        "predicted_sql": "select name, grade from highschooler",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "network_1",
+        "question": "What are the names and grades for each high schooler?",
+        "gold_sql": "SELECT name , grade FROM Highschooler",
+        "predicted_sql": "select name, grade from highschooler",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "network_1",
+        "question": "Show all the grades of the high schoolers.",
+        "gold_sql": "SELECT grade FROM Highschooler",
+        "predicted_sql": "select grade from highschooler",
+        "prompt_len": 326
+    },
+    {
+        "db_id": "network_1",
+        "question": "What is the grade of each high schooler?",
+        "gold_sql": "SELECT grade FROM Highschooler",
+        "predicted_sql": "select name, grade from highschooler",
+        "prompt_len": 326
+    },
+    {
+        "db_id": "network_1",
+        "question": "What grade is Kyle in?",
+        "gold_sql": "SELECT grade FROM Highschooler WHERE name = \"Kyle\"",
+        "predicted_sql": "select grade from highschooler where name = \"Kyle\"",
+        "prompt_len": 322
+    },
+    {
+        "db_id": "network_1",
+        "question": "Return the grade for the high schooler named Kyle.",
+        "gold_sql": "SELECT grade FROM Highschooler WHERE name = \"Kyle\"",
+        "predicted_sql": "select grade from highschooler where name = \"Kyle\"",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "network_1",
+        "question": "Show the names of all high schoolers in grade 10.",
+        "gold_sql": "SELECT name FROM Highschooler WHERE grade = 10",
+        "predicted_sql": "select name from highschooler where grade = 10",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "network_1",
+        "question": "What are the names of all high schoolers in grade 10?",
+        "gold_sql": "SELECT name FROM Highschooler WHERE grade = 10",
+        "predicted_sql": "select name from highschooler where grade = 10",
+        "prompt_len": 329
+    },
+    {
+        "db_id": "network_1",
+        "question": "Show the ID of the high schooler named Kyle.",
+        "gold_sql": "SELECT ID FROM Highschooler WHERE name = \"Kyle\"",
+        "predicted_sql": "select id from highschooler where name = \"Kyle\"",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "network_1",
+        "question": "What is Kyle's id?",
+        "gold_sql": "SELECT ID FROM Highschooler WHERE name = \"Kyle\"",
+        "predicted_sql": "select id from highschooler where name = \"Kyle\"",
+        "prompt_len": 322
+    },
+    {
+        "db_id": "network_1",
+        "question": "How many high schoolers are there in grade 9 or 10?",
+        "gold_sql": "SELECT count(*) FROM Highschooler WHERE grade = 9 OR grade = 10",
+        "predicted_sql": "select count(*) from highschooler where grade in (9,10)",
+        "prompt_len": 329
+    },
+    {
+        "db_id": "network_1",
+        "question": "Count the number of high schoolers in grades 9 or 10.",
+        "gold_sql": "SELECT count(*) FROM Highschooler WHERE grade = 9 OR grade = 10",
+        "predicted_sql": "select count(*) from highschooler where grade in (9,10)",
+        "prompt_len": 329
+    },
+    {
+        "db_id": "network_1",
+        "question": "Show the number of high schoolers for each grade.",
+        "gold_sql": "SELECT grade , count(*) FROM Highschooler GROUP BY grade",
+        "predicted_sql": "select grade, count(*) from highschooler group by grade",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "network_1",
+        "question": "How many high schoolers are in each grade?",
+        "gold_sql": "SELECT grade , count(*) FROM Highschooler GROUP BY grade",
+        "predicted_sql": "select grade, count(*) from highschooler group by grade",
+        "prompt_len": 326
+    },
+    {
+        "db_id": "network_1",
+        "question": "Which grade has the most high schoolers?",
+        "gold_sql": "SELECT grade FROM Highschooler GROUP BY grade ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select grade, count(*) as num from highschooler group by grade order by num desc limit 1",
+        "prompt_len": 325
+    },
+    {
+        "db_id": "network_1",
+        "question": "Return the grade that has the greatest number of high schoolers.",
+        "gold_sql": "SELECT grade FROM Highschooler GROUP BY grade ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select grade from highschooler group by grade order by count(*) desc limit 1",
+        "prompt_len": 329
+    },
+    {
+        "db_id": "network_1",
+        "question": "Show me all grades that have at least 4 students.",
+        "gold_sql": "SELECT grade FROM Highschooler GROUP BY grade HAVING count(*) >= 4",
+        "predicted_sql": "select grade from highschooler group by grade having count(*) >= 4",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "network_1",
+        "question": "Which grades have 4 or more high schoolers?",
+        "gold_sql": "SELECT grade FROM Highschooler GROUP BY grade HAVING count(*) >= 4",
+        "predicted_sql": "select grade from highschooler group by grade having count(*) >= 4",
+        "prompt_len": 326
+    },
+    {
+        "db_id": "network_1",
+        "question": "Show the student IDs and numbers of friends corresponding to each.",
+        "gold_sql": "SELECT student_id , count(*) FROM Friend GROUP BY student_id",
+        "predicted_sql": "select student_id, count(friend_id) as num_friends from friend group by student_id",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "network_1",
+        "question": "How many friends does each student have?",
+        "gold_sql": "SELECT student_id , count(*) FROM Friend GROUP BY student_id",
+        "predicted_sql": "select h.name, count(f.friend_id) as friends from highschooler h left join friend f on h.id = f.student_id group by h.name",
+        "prompt_len": 324
+    },
+    {
+        "db_id": "network_1",
+        "question": "Show the names of high school students and their corresponding number of friends.",
+        "gold_sql": "SELECT T2.name , count(*) FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id GROUP BY T1.student_id",
+        "predicted_sql": "select name, count(friend_id) as num_friends from highschooler join friend on highschooler.id = friend.student_id group by name",
+        "prompt_len": 330
+    },
+    {
+        "db_id": "network_1",
+        "question": "What are the names of the high schoolers and how many friends does each have?",
+        "gold_sql": "SELECT T2.name , count(*) FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id GROUP BY T1.student_id",
+        "predicted_sql": "select h.name, count(f.friend_id) as num_friends from highschooler h left join friend f on h.id = f.student_id group by h.id",
+        "prompt_len": 333
+    },
+    {
+        "db_id": "network_1",
+        "question": "What is the name of the high schooler who has the greatest number of friends?",
+        "gold_sql": "SELECT T2.name FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id GROUP BY T1.student_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select name from highschooler where id in ( select student_id from friend group by student_id order by count(*) desc limit 1 )",
+        "prompt_len": 333
+    },
+    {
+        "db_id": "network_1",
+        "question": "Return the name of the high school student with the most friends.",
+        "gold_sql": "SELECT T2.name FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id GROUP BY T1.student_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select name from highschooler where id in ( select student_id from friend group by student_id order by count(*) desc limit 1 )",
+        "prompt_len": 329
+    },
+    {
+        "db_id": "network_1",
+        "question": "Show the names of high schoolers who have at least 3 friends.",
+        "gold_sql": "SELECT T2.name FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id GROUP BY T1.student_id HAVING count(*) >= 3",
+        "predicted_sql": "select name from highschooler where id in ( select student_id from friend group by student_id having count(*) >= 3 )",
+        "prompt_len": 330
+    },
+    {
+        "db_id": "network_1",
+        "question": "What are the names of high schoolers who have 3 or more friends?",
+        "gold_sql": "SELECT T2.name FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id GROUP BY T1.student_id HAVING count(*) >= 3",
+        "predicted_sql": "select name from highschooler where id in ( select student_id from friend group by student_id having count(*) >= 3 )",
+        "prompt_len": 331
+    },
+    {
+        "db_id": "network_1",
+        "question": "Show the names of all of the high schooler Kyle's friends.",
+        "gold_sql": "SELECT T3.name FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id JOIN Highschooler AS T3 ON T1.friend_id = T3.id WHERE T2.name = \"Kyle\"",
+        "predicted_sql": "select h.name from highschooler h, friend f where h.id = f.friend_id and f.student_id = (select id from highschooler where name = \"Kyle\")",
+        "prompt_len": 330
+    },
+    {
+        "db_id": "network_1",
+        "question": "Return the names of friends of the high school student Kyle.",
+        "gold_sql": "SELECT T3.name FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id JOIN Highschooler AS T3 ON T1.friend_id = T3.id WHERE T2.name = \"Kyle\"",
+        "predicted_sql": "select h.name from highschooler h, friend f where h.id = f.friend_id and f.student_id = (select id from highschooler where name = \"Kyle\")",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "network_1",
+        "question": "How many friends does the high school student Kyle have?",
+        "gold_sql": "SELECT count(*) FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id WHERE T2.name = \"Kyle\"",
+        "predicted_sql": "select count(*) from friend where student_id = (select id from highschooler where name = \"Kyle\")",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "network_1",
+        "question": "Count the number of friends Kyle has.",
+        "gold_sql": "SELECT count(*) FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id WHERE T2.name = \"Kyle\"",
+        "predicted_sql": "select count(*) from friend where student_id = (select id from highschooler where name = \"Kyle\")",
+        "prompt_len": 324
+    },
+    {
+        "db_id": "network_1",
+        "question": "Show ids of all students who do not have any friends.",
+        "gold_sql": "SELECT id FROM Highschooler EXCEPT SELECT student_id FROM Friend",
+        "predicted_sql": "select id from highschooler where id not in (select student_id from friend)",
+        "prompt_len": 329
+    },
+    {
+        "db_id": "network_1",
+        "question": "What are the ids of high school students who do not have friends?",
+        "gold_sql": "SELECT id FROM Highschooler EXCEPT SELECT student_id FROM Friend",
+        "predicted_sql": "select id from highschooler where id not in (select student_id from friend)",
+        "prompt_len": 331
+    },
+    {
+        "db_id": "network_1",
+        "question": "Show names of all high school students who do not have any friends.",
+        "gold_sql": "SELECT name FROM Highschooler EXCEPT SELECT T2.name FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id",
+        "predicted_sql": "select name from highschooler where id not in (select student_id from friend)",
+        "prompt_len": 330
+    },
+    {
+        "db_id": "network_1",
+        "question": "What are the names of students who have no friends?",
+        "gold_sql": "SELECT name FROM Highschooler EXCEPT SELECT T2.name FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id",
+        "predicted_sql": "select name from highschooler where id not in (select friend_id from friend)",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "network_1",
+        "question": "Show the ids of high schoolers who have friends and are also liked by someone else.",
+        "gold_sql": "SELECT student_id FROM Friend INTERSECT SELECT liked_id FROM Likes",
+        "predicted_sql": "select h.id from highschooler h where exists (select * from friend f where f.student_id = h.id) and exists (select * from likes l where l.student_id = h.id)",
+        "prompt_len": 335
+    },
+    {
+        "db_id": "network_1",
+        "question": "What are the ids of students who both have friends and are liked?",
+        "gold_sql": "SELECT student_id FROM Friend INTERSECT SELECT liked_id FROM Likes",
+        "predicted_sql": "select h.id from highschooler h where exists (select * from friend f where f.student_id = h.id) and exists (select * from likes l where l.student_id = h.id)",
+        "prompt_len": 331
+    },
+    {
+        "db_id": "network_1",
+        "question": "Show name of all students who have some friends and also are liked by someone else.",
+        "gold_sql": "SELECT T2.name FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id INTERSECT SELECT T2.name FROM Likes AS T1 JOIN Highschooler AS T2 ON T1.liked_id = T2.id",
+        "predicted_sql": "select name from highschooler where id in (select student_id from friend) and id in (select student_id from likes)",
+        "prompt_len": 333
+    },
+    {
+        "db_id": "network_1",
+        "question": "What are the names of high schoolers who both have friends and are liked?",
+        "gold_sql": "SELECT T2.name FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id INTERSECT SELECT T2.name FROM Likes AS T1 JOIN Highschooler AS T2 ON T1.liked_id = T2.id",
+        "predicted_sql": "select h.name from highschooler h, friend f, likes l where h.id = f.student_id and h.id = l.student_id",
+        "prompt_len": 332
+    },
+    {
+        "db_id": "network_1",
+        "question": "Count the number of likes for each student id.",
+        "gold_sql": "SELECT student_id , count(*) FROM Likes GROUP BY student_id",
+        "predicted_sql": "select student_id, count(liked_id) as likes from likes group by student_id",
+        "prompt_len": 326
+    },
+    {
+        "db_id": "network_1",
+        "question": "How many likes correspond to each student id?",
+        "gold_sql": "SELECT student_id , count(*) FROM Likes GROUP BY student_id",
+        "predicted_sql": "select student_id, count(liked_id) as likes from likes group by student_id",
+        "prompt_len": 325
+    },
+    {
+        "db_id": "network_1",
+        "question": "Show the names of high schoolers who have likes, and numbers of likes for each.",
+        "gold_sql": "SELECT T2.name , count(*) FROM Likes AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id GROUP BY T1.student_id",
+        "predicted_sql": "select h.name, count(l.liked_id) as likes from highschooler h, likes l where h.id = l.student_id group by h.name",
+        "prompt_len": 334
+    },
+    {
+        "db_id": "network_1",
+        "question": "What are the names of high schoolers who have likes, and how many likes does each have?",
+        "gold_sql": "SELECT T2.name , count(*) FROM Likes AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id GROUP BY T1.student_id",
+        "predicted_sql": "select h.name, count(l.liked_id) as likes from highschooler h join likes l on h.id = l.student_id group by h.name",
+        "prompt_len": 336
+    },
+    {
+        "db_id": "network_1",
+        "question": "What is the name of the high schooler who has the greatest number of likes?",
+        "gold_sql": "SELECT T2.name FROM Likes AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id GROUP BY T1.student_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select name from highschooler where id in (select liked_id from likes group by liked_id order by count(*) desc limit 1)",
+        "prompt_len": 333
+    },
+    {
+        "db_id": "network_1",
+        "question": "Give the name of the student with the most likes.",
+        "gold_sql": "SELECT T2.name FROM Likes AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id GROUP BY T1.student_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select name from highschooler where id in ( select liked_id from likes group by liked_id order by count(*) desc limit 1 )",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "network_1",
+        "question": "Show the names of students who have at least 2 likes.",
+        "gold_sql": "SELECT T2.name FROM Likes AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id GROUP BY T1.student_id HAVING count(*) >= 2",
+        "predicted_sql": "select name from highschooler where id in (select student_id from likes group by student_id having count(*) >= 2)",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "network_1",
+        "question": "What are the names of students who have 2 or more likes?",
+        "gold_sql": "SELECT T2.name FROM Likes AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id GROUP BY T1.student_id HAVING count(*) >= 2",
+        "predicted_sql": "select name from highschooler where id in ( select student_id from likes group by student_id having count(*) >= 2 )",
+        "prompt_len": 329
+    },
+    {
+        "db_id": "network_1",
+        "question": "Show the names of students who have a grade higher than 5 and have at least 2 friends.",
+        "gold_sql": "SELECT T2.name FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id WHERE T2.grade > 5 GROUP BY T1.student_id HAVING count(*) >= 2",
+        "predicted_sql": "select name from highschooler where grade > 5 and id in (select student_id from friend group by student_id having count(*) >= 2)",
+        "prompt_len": 335
+    },
+    {
+        "db_id": "network_1",
+        "question": "What are the names of high schoolers who have a grade of over 5 and have 2 or more friends?",
+        "gold_sql": "SELECT T2.name FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id WHERE T2.grade > 5 GROUP BY T1.student_id HAVING count(*) >= 2",
+        "predicted_sql": "select name from highschooler where grade > 5 and id in (select student_id from friend group by student_id having count(*) >= 2)",
+        "prompt_len": 338
+    },
+    {
+        "db_id": "network_1",
+        "question": "How many likes does Kyle have?",
+        "gold_sql": "SELECT count(*) FROM Likes AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id WHERE T2.name = \"Kyle\"",
+        "predicted_sql": "select count(*) from likes where student_id = (select id from highschooler where name = \"Kyle\")",
+        "prompt_len": 323
+    },
+    {
+        "db_id": "network_1",
+        "question": "Return the number of likes that the high schooler named Kyle has.",
+        "gold_sql": "SELECT count(*) FROM Likes AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id WHERE T2.name = \"Kyle\"",
+        "predicted_sql": "select count(*) from likes where student_id in (select id from highschooler where name = \"Kyle\")",
+        "prompt_len": 330
+    },
+    {
+        "db_id": "network_1",
+        "question": "Find the average grade of all students who have some friends.",
+        "gold_sql": "SELECT avg(grade) FROM Highschooler WHERE id IN (SELECT T1.student_id FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id)",
+        "predicted_sql": "select avg(grade) from highschooler where id in (select student_id from friend)",
+        "prompt_len": 328
+    },
+    {
+        "db_id": "network_1",
+        "question": "What is the average grade of students who have friends?",
+        "gold_sql": "SELECT avg(grade) FROM Highschooler WHERE id IN (SELECT T1.student_id FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id)",
+        "predicted_sql": "select avg(grade) from highschooler where id in (select student_id from friend)",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "network_1",
+        "question": "Find the minimum grade of students who have no friends.",
+        "gold_sql": "SELECT min(grade) FROM Highschooler WHERE id NOT IN (SELECT T1.student_id FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id)",
+        "predicted_sql": "select min(grade) from highschooler where id not in (select student_id from friend)",
+        "prompt_len": 327
+    },
+    {
+        "db_id": "network_1",
+        "question": "What is the lowest grade of students who do not have any friends?",
+        "gold_sql": "SELECT min(grade) FROM Highschooler WHERE id NOT IN (SELECT T1.student_id FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id = T2.id)",
+        "predicted_sql": "select min(grade) from highschooler where id not in (select student_id from friend)",
+        "prompt_len": 330
+    }
+]

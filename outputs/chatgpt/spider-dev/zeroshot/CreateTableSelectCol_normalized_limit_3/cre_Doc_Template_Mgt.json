@@ -1,0 +1,590 @@
+[
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "How many documents do we have?",
+        "gold_sql": "SELECT count(*) FROM Documents",
+        "predicted_sql": "select count(*) from documents",
+        "prompt_len": 549
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Count the number of documents.",
+        "gold_sql": "SELECT count(*) FROM Documents",
+        "predicted_sql": "select count(*) from documents",
+        "prompt_len": 548
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "List document IDs, document names, and document descriptions for all documents.",
+        "gold_sql": "SELECT document_id , document_name , document_description FROM Documents",
+        "predicted_sql": "select document_id, document_name, document_description from documents",
+        "prompt_len": 556
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the ids, names, and descriptions for all documents?",
+        "gold_sql": "SELECT document_id , document_name , document_description FROM Documents",
+        "predicted_sql": "select document_id, document_name, document_description from documents",
+        "prompt_len": 555
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What is the document name and template id for document with description with the letter 'w' in it?",
+        "gold_sql": "SELECT document_name , template_id FROM Documents WHERE Document_Description LIKE \"%w%\"",
+        "predicted_sql": "select documents.document_name, templates.template_id from documents inner join templates on documents.template_id = templates.template_id where documents.document_description like '%w%'",
+        "prompt_len": 563
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Return the names and template ids for documents that contain the letter w in their description.",
+        "gold_sql": "SELECT document_name , template_id FROM Documents WHERE Document_Description LIKE \"%w%\"",
+        "predicted_sql": "select documents.document_name, templates.template_id from documents inner join templates on documents.template_id = templates.template_id where documents.document_description like '%w%'",
+        "prompt_len": 559
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What is the document id, template id and description for document named \"Robbin CV\"?",
+        "gold_sql": "SELECT document_id , template_id , Document_Description FROM Documents WHERE document_name = \"Robbin CV\"",
+        "predicted_sql": "select documents.document_id, templates.template_id, documents.document_description from documents inner join templates on documents.template_id = templates.template_id where documents.document_name = \"Robbin CV\"",
+        "prompt_len": 561
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Return the document id, template id, and description for the document with the name Robbin CV.",
+        "gold_sql": "SELECT document_id , template_id , Document_Description FROM Documents WHERE document_name = \"Robbin CV\"",
+        "predicted_sql": "select documents.document_id, templates.template_id, documents.document_description from documents inner join templates on documents.template_id = templates.template_id where documents.document_name = \"Robbin CV\"",
+        "prompt_len": 562
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "How many different templates do all document use?",
+        "gold_sql": "SELECT count(DISTINCT template_id) FROM Documents",
+        "predicted_sql": "select count(distinct template_id) from documents",
+        "prompt_len": 551
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Count the number of different templates used for documents.",
+        "gold_sql": "SELECT count(DISTINCT template_id) FROM Documents",
+        "predicted_sql": "select count(distinct template_id) from documents",
+        "prompt_len": 552
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "How many documents are using the template with type code 'PPT'?",
+        "gold_sql": "SELECT count(*) FROM Documents AS T1 JOIN Templates AS T2 ON T1.Template_ID = T2.Template_ID WHERE T2.Template_Type_Code = 'PPT'",
+        "predicted_sql": "select count(*) from documents d inner join templates t on d.template_id = t.template_id where t.template_type_code = 'PPT'",
+        "prompt_len": 557
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Count the number of documents that use the PPT template type.",
+        "gold_sql": "SELECT count(*) FROM Documents AS T1 JOIN Templates AS T2 ON T1.Template_ID = T2.Template_ID WHERE T2.Template_Type_Code = 'PPT'",
+        "predicted_sql": "select count(*) from documents d inner join templates t on d.template_id = t.template_id where t.template_type_code = 'PPT'",
+        "prompt_len": 555
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Show all template ids and number of documents using each template.",
+        "gold_sql": "SELECT template_id , count(*) FROM Documents GROUP BY template_id",
+        "predicted_sql": "select templates.template_id, count(documents.document_id) as num_documents from templates left join documents on templates.template_id = documents.template_id group by templates.template_id",
+        "prompt_len": 554
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are all different template ids used for documents, and how many times were each of them used?",
+        "gold_sql": "SELECT template_id , count(*) FROM Documents GROUP BY template_id",
+        "predicted_sql": "select templates.template_id, count(documents.document_id) as usage_count from templates left join documents on templates.template_id = documents.template_id group by templates.template_id",
+        "prompt_len": 562
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What is the id and type code for the template used by the most documents?",
+        "gold_sql": "SELECT T1.template_id , T2.Template_Type_Code FROM Documents AS T1 JOIN Templates AS T2 ON T1.template_id = T2.template_id GROUP BY T1.template_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select templates.template_id, templates.template_type_code from templates where templates.template_id = (  select documents.template_id  from documents  group by documents.template_id  order by count(*) desc  limit 1 )",
+        "prompt_len": 558
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Return the id and type code of the template that is used for the greatest number of documents.",
+        "gold_sql": "SELECT T1.template_id , T2.Template_Type_Code FROM Documents AS T1 JOIN Templates AS T2 ON T1.template_id = T2.template_id GROUP BY T1.template_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select templates.template_id, templates.template_type_code from templates inner join documents on templates.template_id = documents.template_id group by templates.template_id order by count(*) desc limit 1",
+        "prompt_len": 561
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Show ids for all templates that are used by more than one document.",
+        "gold_sql": "SELECT template_id FROM Documents GROUP BY template_id HAVING count(*) > 1",
+        "predicted_sql": "select templates.template_id from templates inner join documents on templates.template_id = documents.template_id group by templates.template_id having count(distinct documents.document_id) > 1",
+        "prompt_len": 556
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the template ids of any templates used in more than a single document?",
+        "gold_sql": "SELECT template_id FROM Documents GROUP BY template_id HAVING count(*) > 1",
+        "predicted_sql": "select templates.template_id from templates inner join documents on templates.template_id = documents.template_id group by templates.template_id having count(distinct documents.document_id) > 1",
+        "prompt_len": 558
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Show ids for all templates not used by any document.",
+        "gold_sql": "SELECT template_id FROM Templates EXCEPT SELECT template_id FROM Documents",
+        "predicted_sql": "select templates.template_id from templates left join documents on templates.template_id = documents.template_id where documents.document_id is null",
+        "prompt_len": 553
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the ids for templates that are not used in any documents?",
+        "gold_sql": "SELECT template_id FROM Templates EXCEPT SELECT template_id FROM Documents",
+        "predicted_sql": "select templates.template_id from templates left join documents on templates.template_id = documents.template_id where documents.document_id is null",
+        "prompt_len": 556
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "How many templates do we have?",
+        "gold_sql": "SELECT count(*) FROM Templates",
+        "predicted_sql": "select count(*) from templates",
+        "prompt_len": 549
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Count the number of templates.",
+        "gold_sql": "SELECT count(*) FROM Templates",
+        "predicted_sql": "select count(*) from templates",
+        "prompt_len": 548
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Show template ids, version numbers, and template type codes for all templates.",
+        "gold_sql": "SELECT template_id , version_number , template_type_code FROM Templates",
+        "predicted_sql": "select template_id, version_number, template_type_code from templates",
+        "prompt_len": 557
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the ids, version numbers, and type codes for each template?",
+        "gold_sql": "SELECT template_id , version_number , template_type_code FROM Templates",
+        "predicted_sql": "select template_id, version_number, template_type_code from templates",
+        "prompt_len": 557
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Show all distinct template type codes for all templates.",
+        "gold_sql": "SELECT DISTINCT template_type_code FROM Templates",
+        "predicted_sql": "select distinct template_type_code from templates",
+        "prompt_len": 552
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the different template type codes?",
+        "gold_sql": "SELECT DISTINCT template_type_code FROM Templates",
+        "predicted_sql": "select template_type_code from ref_template_types",
+        "prompt_len": 550
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the ids of templates with template type code PP or PPT?",
+        "gold_sql": "SELECT template_id FROM Templates WHERE template_type_code = \"PP\" OR template_type_code = \"PPT\"",
+        "predicted_sql": "select template_id from templates where template_type_code in ('PP', 'PPT')",
+        "prompt_len": 557
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Return the ids of templates that have the code PP or PPT.",
+        "gold_sql": "SELECT template_id FROM Templates WHERE template_type_code = \"PP\" OR template_type_code = \"PPT\"",
+        "predicted_sql": "select template_id from templates where template_type_code in ('PP', 'PPT')",
+        "prompt_len": 556
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "How many templates have template type code CV?",
+        "gold_sql": "SELECT count(*) FROM Templates WHERE template_type_code = \"CV\"",
+        "predicted_sql": "select count(*) from templates where template_type_code = 'CV'",
+        "prompt_len": 551
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Count the number of templates of the type CV.",
+        "gold_sql": "SELECT count(*) FROM Templates WHERE template_type_code = \"CV\"",
+        "predicted_sql": "select count(*) from templates where template_type_code = 'CV'",
+        "prompt_len": 552
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What is the version number and template type code for the template with version number later than 5?",
+        "gold_sql": "SELECT version_number , template_type_code FROM Templates WHERE version_number > 5",
+        "predicted_sql": "select version_number, template_type_code from templates where version_number > 5",
+        "prompt_len": 562
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Return the version numbers and template type codes of templates with a version number greater than 5.",
+        "gold_sql": "SELECT version_number , template_type_code FROM Templates WHERE version_number > 5",
+        "predicted_sql": "select version_number, template_type_code from templates where version_number > 5",
+        "prompt_len": 561
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Show all template type codes and number of templates for each.",
+        "gold_sql": "SELECT template_type_code , count(*) FROM Templates GROUP BY template_type_code",
+        "predicted_sql": "select ref_template_types.template_type_code, count(templates.template_id) as num_templates from ref_template_types left join templates on ref_template_types.template_type_code = templates.template_type_code group by ref_template_types.template_type_code",
+        "prompt_len": 554
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the different template type codes, and how many templates correspond to each?",
+        "gold_sql": "SELECT template_type_code , count(*) FROM Templates GROUP BY template_type_code",
+        "predicted_sql": "select ref_template_types.template_type_code, count(templates.template_id) from ref_template_types left join templates on ref_template_types.template_type_code = templates.template_type_code group by ref_template_types.template_type_code",
+        "prompt_len": 558
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Which template type code has most number of templates?",
+        "gold_sql": "SELECT template_type_code FROM Templates GROUP BY template_type_code ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select template_type_code, count(*) as num_templates from templates group by template_type_code order by num_templates desc limit 1",
+        "prompt_len": 552
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Return the type code of the template type that the most templates belong to.",
+        "gold_sql": "SELECT template_type_code FROM Templates GROUP BY template_type_code ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select template_type_code from templates group by template_type_code order by count(*) desc limit 1",
+        "prompt_len": 557
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Show all template type codes with less than three templates.",
+        "gold_sql": "SELECT template_type_code FROM Templates GROUP BY template_type_code HAVING count(*) < 3",
+        "predicted_sql": "select template_type_code from templates group by template_type_code having count(*) < 3",
+        "prompt_len": 553
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the codes of template types that have fewer than 3 templates?",
+        "gold_sql": "SELECT template_type_code FROM Templates GROUP BY template_type_code HAVING count(*) < 3",
+        "predicted_sql": "select template_type_code from ref_template_types where template_type_code not in (   select template_type_code   from templates   group by template_type_code   having count(*) >= 3 )",
+        "prompt_len": 557
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What the smallest version number and its template type code?",
+        "gold_sql": "SELECT min(Version_Number) , template_type_code FROM Templates",
+        "predicted_sql": "select min(version_number), template_type_code from templates group by template_type_code order by min(version_number) limit 1",
+        "prompt_len": 553
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Return the lowest version number, along with its corresponding template type code.",
+        "gold_sql": "SELECT min(Version_Number) , template_type_code FROM Templates",
+        "predicted_sql": "select templates.version_number, templates.template_type_code from templates where templates.version_number = (select min(version_number) from templates)",
+        "prompt_len": 556
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What is the template type code of the template used by document with the name \"Data base\"?",
+        "gold_sql": "SELECT T1.template_type_code FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id = T2.template_id WHERE T2.document_name = \"Data base\"",
+        "predicted_sql": "select templates.template_type_code from templates join documents on templates.template_id = documents.template_id where documents.document_name = \"Data base\"",
+        "prompt_len": 562
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Return the template type code of the template that is used by a document named Data base.",
+        "gold_sql": "SELECT T1.template_type_code FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id = T2.template_id WHERE T2.document_name = \"Data base\"",
+        "predicted_sql": "select templates.template_type_code from templates join documents on templates.template_id = documents.template_id where documents.document_name = \"Data base\"",
+        "prompt_len": 560
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Show all document names using templates with template type code BK.",
+        "gold_sql": "SELECT T2.document_name FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id = T2.template_id WHERE T1.template_type_code = \"BK\"",
+        "predicted_sql": "select documents.document_name from documents inner join templates on documents.template_id = templates.template_id where templates.template_type_code = 'BK'",
+        "prompt_len": 554
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the names of documents that use templates with the code BK?",
+        "gold_sql": "SELECT T2.document_name FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id = T2.template_id WHERE T1.template_type_code = \"BK\"",
+        "predicted_sql": "select documents.document_name from documents inner join templates on documents.template_id = templates.template_id where templates.template_type_code = 'BK'",
+        "prompt_len": 556
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Show all template type codes and the number of documents using each type.",
+        "gold_sql": "SELECT T1.template_type_code , count(*) FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id = T2.template_id GROUP BY T1.template_type_code",
+        "predicted_sql": "select ref_template_types.template_type_code, count(documents.document_id) from ref_template_types left join templates on ref_template_types.template_type_code = templates.template_type_code left join documents on templates.template_id = documents.template_id group by ref_template_types.template_type_code",
+        "prompt_len": 556
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the different template type codes, and how many documents use each type?",
+        "gold_sql": "SELECT T1.template_type_code , count(*) FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id = T2.template_id GROUP BY T1.template_type_code",
+        "predicted_sql": "select ref_template_types.template_type_code, count(documents.document_id) from ref_template_types left join templates on ref_template_types.template_type_code = templates.template_type_code left join documents on templates.template_id = documents.template_id group by ref_template_types.template_type_code",
+        "prompt_len": 558
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Which template type code is used by most number of documents?",
+        "gold_sql": "SELECT T1.template_type_code FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id = T2.template_id GROUP BY T1.template_type_code ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select templates.template_type_code, count(*) as num_docs from templates join documents on templates.template_id = documents.template_id group by templates.template_type_code order by num_docs desc limit 1",
+        "prompt_len": 554
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Return the code of the template type that is most commonly used in documents.",
+        "gold_sql": "SELECT T1.template_type_code FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id = T2.template_id GROUP BY T1.template_type_code ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select templates.template_type_code from templates inner join documents on templates.template_id = documents.template_id group by templates.template_type_code order by count(*) desc limit 1",
+        "prompt_len": 557
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Show all template type codes that are not used by any document.",
+        "gold_sql": "SELECT template_type_code FROM Templates EXCEPT SELECT template_type_code FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id = T2.template_id",
+        "predicted_sql": "select template_type_code from ref_template_types where template_type_code not in (  select template_type_code  from templates  inner join documents on templates.template_id = documents.template_id )",
+        "prompt_len": 555
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the codes of template types that are not used for any document?",
+        "gold_sql": "SELECT template_type_code FROM Templates EXCEPT SELECT template_type_code FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id = T2.template_id",
+        "predicted_sql": "select template_type_code from ref_template_types where template_type_code not in (select template_type_code from templates)",
+        "prompt_len": 557
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Show all template type codes and descriptions.",
+        "gold_sql": "SELECT template_type_code , template_type_description FROM Ref_template_types",
+        "predicted_sql": "select template_type_code, template_type_description from ref_template_types",
+        "prompt_len": 550
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the type codes and descriptions for all template types?",
+        "gold_sql": "SELECT template_type_code , template_type_description FROM Ref_template_types",
+        "predicted_sql": "select template_type_code, template_type_description from ref_template_types",
+        "prompt_len": 554
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What is the template type descriptions for template type code \"AD\".",
+        "gold_sql": "SELECT template_type_description FROM Ref_template_types WHERE template_type_code = \"AD\"",
+        "predicted_sql": "select template_type_description from ref_template_types where template_type_code = \"AD\"",
+        "prompt_len": 555
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Return the template type description of the template type with the code AD.",
+        "gold_sql": "SELECT template_type_description FROM Ref_template_types WHERE template_type_code = \"AD\"",
+        "predicted_sql": "select template_type_description from ref_template_types where template_type_code = 'AD'",
+        "prompt_len": 556
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What is the template type code for template type description \"Book\".",
+        "gold_sql": "SELECT template_type_code FROM Ref_template_types WHERE template_type_description = \"Book\"",
+        "predicted_sql": "select template_type_code from ref_template_types where template_type_description = \"Book\"",
+        "prompt_len": 555
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Return the type code of the template type with the description \"Book\".",
+        "gold_sql": "SELECT template_type_code FROM Ref_template_types WHERE template_type_description = \"Book\"",
+        "predicted_sql": "select template_type_code from ref_template_types where template_type_description = \"Book\"",
+        "prompt_len": 556
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the distinct template type descriptions for the templates ever used by any document?",
+        "gold_sql": "SELECT DISTINCT T1.template_type_description FROM Ref_template_types AS T1 JOIN Templates AS T2 ON T1.template_type_code = T2.template_type_code JOIN Documents AS T3 ON T2.Template_ID = T3.template_ID",
+        "predicted_sql": "select distinct ref_template_types.template_type_description from ref_template_types inner join templates on ref_template_types.template_type_code = templates.template_type_code inner join documents on templates.template_id = documents.template_id",
+        "prompt_len": 558
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Return the different descriptions for templates that have been used in a document.",
+        "gold_sql": "SELECT DISTINCT T1.template_type_description FROM Ref_template_types AS T1 JOIN Templates AS T2 ON T1.template_type_code = T2.template_type_code JOIN Documents AS T3 ON T2.Template_ID = T3.template_ID",
+        "predicted_sql": "select distinct ref_template_types.template_type_description from ref_template_types inner join templates on ref_template_types.template_type_code = templates.template_type_code inner join documents on templates.template_id = documents.template_id",
+        "prompt_len": 556
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the template ids with template type description \"Presentation\".",
+        "gold_sql": "SELECT T2.template_id FROM Ref_template_types AS T1 JOIN Templates AS T2 ON T1.template_type_code = T2.template_type_code WHERE T1.template_type_description = \"Presentation\"",
+        "predicted_sql": "select templates.template_id from templates inner join ref_template_types on templates.template_type_code = ref_template_types.template_type_code where ref_template_types.template_type_description = \"Presentation\"",
+        "prompt_len": 554
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Return the ids corresponding to templates with the description 'Presentation'.",
+        "gold_sql": "SELECT T2.template_id FROM Ref_template_types AS T1 JOIN Templates AS T2 ON T1.template_type_code = T2.template_type_code WHERE T1.template_type_description = \"Presentation\"",
+        "predicted_sql": "select templates.template_id from templates join ref_template_types on templates.template_type_code = ref_template_types.template_type_code where ref_template_types.template_type_description = 'Presentation'",
+        "prompt_len": 554
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "How many paragraphs in total?",
+        "gold_sql": "SELECT count(*) FROM Paragraphs",
+        "predicted_sql": "select count(*) from paragraphs",
+        "prompt_len": 548
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Count the number of paragraphs.",
+        "gold_sql": "SELECT count(*) FROM Paragraphs",
+        "predicted_sql": "select count(*) from paragraphs",
+        "prompt_len": 548
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "How many paragraphs for the document with name 'Summer Show'?",
+        "gold_sql": "SELECT count(*) FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_ID = T2.document_ID WHERE T2.document_name = 'Summer Show'",
+        "predicted_sql": "select count(*) from paragraphs p join documents d on p.document_id = d.document_id where d.document_name = 'Summer Show'",
+        "prompt_len": 555
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Count the number of paragraphs in the document named 'Summer Show'.",
+        "gold_sql": "SELECT count(*) FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_ID = T2.document_ID WHERE T2.document_name = 'Summer Show'",
+        "predicted_sql": "select count(*) from paragraphs where document_id = (select document_id from documents where document_name = 'Summer Show')",
+        "prompt_len": 555
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Show paragraph details for paragraph with text 'Korea ' .",
+        "gold_sql": "select other_details from paragraphs where paragraph_text like 'korea'",
+        "predicted_sql": "select * from paragraphs where paragraph_text = 'Korea'",
+        "prompt_len": 554
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the details for the paragraph that includes the text 'Korea ' ?",
+        "gold_sql": "select other_details from paragraphs where paragraph_text like 'korea'",
+        "predicted_sql": "select paragraph_text, other_details from paragraphs where paragraph_text = 'Korea'",
+        "prompt_len": 558
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Show all paragraph ids and texts for the document with name 'Welcome to NY'.",
+        "gold_sql": "SELECT T1.paragraph_id , T1.paragraph_text FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id = T2.document_id WHERE T2.Document_Name = 'Welcome to NY'",
+        "predicted_sql": "select paragraph_id, paragraph_text from paragraphs where document_id = (   select document_id   from documents   where document_name = 'Welcome to NY' )",
+        "prompt_len": 558
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the ids and texts of paragraphs in the document titled 'Welcome to NY'?",
+        "gold_sql": "SELECT T1.paragraph_id , T1.paragraph_text FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id = T2.document_id WHERE T2.Document_Name = 'Welcome to NY'",
+        "predicted_sql": "select paragraph_id, paragraph_text from paragraphs where document_id = (   select document_id   from documents   where document_name = 'Welcome to NY' )",
+        "prompt_len": 560
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Show all paragraph texts for the document \"Customer reviews\".",
+        "gold_sql": "SELECT T1.paragraph_text FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id = T2.document_id WHERE T2.document_name = \"Customer reviews\"",
+        "predicted_sql": "select paragraph_text from paragraphs inner join documents on paragraphs.document_id = documents.document_id where documents.document_name = \"Customer reviews\"",
+        "prompt_len": 553
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the paragraph texts for the document with the name 'Customer reviews'?",
+        "gold_sql": "SELECT T1.paragraph_text FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id = T2.document_id WHERE T2.document_name = \"Customer reviews\"",
+        "predicted_sql": "select paragraph_text from paragraphs inner join documents on paragraphs.document_id = documents.document_id where documents.document_name = 'Customer reviews'",
+        "prompt_len": 558
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Show all document ids and the number of paragraphs in each document. Order by document id.",
+        "gold_sql": "SELECT document_id , count(*) FROM Paragraphs GROUP BY document_id ORDER BY document_id",
+        "predicted_sql": "select documents.document_id, count(paragraphs.paragraph_id) as num_paragraphs from documents left join paragraphs on documents.document_id = paragraphs.document_id group by documents.document_id order by documents.document_id",
+        "prompt_len": 560
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Return the different document ids along with the number of paragraphs corresponding to each, ordered by id.",
+        "gold_sql": "SELECT document_id , count(*) FROM Paragraphs GROUP BY document_id ORDER BY document_id",
+        "predicted_sql": "select documents.document_id, count(paragraphs.paragraph_id) as num_paragraphs from documents left join paragraphs on documents.document_id = paragraphs.document_id group by documents.document_id order by documents.document_id",
+        "prompt_len": 561
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Show all document ids, names and the number of paragraphs in each document.",
+        "gold_sql": "SELECT T1.document_id , T2.document_name , count(*) FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id = T2.document_id GROUP BY T1.document_id",
+        "predicted_sql": "select documents.document_id, documents.document_name, count(paragraphs.paragraph_id) as num_paragraphs from documents left join paragraphs on documents.document_id = paragraphs.document_id group by documents.document_id",
+        "prompt_len": 557
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the ids and names of each document, as well as the number of paragraphs in each?",
+        "gold_sql": "SELECT T1.document_id , T2.document_name , count(*) FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id = T2.document_id GROUP BY T1.document_id",
+        "predicted_sql": "select documents.document_id, documents.document_name, count(paragraphs.paragraph_id) as num_paragraphs from documents left join paragraphs on documents.document_id = paragraphs.document_id group by documents.document_id",
+        "prompt_len": 562
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "List all document ids with at least two paragraphs.",
+        "gold_sql": "SELECT document_id FROM Paragraphs GROUP BY document_id HAVING count(*) >= 2",
+        "predicted_sql": "select document_id from paragraphs group by document_id having count(*) >= 2",
+        "prompt_len": 552
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the ids of documents that have 2 or more paragraphs?",
+        "gold_sql": "SELECT document_id FROM Paragraphs GROUP BY document_id HAVING count(*) >= 2",
+        "predicted_sql": "select documents.document_id from documents inner join paragraphs on documents.document_id = paragraphs.document_id group by documents.document_id having count(*) >= 2",
+        "prompt_len": 556
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What is the document id and name with greatest number of paragraphs?",
+        "gold_sql": "SELECT T1.document_id , T2.document_name FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id = T2.document_id GROUP BY T1.document_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select documents.document_id, documents.document_name, count(paragraphs.paragraph_id) as num_paragraphs from documents inner join paragraphs on documents.document_id = paragraphs.document_id group by documents.document_id order by num_paragraphs desc limit 1",
+        "prompt_len": 555
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Return the id and name of the document with the most paragraphs.",
+        "gold_sql": "SELECT T1.document_id , T2.document_name FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id = T2.document_id GROUP BY T1.document_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select d.document_id, d.document_name from documents d inner join (   select document_id, count(*) as num_paragraphs   from paragraphs   group by document_id   order by num_paragraphs desc   limit 1 ) p on d.document_id = p.document_id",
+        "prompt_len": 555
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What is the document id with least number of paragraphs?",
+        "gold_sql": "SELECT document_id FROM Paragraphs GROUP BY document_id ORDER BY count(*) ASC LIMIT 1",
+        "predicted_sql": "select document_id, count(*) as num_paragraphs from paragraphs group by document_id order by num_paragraphs limit 1",
+        "prompt_len": 553
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Return the id of the document with the fewest paragraphs.",
+        "gold_sql": "SELECT document_id FROM Paragraphs GROUP BY document_id ORDER BY count(*) ASC LIMIT 1",
+        "predicted_sql": "select document_id from paragraphs group by document_id order by count(*) asc limit 1",
+        "prompt_len": 554
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What is the document id with 1 to 2 paragraphs?",
+        "gold_sql": "SELECT document_id FROM Paragraphs GROUP BY document_id HAVING count(*) BETWEEN 1 AND 2",
+        "predicted_sql": "select document_id from paragraphs group by document_id having count(*) between 1 and 2",
+        "prompt_len": 555
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Give the ids of documents that have between one and two paragraphs.",
+        "gold_sql": "SELECT document_id FROM Paragraphs GROUP BY document_id HAVING count(*) BETWEEN 1 AND 2",
+        "predicted_sql": "select documents.document_id from documents inner join paragraphs on documents.document_id = paragraphs.document_id group by documents.document_id having count(paragraphs.paragraph_id) between 1 and 2",
+        "prompt_len": 555
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "Show the document id with paragraph text 'Brazil' and 'Ireland'.",
+        "gold_sql": "SELECT document_id FROM Paragraphs WHERE paragraph_text = 'Brazil' INTERSECT SELECT document_id FROM Paragraphs WHERE paragraph_text = 'Ireland'",
+        "predicted_sql": "select documents.document_id from documents inner join paragraphs on documents.document_id = paragraphs.document_id where paragraphs.paragraph_text in ('Brazil', 'Ireland')",
+        "prompt_len": 557
+    },
+    {
+        "db_id": "cre_Doc_Template_Mgt",
+        "question": "What are the ids of documents that contain the paragraph text 'Brazil' and 'Ireland'?",
+        "gold_sql": "SELECT document_id FROM Paragraphs WHERE paragraph_text = 'Brazil' INTERSECT SELECT document_id FROM Paragraphs WHERE paragraph_text = 'Ireland'",
+        "predicted_sql": "select documents.document_id from documents inner join paragraphs on documents.document_id = paragraphs.document_id where paragraphs.paragraph_text in ('Brazil', 'Ireland')",
+        "prompt_len": 562
+    }
+]

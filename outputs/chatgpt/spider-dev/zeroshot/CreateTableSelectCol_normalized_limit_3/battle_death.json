@@ -1,0 +1,114 @@
+[
+    {
+        "db_id": "battle_death",
+        "question": "How many ships ended up being 'Captured'?",
+        "gold_sql": "SELECT count(*) FROM ship WHERE disposition_of_ship = 'Captured'",
+        "predicted_sql": "select count(*) from ship where disposition_of_ship = 'Captured'",
+        "prompt_len": 493
+    },
+    {
+        "db_id": "battle_death",
+        "question": "List the name and tonnage ordered by in descending alphaetical order for the names.",
+        "gold_sql": "SELECT name , tonnage FROM ship ORDER BY name DESC",
+        "predicted_sql": "select name, tonnage from ship order by name desc",
+        "prompt_len": 499
+    },
+    {
+        "db_id": "battle_death",
+        "question": "List the name, date and result of each battle.",
+        "gold_sql": "SELECT name , date FROM battle",
+        "predicted_sql": "select name, date, result from battle",
+        "prompt_len": 493
+    },
+    {
+        "db_id": "battle_death",
+        "question": "What is maximum and minimum death toll caused each time?",
+        "gold_sql": "SELECT max(killed) , min(killed) FROM death",
+        "predicted_sql": "select max(killed), min(killed) from death",
+        "prompt_len": 493
+    },
+    {
+        "db_id": "battle_death",
+        "question": "What is the average number of injuries caused each time?",
+        "gold_sql": "SELECT avg(injured) FROM death",
+        "predicted_sql": "select avg(injured) from death",
+        "prompt_len": 493
+    },
+    {
+        "db_id": "battle_death",
+        "question": "What are the death and injury situations caused by the ship with tonnage 't'?",
+        "gold_sql": "SELECT T1.killed , T1.injured FROM death AS T1 JOIN ship AS t2 ON T1.caused_by_ship_id = T2.id WHERE T2.tonnage = 't'",
+        "predicted_sql": "select death.killed, death.injured from death inner join ship on death.caused_by_ship_id = ship.id where ship.tonnage = 't'",
+        "prompt_len": 500
+    },
+    {
+        "db_id": "battle_death",
+        "question": "What are the name and results of the battles when the bulgarian commander is not 'Boril'",
+        "gold_sql": "SELECT name , RESULT FROM battle WHERE bulgarian_commander != 'Boril'",
+        "predicted_sql": "select name, result from battle where bulgarian_commander != 'Boril'",
+        "prompt_len": 504
+    },
+    {
+        "db_id": "battle_death",
+        "question": "What are the different ids and names of the battles that lost any 'Brig' type shipes?",
+        "gold_sql": "SELECT DISTINCT T1.id , T1.name FROM battle AS T1 JOIN ship AS T2 ON T1.id = T2.lost_in_battle WHERE T2.ship_type = 'Brig'",
+        "predicted_sql": "select battle.id, battle.name from battle join ship on battle.id = ship.lost_in_battle where ship.ship_type = 'Brig'",
+        "prompt_len": 503
+    },
+    {
+        "db_id": "battle_death",
+        "question": "What are the ids and names of the battles that led to more than 10 people killed in total.",
+        "gold_sql": "SELECT T1.id , T1.name FROM battle AS T1 JOIN ship AS T2 ON T1.id = T2.lost_in_battle JOIN death AS T3 ON T2.id = T3.caused_by_ship_id GROUP BY T1.id HAVING sum(T3.killed) > 10",
+        "predicted_sql": "select b.id, b.name from battle b join ship s on b.id = s.lost_in_battle join death d on s.id = d.caused_by_ship_id group by b.id, b.name having sum(d.killed) > 10",
+        "prompt_len": 503
+    },
+    {
+        "db_id": "battle_death",
+        "question": "What is the ship id and name that caused most total injuries?",
+        "gold_sql": "SELECT T2.id , T2.name FROM death AS T1 JOIN ship AS t2 ON T1.caused_by_ship_id = T2.id GROUP BY T2.id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select ship.id, ship.name, sum(death.injured) as total_injuries from ship join death on ship.id = death.caused_by_ship_id group by ship.id order by total_injuries desc limit 1",
+        "prompt_len": 495
+    },
+    {
+        "db_id": "battle_death",
+        "question": "What are the distinct battle names which are between bulgarian commander 'Kaloyan' and latin commander 'Baldwin I'?",
+        "gold_sql": "SELECT name FROM battle WHERE bulgarian_commander = 'Kaloyan' AND latin_commander = 'Baldwin I'",
+        "predicted_sql": "select name from battle where bulgarian_commander = 'Kaloyan' and latin_commander = 'Baldwin I'",
+        "prompt_len": 510
+    },
+    {
+        "db_id": "battle_death",
+        "question": "How many different results are there for the battles?",
+        "gold_sql": "SELECT count(DISTINCT RESULT) FROM battle",
+        "predicted_sql": "select count(distinct result) from battle",
+        "prompt_len": 492
+    },
+    {
+        "db_id": "battle_death",
+        "question": "How many battles did not lose any ship with tonnage '225'?",
+        "gold_sql": "SELECT count(*) FROM battle WHERE id NOT IN ( SELECT lost_in_battle FROM ship WHERE tonnage = '225' )",
+        "predicted_sql": "select count(distinct battle.id) from battle left join ship on battle.id = ship.lost_in_battle and ship.tonnage = '225' where ship.id is null",
+        "prompt_len": 497
+    },
+    {
+        "db_id": "battle_death",
+        "question": "List the name and date the battle that has lost the ship named 'Lettice' and the ship named 'HMS Atalanta'",
+        "gold_sql": "SELECT T1.name , T1.date FROM battle AS T1 JOIN ship AS T2 ON T1.id = T2.lost_in_battle WHERE T2.name = 'Lettice' INTERSECT SELECT T1.name , T1.date FROM battle AS T1 JOIN ship AS T2 ON T1.id = T2.lost_in_battle WHERE T2.name = 'HMS Atalanta'",
+        "predicted_sql": "select battle.name, battle.date from battle join ship on battle.id = ship.lost_in_battle where ship.name in ('Lettice', 'HMS Atalanta')",
+        "prompt_len": 511
+    },
+    {
+        "db_id": "battle_death",
+        "question": "Show names, results and bulgarian commanders of the battles with no ships lost in the 'English Channel'.",
+        "gold_sql": "SELECT name , RESULT , bulgarian_commander FROM battle EXCEPT SELECT T1.name , T1.result , T1.bulgarian_commander FROM battle AS T1 JOIN ship AS T2 ON T1.id = T2.lost_in_battle WHERE T2.location = 'English Channel'",
+        "predicted_sql": "select battle.name, battle.result, battle.bulgarian_commander from battle left join ship on battle.id = ship.lost_in_battle and ship.location = 'English Channel' where ship.id is null",
+        "prompt_len": 504
+    },
+    {
+        "db_id": "battle_death",
+        "question": "What are the notes of the death events which has substring 'East'?",
+        "gold_sql": "SELECT note FROM death WHERE note LIKE '%East%'",
+        "predicted_sql": "select note from death where note like '%East%'",
+        "prompt_len": 497
+    }
+]

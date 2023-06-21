@@ -1,0 +1,548 @@
+[
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "what are all the addresses including line 1 and line 2?",
+        "gold_sql": "SELECT line_1 , line_2 FROM addresses",
+        "predicted_sql": "select line_1, line_2 from addresses",
+        "prompt_len": 1607
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the first and second line for all addresses?",
+        "gold_sql": "SELECT line_1 , line_2 FROM addresses",
+        "predicted_sql": "select line_1, line_2 from addresses",
+        "prompt_len": 1604
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "How many courses in total are listed?",
+        "gold_sql": "SELECT count(*) FROM Courses",
+        "predicted_sql": "select count(*) from courses",
+        "prompt_len": 1601
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "How many courses are there?",
+        "gold_sql": "SELECT count(*) FROM Courses",
+        "predicted_sql": "select count(*) from courses",
+        "prompt_len": 1599
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "How is the math course described?",
+        "gold_sql": "SELECT course_description FROM Courses WHERE course_name = 'math'",
+        "predicted_sql": "select course_description from courses where course_name = 'math'",
+        "prompt_len": 1600
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What are the descriptions for all the math courses?",
+        "gold_sql": "SELECT course_description FROM Courses WHERE course_name = 'math'",
+        "predicted_sql": "select course_description from courses where course_name = 'math'",
+        "prompt_len": 1603
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the zip code of the address in the city Port Chelsea?",
+        "gold_sql": "SELECT zip_postcode FROM Addresses WHERE city = 'Port Chelsea'",
+        "predicted_sql": "select zip_postcode from addresses where city = 'Port Chelsea'",
+        "prompt_len": 1607
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the zip code for Port Chelsea?",
+        "gold_sql": "SELECT zip_postcode FROM Addresses WHERE city = 'Port Chelsea'",
+        "predicted_sql": "select zip_postcode from addresses where city = 'Port Chelsea'",
+        "prompt_len": 1602
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "Which department offers the most number of degrees? List department name and id.",
+        "gold_sql": "SELECT T2.department_name , T1.department_id FROM Degree_Programs AS T1 JOIN Departments AS T2 ON T1.department_id = T2.department_id GROUP BY T1.department_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select departments.department_id, departments.department_name, count(degree_programs.degree_program_id) as num_degrees from departments inner join degree_programs on departments.department_id = degree_programs.department_id group by departments.department_id order by num_degrees desc limit 1",
+        "prompt_len": 1608
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the name and id of the department with the most number of degrees ?",
+        "gold_sql": "select t2.department_name , t1.department_id from degree_programs as t1 join departments as t2 on t1.department_id = t2.department_id group by t1.department_id order by count(*) desc limit 1",
+        "predicted_sql": "select departments.department_name, departments.department_id from departments inner join degree_programs on departments.department_id = degree_programs.department_id group by departments.department_id order by count(degree_programs.degree_program_id) desc limit 1",
+        "prompt_len": 1609
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "How many departments offer any degree?",
+        "gold_sql": "SELECT count(DISTINCT department_id) FROM Degree_Programs",
+        "predicted_sql": "select count(distinct department_id) from degree_programs",
+        "prompt_len": 1600
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "How many different departments offer degrees?",
+        "gold_sql": "SELECT count(DISTINCT department_id) FROM Degree_Programs",
+        "predicted_sql": "select count(distinct department_id) from degree_programs",
+        "prompt_len": 1600
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "How many different degree names are offered?",
+        "gold_sql": "SELECT count(DISTINCT degree_summary_name) FROM Degree_Programs",
+        "predicted_sql": "select count(distinct degree_summary_name) from degree_programs",
+        "prompt_len": 1601
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "How many different degrees are offered?",
+        "gold_sql": "SELECT count(DISTINCT degree_summary_name) FROM Degree_Programs",
+        "predicted_sql": "select count(distinct degree_summary_name) from degree_programs",
+        "prompt_len": 1600
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "How many degrees does the engineering department offer?",
+        "gold_sql": "SELECT count(*) FROM Departments AS T1 JOIN Degree_Programs AS T2 ON T1.department_id = T2.department_id WHERE T1.department_name = 'engineer'",
+        "predicted_sql": "select count(*) from degree_programs where department_id = (select department_id from departments where department_name = 'engineering')",
+        "prompt_len": 1602
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "How many degrees does the engineering department have?",
+        "gold_sql": "SELECT count(*) FROM Departments AS T1 JOIN Degree_Programs AS T2 ON T1.department_id = T2.department_id WHERE T1.department_name = 'engineer'",
+        "predicted_sql": "select count(*) from degree_programs where department_id = (select department_id from departments where department_name = 'engineering')",
+        "prompt_len": 1602
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What are the names and descriptions of all the sections?",
+        "gold_sql": "SELECT section_name , section_description FROM Sections",
+        "predicted_sql": "select section_name, section_description from sections",
+        "prompt_len": 1604
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What are the names and descriptions for all the sections?",
+        "gold_sql": "SELECT section_name , section_description FROM Sections",
+        "predicted_sql": "select section_name, section_description from sections",
+        "prompt_len": 1604
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What are the names and id of courses having at most 2 sections?",
+        "gold_sql": "SELECT T1.course_name , T1.course_id FROM Courses AS T1 JOIN Sections AS T2 ON T1.course_id = T2.course_id GROUP BY T1.course_id HAVING count(*) <= 2",
+        "predicted_sql": "select courses.course_id, courses.course_name from courses where courses.course_id in (  select course_id  from sections  group by course_id  having count(*) <= 2 )",
+        "prompt_len": 1608
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What are the names and ids of every course with less than 2 sections?",
+        "gold_sql": "SELECT T1.course_name , T1.course_id FROM Courses AS T1 JOIN Sections AS T2 ON T1.course_id = T2.course_id GROUP BY T1.course_id HAVING count(*) <= 2",
+        "predicted_sql": "select courses.course_id, courses.course_name from courses left join sections on courses.course_id = sections.course_id group by courses.course_id having count(sections.section_id) < 2",
+        "prompt_len": 1609
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "List the section_name in reversed lexicographical order.",
+        "gold_sql": "SELECT section_name FROM Sections ORDER BY section_name DESC",
+        "predicted_sql": "select section_name from sections order by section_name desc",
+        "prompt_len": 1604
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What are the names of the sections in reverse alphabetical order?",
+        "gold_sql": "SELECT section_name FROM Sections ORDER BY section_name DESC",
+        "predicted_sql": "select section_name from sections order by section_name desc",
+        "prompt_len": 1605
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the semester which most student registered in? Show both the name and the id.",
+        "gold_sql": "SELECT T1.semester_name , T1.semester_id FROM Semesters AS T1 JOIN Student_Enrolment AS T2 ON T1.semester_id = T2.semester_id GROUP BY T1.semester_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select semesters.semester_id, semesters.semester_name, count(student_enrolment.student_id) as num_students from semesters inner join student_enrolment on semesters.semester_id = student_enrolment.semester_id group by semesters.semester_id order by num_students desc limit 1",
+        "prompt_len": 1611
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "For each semester, what is the name and id of the one with the most students registered?",
+        "gold_sql": "SELECT T1.semester_name , T1.semester_id FROM Semesters AS T1 JOIN Student_Enrolment AS T2 ON T1.semester_id = T2.semester_id GROUP BY T1.semester_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select semesters.semester_id, semesters.semester_name, count(student_enrolment.student_id) as num_students from semesters inner join student_enrolment on semesters.semester_id = student_enrolment.semester_id group by semesters.semester_id order by num_students desc limit 1",
+        "prompt_len": 1612
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the description of the department whose name has the substring the computer?",
+        "gold_sql": "SELECT department_description FROM Departments WHERE department_name LIKE '%computer%'",
+        "predicted_sql": "select department_description from departments where department_name like '%computer%'",
+        "prompt_len": 1608
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the department description for the one whose name has the word computer?",
+        "gold_sql": "SELECT department_description FROM Departments WHERE department_name LIKE '%computer%'",
+        "predicted_sql": "select department_description from departments where department_name like '%computer%'",
+        "prompt_len": 1608
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "Who are enrolled in 2 degree programs in one semester? List the first name, middle name and last name and the id.",
+        "gold_sql": "SELECT T1.first_name , T1.middle_name , T1.last_name , T1.student_id FROM Students AS T1 JOIN Student_Enrolment AS T2 ON T1.student_id = T2.student_id GROUP BY T1.student_id HAVING count(*) = 2",
+        "predicted_sql": "select s.first_name, s.middle_name, s.last_name, s.student_id from students s inner join student_enrolment se on s.student_id = se.student_id where se.semester_id = 2 group by s.student_id having count(distinct se.degree_program_id) = 2",
+        "prompt_len": 1619
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What are the first, middle, and last names, along with the ids, of all students who enrolled in 2 degree programs in one semester?",
+        "gold_sql": "SELECT T1.first_name , T1.middle_name , T1.last_name , T1.student_id FROM Students AS T1 JOIN Student_Enrolment AS T2 ON T1.student_id = T2.student_id GROUP BY T1.student_id HAVING count(*) = 2",
+        "predicted_sql": "select students.student_id, students.first_name, students.middle_name, students.last_name from students inner join student_enrolment on students.student_id = student_enrolment.student_id where student_enrolment.semester_id = 2 group by students.student_id having count(distinct student_enrolment.degree_program_id) = 2",
+        "prompt_len": 1623
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "Who is enrolled in a Bachelor degree program? List the first name, middle name, last name.",
+        "gold_sql": "SELECT DISTINCT T1.first_name , T1.middle_name , T1.last_name FROM Students AS T1 JOIN Student_Enrolment AS T2 ON T1.student_id = T2.student_id JOIN Degree_Programs AS T3 ON T2.degree_program_id = T3.degree_program_id WHERE T3.degree_summary_name = 'Bachelor'",
+        "predicted_sql": "select students.first_name, students.middle_name, students.last_name from students inner join student_enrolment on students.student_id = student_enrolment.student_id inner join degree_programs on student_enrolment.degree_program_id = degree_programs.degree_program_id where degree_summary_name = 'Bachelor'",
+        "prompt_len": 1613
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What are the first, middle, and last names for everybody enrolled in a Bachelors program?",
+        "gold_sql": "SELECT DISTINCT T1.first_name , T1.middle_name , T1.last_name FROM Students AS T1 JOIN Student_Enrolment AS T2 ON T1.student_id = T2.student_id JOIN Degree_Programs AS T3 ON T2.degree_program_id = T3.degree_program_id WHERE T3.degree_summary_name = 'Bachelor'",
+        "predicted_sql": "select students.first_name, students.middle_name, students.last_name from students inner join student_enrolment on students.student_id = student_enrolment.student_id inner join degree_programs on student_enrolment.degree_program_id = degree_programs.degree_program_id where degree_summary_name = 'Bachelor'",
+        "prompt_len": 1613
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "Find the kind of program which most number of students are enrolled in?",
+        "gold_sql": "SELECT T1.degree_summary_name FROM Degree_Programs AS T1 JOIN Student_Enrolment AS T2 ON T1.degree_program_id = T2.degree_program_id GROUP BY T1.degree_summary_name ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select degree_programs.degree_summary_name, count(*) as num_students from student_enrolment inner join degree_programs on student_enrolment.degree_program_id = degree_programs.degree_program_id group by degree_programs.degree_summary_name order by num_students desc limit 1",
+        "prompt_len": 1607
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the degree summary name that has the most number of students enrolled?",
+        "gold_sql": "SELECT T1.degree_summary_name FROM Degree_Programs AS T1 JOIN Student_Enrolment AS T2 ON T1.degree_program_id = T2.degree_program_id GROUP BY T1.degree_summary_name ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select degree_summary_name, count(*) as num_students from degree_programs join student_enrolment on degree_programs.degree_program_id = student_enrolment.degree_program_id group by degree_summary_name order by num_students desc limit 1",
+        "prompt_len": 1608
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "Find the program which most number of students are enrolled in. List both the id and the summary.",
+        "gold_sql": "SELECT T1.degree_program_id , T1.degree_summary_name FROM Degree_Programs AS T1 JOIN Student_Enrolment AS T2 ON T1.degree_program_id = T2.degree_program_id GROUP BY T1.degree_program_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select degree_programs.degree_program_id, degree_summary_name from degree_programs inner join student_enrolment on degree_programs.degree_program_id = student_enrolment.degree_program_id group by degree_programs.degree_program_id order by count(student_enrolment.student_id) desc limit 1",
+        "prompt_len": 1613
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the program id and the summary of the degree that has the most students enrolled?",
+        "gold_sql": "SELECT T1.degree_program_id , T1.degree_summary_name FROM Degree_Programs AS T1 JOIN Student_Enrolment AS T2 ON T1.degree_program_id = T2.degree_program_id GROUP BY T1.degree_program_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select degree_program_id, degree_summary_name, count(*) as num_students from student_enrolment group by degree_program_id, degree_summary_name order by num_students desc limit 1",
+        "prompt_len": 1611
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "Which student has enrolled for the most times in any program? List the id, first name, middle name, last name, the number of enrollments and student id.",
+        "gold_sql": "SELECT T1.student_id , T1.first_name , T1.middle_name , T1.last_name , count(*) , T1.student_id FROM Students AS T1 JOIN Student_Enrolment AS T2 ON T1.student_id = T2.student_id GROUP BY T1.student_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select students.student_id, students.first_name, students.middle_name, students.last_name, count(*) as num_enrollments from students inner join student_enrolment on students.student_id = student_enrolment.student_id group by students.student_id order by num_enrollments desc limit 1",
+        "prompt_len": 1627
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the first, middle, and last name, along with the id and number of enrollments, for the student who enrolled the most in any program?",
+        "gold_sql": "SELECT T1.student_id , T1.first_name , T1.middle_name , T1.last_name , count(*) , T1.student_id FROM Students AS T1 JOIN Student_Enrolment AS T2 ON T1.student_id = T2.student_id GROUP BY T1.student_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select students.student_id, students.first_name, students.middle_name, students.last_name, count(*) as num_enrollments from students join student_enrolment on students.student_id = student_enrolment.student_id group by students.student_id order by num_enrollments desc limit 1",
+        "prompt_len": 1625
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "Which semesters do not have any student enrolled? List the semester name.",
+        "gold_sql": "SELECT semester_name FROM Semesters WHERE semester_id NOT IN( SELECT semester_id FROM Student_Enrolment )",
+        "predicted_sql": "select semesters.semester_name from semesters left join student_enrolment on semesters.semester_id = student_enrolment.semester_id where student_enrolment.semester_id is null",
+        "prompt_len": 1608
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the name of the semester with no students enrolled?",
+        "gold_sql": "SELECT semester_name FROM Semesters WHERE semester_id NOT IN( SELECT semester_id FROM Student_Enrolment )",
+        "predicted_sql": "select semesters.semester_name from semesters left join student_enrolment on semesters.semester_id = student_enrolment.semester_id where student_enrolment.semester_id is null",
+        "prompt_len": 1605
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What are all the course names of the courses which ever have students enrolled in?",
+        "gold_sql": "SELECT DISTINCT T1.course_name FROM Courses AS T1 JOIN Student_Enrolment_Courses AS T2 ON T1.course_id = T2.course_id",
+        "predicted_sql": "select distinct course_name from courses inner join sections on courses.course_id = sections.course_id inner join student_enrolment_courses on sections.section_id = student_enrolment_courses.student_course_id",
+        "prompt_len": 1609
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What are the names of all courses that have some students enrolled?",
+        "gold_sql": "SELECT DISTINCT T1.course_name FROM Courses AS T1 JOIN Student_Enrolment_Courses AS T2 ON T1.course_id = T2.course_id",
+        "predicted_sql": "select courses.course_name from courses inner join student_enrolment_courses on courses.course_id = student_enrolment_courses.course_id",
+        "prompt_len": 1606
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What's the name of the course with most number of enrollments?",
+        "gold_sql": "SELECT T1.course_name FROM Courses AS T1 JOIN Student_Enrolment_Courses AS T2 ON T1.course_id = T2.course_id GROUP BY T1.course_name ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select courses.course_name, count(student_enrolment_courses.student_course_id) as enrollments from courses inner join student_enrolment_courses on courses.course_id = student_enrolment_courses.course_id group by courses.course_id order by enrollments desc limit 1",
+        "prompt_len": 1607
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the name of the course with the most students enrolled?",
+        "gold_sql": "SELECT T1.course_name FROM Courses AS T1 JOIN Student_Enrolment_Courses AS T2 ON T1.course_id = T2.course_id GROUP BY T1.course_name ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select courses.course_name, count(*) as num_students from courses join sections on courses.course_id = sections.course_id join student_enrolment_courses on sections.section_id = student_enrolment_courses.student_enrolment_id group by courses.course_id order by num_students desc limit 1",
+        "prompt_len": 1606
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "Find the last name of the students who currently live in the state of North Carolina but have not registered in any degree program.",
+        "gold_sql": "SELECT T1.last_name FROM Students AS T1 JOIN Addresses AS T2 ON T1.current_address_id = T2.address_id WHERE T2.state_province_county = 'NorthCarolina' EXCEPT SELECT DISTINCT T3.last_name FROM Students AS T3 JOIN Student_Enrolment AS T4 ON T3.student_id = T4.student_id",
+        "predicted_sql": "select students.last_name from students join addresses on students.current_address_id = addresses.address_id where addresses.state_province_county = 'North Carolina' and students.student_id not in (select student_id from student_enrolment)",
+        "prompt_len": 1618
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What are the last name of the students who live in North Carolina but have not registered in any degree programs?",
+        "gold_sql": "SELECT T1.last_name FROM Students AS T1 JOIN Addresses AS T2 ON T1.current_address_id = T2.address_id WHERE T2.state_province_county = 'NorthCarolina' EXCEPT SELECT DISTINCT T3.last_name FROM Students AS T3 JOIN Student_Enrolment AS T4 ON T3.student_id = T4.student_id",
+        "predicted_sql": "select students.last_name from students left join student_enrolment on students.student_id = student_enrolment.student_id where students.current_address_id in (  select address_id from addresses where state_province_county = 'North Carolina' ) and student_enrolment.student_enrolment_id is null",
+        "prompt_len": 1615
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "Show the date and id of the transcript with at least 2 course results.",
+        "gold_sql": "SELECT T2.transcript_date , T1.transcript_id FROM Transcript_Contents AS T1 JOIN Transcripts AS T2 ON T1.transcript_id = T2.transcript_id GROUP BY T1.transcript_id HAVING count(*) >= 2",
+        "predicted_sql": "select transcripts.transcript_date, transcripts.transcript_id from transcripts inner join transcript_contents on transcripts.transcript_id = transcript_contents.transcript_id group by transcripts.transcript_id having count(transcript_contents.student_course_id) >= 2",
+        "prompt_len": 1609
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the date and id of the transcript with at least 2 courses listed?",
+        "gold_sql": "SELECT T2.transcript_date , T1.transcript_id FROM Transcript_Contents AS T1 JOIN Transcripts AS T2 ON T1.transcript_id = T2.transcript_id GROUP BY T1.transcript_id HAVING count(*) >= 2",
+        "predicted_sql": "select transcripts.transcript_date, transcripts.transcript_id from transcripts inner join transcript_contents on transcripts.transcript_id = transcript_contents.transcript_id group by transcripts.transcript_id having count(*) >= 2",
+        "prompt_len": 1610
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the phone number of the man with the first name Timmothy and the last name Ward?",
+        "gold_sql": "SELECT cell_mobile_number FROM Students WHERE first_name = 'Timmothy' AND last_name = 'Ward'",
+        "predicted_sql": "select cell_mobile_number from students where first_name = 'Timmothy' and last_name = 'Ward'",
+        "prompt_len": 1614
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the mobile phone number of the student named Timmothy Ward ?",
+        "gold_sql": "select cell_mobile_number from students where first_name = 'timmothy' and last_name = 'ward'",
+        "predicted_sql": "select cell_mobile_number from students where first_name = 'Timmothy' and last_name = 'Ward'",
+        "prompt_len": 1608
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "Who is the first student to register? List the first name, middle name and last name.",
+        "gold_sql": "SELECT first_name , middle_name , last_name FROM Students ORDER BY date_first_registered ASC LIMIT 1",
+        "predicted_sql": "select first_name, middle_name, last_name from students order by date_first_registered limit 1",
+        "prompt_len": 1612
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the first, middle, and last name of the first student to register?",
+        "gold_sql": "SELECT first_name , middle_name , last_name FROM Students ORDER BY date_first_registered ASC LIMIT 1",
+        "predicted_sql": "select first_name, middle_name, last_name from students where student_id = 1",
+        "prompt_len": 1610
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "Who is the earliest graduate of the school? List the first name, middle name and last name.",
+        "gold_sql": "SELECT first_name , middle_name , last_name FROM Students ORDER BY date_left ASC LIMIT 1",
+        "predicted_sql": "select students.first_name, students.middle_name, students.last_name from students inner join student_enrolment on students.student_id = student_enrolment.student_id inner join degree_programs on student_enrolment.degree_program_id = degree_programs.degree_program_id where degree_summary_name = 'PHD' order by date_left limit 1",
+        "prompt_len": 1613
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the first, middle, and last name of the earliest school graduate?",
+        "gold_sql": "SELECT first_name , middle_name , last_name FROM Students ORDER BY date_left ASC LIMIT 1",
+        "predicted_sql": "select students.first_name, students.middle_name, students.last_name from students inner join student_enrolment on students.student_id = student_enrolment.student_id inner join transcripts on student_enrolment.student_enrolment_id = transcripts.transcript_id order by transcripts.transcript_date asc limit 1",
+        "prompt_len": 1609
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "Whose permanent address is different from his or her current address? List his or her first name.",
+        "gold_sql": "SELECT first_name FROM Students WHERE current_address_id != permanent_address_id",
+        "predicted_sql": "select students.first_name from students where current_address_id != permanent_address_id",
+        "prompt_len": 1613
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the first name of the student whose permanent address is different from his or her current one?",
+        "gold_sql": "SELECT first_name FROM Students WHERE current_address_id != permanent_address_id",
+        "predicted_sql": "select students.first_name from students where current_address_id != permanent_address_id",
+        "prompt_len": 1613
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "Which address holds the most number of students currently? List the address id and all lines.",
+        "gold_sql": "SELECT T1.address_id , T1.line_1 , T1.line_2 FROM Addresses AS T1 JOIN Students AS T2 ON T1.address_id = T2.current_address_id GROUP BY T1.address_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select current_address_id, line_1, line_2, line_3, city, zip_postcode, state_province_county, country, other_address_details from students join addresses on students.current_address_id = addresses.address_id group by current_address_id order by count(*) desc limit 1",
+        "prompt_len": 1611
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the id, line 1, and line 2 of the address with the most students?",
+        "gold_sql": "SELECT T1.address_id , T1.line_1 , T1.line_2 FROM Addresses AS T1 JOIN Students AS T2 ON T1.address_id = T2.current_address_id GROUP BY T1.address_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select addresses.address_id, addresses.line_1, addresses.line_2 from addresses join students on addresses.address_id = students.current_address_id group by addresses.address_id order by count(students.student_id) desc limit 1",
+        "prompt_len": 1614
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "On average, when were the transcripts printed?",
+        "gold_sql": "SELECT avg(transcript_date) FROM Transcripts",
+        "predicted_sql": "select avg(strftime('%s', transcript_date)) from transcripts",
+        "prompt_len": 1602
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the average transcript date?",
+        "gold_sql": "SELECT avg(transcript_date) FROM Transcripts",
+        "predicted_sql": "select avg(transcript_date) from transcripts",
+        "prompt_len": 1600
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "When is the first transcript released? List the date and details.",
+        "gold_sql": "SELECT transcript_date , other_details FROM Transcripts ORDER BY transcript_date ASC LIMIT 1",
+        "predicted_sql": "select transcript_date, other_details from transcripts order by transcript_date limit 1",
+        "prompt_len": 1606
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the earliest date of a transcript release, and what details can you tell me?",
+        "gold_sql": "SELECT transcript_date , other_details FROM Transcripts ORDER BY transcript_date ASC LIMIT 1",
+        "predicted_sql": "select min(transcript_date), other_details from transcripts",
+        "prompt_len": 1611
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "How many transcripts are released?",
+        "gold_sql": "SELECT count(*) FROM Transcripts",
+        "predicted_sql": "select count(*) from transcripts",
+        "prompt_len": 1599
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "How many transcripts are listed?",
+        "gold_sql": "SELECT count(*) FROM Transcripts",
+        "predicted_sql": "select count(*) from transcripts",
+        "prompt_len": 1599
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the last transcript release date?",
+        "gold_sql": "SELECT transcript_date FROM Transcripts ORDER BY transcript_date DESC LIMIT 1",
+        "predicted_sql": "select max(transcript_date) from transcripts",
+        "prompt_len": 1601
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "When was the last transcript released?",
+        "gold_sql": "SELECT transcript_date FROM Transcripts ORDER BY transcript_date DESC LIMIT 1",
+        "predicted_sql": "select max(transcript_date) from transcripts",
+        "prompt_len": 1600
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "How many times at most can a course enrollment result show in different transcripts? Also show the course enrollment id.",
+        "gold_sql": "SELECT count(*) , student_course_id FROM Transcript_Contents GROUP BY student_course_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select count(student_course_id), student_course_id from transcript_contents group by student_course_id order by count(student_course_id) desc limit 1",
+        "prompt_len": 1615
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the maximum number of times that a course shows up in different transcripts and what is that course's enrollment id?",
+        "gold_sql": "SELECT count(*) , student_course_id FROM Transcript_Contents GROUP BY student_course_id ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select student_course_id, count(*) as num_transcripts from transcript_contents group by student_course_id order by num_transcripts desc limit 1",
+        "prompt_len": 1617
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "Show the date of the transcript which shows the least number of results, also list the id.",
+        "gold_sql": "SELECT T2.transcript_date , T1.transcript_id FROM Transcript_Contents AS T1 JOIN Transcripts AS T2 ON T1.transcript_id = T2.transcript_id GROUP BY T1.transcript_id ORDER BY count(*) ASC LIMIT 1",
+        "predicted_sql": "select transcript_id, transcript_date from transcripts where transcript_id in (   select transcript_id   from transcript_contents   group by transcript_id   order by count(*) asc   limit 1 )",
+        "prompt_len": 1612
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the date and id of the transcript with the least number of results?",
+        "gold_sql": "SELECT T2.transcript_date , T1.transcript_id FROM Transcript_Contents AS T1 JOIN Transcripts AS T2 ON T1.transcript_id = T2.transcript_id GROUP BY T1.transcript_id ORDER BY count(*) ASC LIMIT 1",
+        "predicted_sql": "select transcript_id, transcript_date from transcripts where transcript_id in (   select transcript_id   from transcript_contents   group by transcript_id   order by count(*) asc   limit 1 )",
+        "prompt_len": 1609
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "Find the semester when both Master students and Bachelor students got enrolled in.",
+        "gold_sql": "SELECT DISTINCT T2.semester_id FROM Degree_Programs AS T1 JOIN Student_Enrolment AS T2 ON T1.degree_program_id = T2.degree_program_id WHERE degree_summary_name = 'Master' INTERSECT SELECT DISTINCT T2.semester_id FROM Degree_Programs AS T1 JOIN Student_Enrolment AS T2 ON T1.degree_program_id = T2.degree_program_id WHERE degree_summary_name = 'Bachelor'",
+        "predicted_sql": "select semesters.semester_name from semesters inner join student_enrolment on semesters.semester_id = student_enrolment.semester_id inner join degree_programs on student_enrolment.degree_program_id = degree_programs.degree_program_id where degree_summary_name in ('Master', 'Bachelor') group by semesters.semester_name having count(distinct degree_summary_name) = 2",
+        "prompt_len": 1607
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the id of the semester that had both Masters and Bachelors students enrolled?",
+        "gold_sql": "SELECT DISTINCT T2.semester_id FROM Degree_Programs AS T1 JOIN Student_Enrolment AS T2 ON T1.degree_program_id = T2.degree_program_id WHERE degree_summary_name = 'Master' INTERSECT SELECT DISTINCT T2.semester_id FROM Degree_Programs AS T1 JOIN Student_Enrolment AS T2 ON T1.degree_program_id = T2.degree_program_id WHERE degree_summary_name = 'Bachelor'",
+        "predicted_sql": "select semesters.semester_id from semesters inner join student_enrolment on semesters.semester_id = student_enrolment.semester_id inner join degree_programs on student_enrolment.degree_program_id = degree_programs.degree_program_id where degree_summary_name in ('Master', 'Bachelor') group by semesters.semester_id having count(distinct degree_summary_name) = 2",
+        "prompt_len": 1611
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "How many different addresses do the students currently live?",
+        "gold_sql": "SELECT count(DISTINCT current_address_id) FROM Students",
+        "predicted_sql": "select count(distinct current_address_id) from students",
+        "prompt_len": 1603
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What are the different addresses that have students living there?",
+        "gold_sql": "SELECT count(DISTINCT current_address_id) FROM Students",
+        "predicted_sql": "select distinct line_1, line_2, line_3, city, zip_postcode, state_province_county, country, other_address_details from addresses where address_id in (  select current_address_id from students  union  select permanent_address_id from students )",
+        "prompt_len": 1604
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "List all the student details in reversed lexicographical order.",
+        "gold_sql": "SELECT other_student_details FROM Students ORDER BY other_student_details DESC",
+        "predicted_sql": "select * from students order by last_name desc, first_name desc, middle_name desc",
+        "prompt_len": 1605
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What other details can you tell me about students in reverse alphabetical order?",
+        "gold_sql": "SELECT other_student_details FROM Students ORDER BY other_student_details DESC",
+        "predicted_sql": "select * from students order by last_name desc",
+        "prompt_len": 1607
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "Describe the section h.",
+        "gold_sql": "SELECT section_description FROM Sections WHERE section_name = 'h'",
+        "predicted_sql": "select section_description from sections where section_name = 'h'",
+        "prompt_len": 1598
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What is the description for the section named h?",
+        "gold_sql": "SELECT section_description FROM Sections WHERE section_name = 'h'",
+        "predicted_sql": "select sections.section_description from sections where sections.section_name = 'h'",
+        "prompt_len": 1603
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "Find the first name of the students who permanently live in the country Haiti or have the cell phone number 09700166582 .",
+        "gold_sql": "select t1.first_name from students as t1 join addresses as t2 on t1.permanent_address_id = t2.address_id where t2.country = 'haiti' or t1.cell_mobile_number = '09700166582'",
+        "predicted_sql": "select students.first_name from students inner join addresses on students.permanent_address_id = addresses.address_id where addresses.country = 'Haiti' or students.cell_mobile_number = '09700166582'",
+        "prompt_len": 1619
+    },
+    {
+        "db_id": "student_transcripts_tracking",
+        "question": "What are the first names of the students who live in Haiti permanently or have the cell phone number 09700166582 ?",
+        "gold_sql": "select t1.first_name from students as t1 join addresses as t2 on t1.permanent_address_id = t2.address_id where t2.country = 'haiti' or t1.cell_mobile_number = '09700166582'",
+        "predicted_sql": "select students.first_name from students inner join addresses on students.permanent_address_id = addresses.address_id where addresses.country = 'Haiti' or students.cell_mobile_number = '09700166582'",
+        "prompt_len": 1618
+    }
+]

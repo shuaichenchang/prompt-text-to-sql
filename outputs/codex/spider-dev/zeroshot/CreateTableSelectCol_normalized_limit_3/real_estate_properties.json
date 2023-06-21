@@ -1,0 +1,30 @@
+[
+    {
+        "db_id": "real_estate_properties",
+        "question": "How many available features are there in total?",
+        "gold_sql": "SELECT count(*) FROM Other_Available_Features",
+        "predicted_sql": "select count(*) from other_available_features",
+        "prompt_len": 1355
+    },
+    {
+        "db_id": "real_estate_properties",
+        "question": "What is the feature type name of feature AirCon?",
+        "gold_sql": "SELECT T2.feature_type_name FROM Other_Available_Features AS T1 JOIN Ref_Feature_Types AS T2 ON T1.feature_type_code = T2.feature_type_code WHERE T1.feature_name = \"AirCon\"",
+        "predicted_sql": "select feature_type_name from ref_feature_types where feature_type_code = (select feature_type_code from other_available_features where feature_name = 'AirCon')",
+        "prompt_len": 1357
+    },
+    {
+        "db_id": "real_estate_properties",
+        "question": "Show the property type descriptions of properties belonging to that code.",
+        "gold_sql": "SELECT T2.property_type_description FROM Properties AS T1 JOIN Ref_Property_Types AS T2 ON T1.property_type_code = T2.property_type_code GROUP BY T1.property_type_code",
+        "predicted_sql": "select property_type_description from ref_property_types",
+        "prompt_len": 1358
+    },
+    {
+        "db_id": "real_estate_properties",
+        "question": "What are the names of properties that are either houses or apartments with more than 1 room?",
+        "gold_sql": "SELECT property_name FROM Properties WHERE property_type_code = \"House\" UNION SELECT property_name FROM Properties WHERE property_type_code = \"Apartment\" AND room_count > 1",
+        "predicted_sql": "select property_name from properties where property_type_code in ('House', 'Apartment') and room_count > 1",
+        "prompt_len": 1364
+    }
+]

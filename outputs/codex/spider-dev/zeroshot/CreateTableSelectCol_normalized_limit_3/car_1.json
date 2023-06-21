@@ -1,0 +1,646 @@
+[
+    {
+        "db_id": "car_1",
+        "question": "How many continents are there?",
+        "gold_sql": "SELECT count(*) FROM CONTINENTS",
+        "predicted_sql": "select count(*) from continents",
+        "prompt_len": 666
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the number of continents?",
+        "gold_sql": "SELECT count(*) FROM CONTINENTS",
+        "predicted_sql": "select count(*) from continents",
+        "prompt_len": 667
+    },
+    {
+        "db_id": "car_1",
+        "question": "How many countries does each continent have? List the continent id, continent name and the number of countries.",
+        "gold_sql": "SELECT T1.ContId , T1.Continent , count(*) FROM CONTINENTS AS T1 JOIN COUNTRIES AS T2 ON T1.ContId = T2.Continent GROUP BY T1.ContId",
+        "predicted_sql": "select contid, continent, count(countryid) as num_countries from continents join countries on continents.contid = countries.continent group by contid",
+        "prompt_len": 681
+    },
+    {
+        "db_id": "car_1",
+        "question": "For each continent, list its id, name, and how many countries it has?",
+        "gold_sql": "SELECT T1.ContId , T1.Continent , count(*) FROM CONTINENTS AS T1 JOIN COUNTRIES AS T2 ON T1.ContId = T2.Continent GROUP BY T1.ContId",
+        "predicted_sql": "select continents.contid, continents.continent, count(countries.countryid) as country_count from continents join countries on continents.contid = countries.continent group by continents.contid",
+        "prompt_len": 677
+    },
+    {
+        "db_id": "car_1",
+        "question": "How many countries are listed?",
+        "gold_sql": "SELECT count(*) FROM COUNTRIES",
+        "predicted_sql": "select count(*) from countries",
+        "prompt_len": 666
+    },
+    {
+        "db_id": "car_1",
+        "question": "How many countries exist?",
+        "gold_sql": "SELECT count(*) FROM COUNTRIES",
+        "predicted_sql": "select count(*) from countries",
+        "prompt_len": 665
+    },
+    {
+        "db_id": "car_1",
+        "question": "How many models does each car maker produce? List maker full name, id and the number.",
+        "gold_sql": "SELECT T1.FullName , T1.Id , count(*) FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id = T2.Maker GROUP BY T1.Id",
+        "predicted_sql": "select fullname, id, count(model) as number_of_models from car_makers join model_list on car_makers.id = model_list.maker group by fullname, id",
+        "prompt_len": 679
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the full name of each car maker, along with its id and how many models it produces?",
+        "gold_sql": "SELECT T1.FullName , T1.Id , count(*) FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id = T2.Maker GROUP BY T1.Id",
+        "predicted_sql": "select car_makers.id, car_makers.fullname, count(model_list.model) from car_makers join model_list on car_makers.id = model_list.maker group by car_makers.id",
+        "prompt_len": 681
+    },
+    {
+        "db_id": "car_1",
+        "question": "Which model of the car has the minimum horsepower?",
+        "gold_sql": "SELECT T1.Model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId = T2.Id ORDER BY T2.horsepower ASC LIMIT 1",
+        "predicted_sql": "select model from model_list where modelid = (select id from car_names where horsepower = (select min(horsepower) from cars_data))",
+        "prompt_len": 670
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the model of the car with the smallest amount of horsepower?",
+        "gold_sql": "SELECT T1.Model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId = T2.Id ORDER BY T2.horsepower ASC LIMIT 1",
+        "predicted_sql": "select model from model_list where modelid = (select model from car_names where makeid = (select id from cars_data where horsepower = (select min(horsepower) from cars_data)))",
+        "prompt_len": 674
+    },
+    {
+        "db_id": "car_1",
+        "question": "Find the model of the car whose weight is below the average weight.",
+        "gold_sql": "SELECT T1.model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId = T2.Id WHERE T2.Weight < (SELECT avg(Weight) FROM CARS_DATA)",
+        "predicted_sql": "select model from model_list where modelid in (select model from car_names where makeid in (select id from cars_data where weight < (select avg(weight) from cars_data)))",
+        "prompt_len": 674
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the model for the car with a weight smaller than the average?",
+        "gold_sql": "SELECT T1.model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId = T2.Id WHERE T2.Weight < (SELECT avg(Weight) FROM CARS_DATA)",
+        "predicted_sql": "select model from model_list where modelid in (select model from car_names where makeid in (select id from cars_data where weight < (select avg(weight) from cars_data)))",
+        "prompt_len": 675
+    },
+    {
+        "db_id": "car_1",
+        "question": "Find the name of the makers that produced some cars in the year of 1970?",
+        "gold_sql": "SELECT DISTINCT T1.Maker FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id = T2.Maker JOIN CAR_NAMES AS T3 ON T2.model = T3.model JOIN CARS_DATA AS T4 ON T3.MakeId = T4.id WHERE T4.year = '1970'",
+        "predicted_sql": "select maker from car_makers where id in (select maker from model_list where modelid in (select id from car_names where makeid in (select id from cars_data where year = 1970)))",
+        "prompt_len": 676
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the name of the different car makers who produced a car in 1970?",
+        "gold_sql": "SELECT DISTINCT T1.Maker FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id = T2.Maker JOIN CAR_NAMES AS T3 ON T2.model = T3.model JOIN CARS_DATA AS T4 ON T3.MakeId = T4.id WHERE T4.year = '1970'",
+        "predicted_sql": "select distinct car_makers.fullname from car_makers join car_names on car_names.model = car_makers.maker join cars_data on cars_data.id = car_names.makeid where cars_data.year = 1970",
+        "prompt_len": 676
+    },
+    {
+        "db_id": "car_1",
+        "question": "Find the make and production time of the cars that were produced in the earliest year?",
+        "gold_sql": "SELECT T2.Make , T1.Year FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id = T2.MakeId WHERE T1.Year = (SELECT min(YEAR) FROM CARS_DATA)",
+        "predicted_sql": "select make, year from cars_data join car_names on cars_data.id = car_names.makeid where year = (select min(year) from cars_data)",
+        "prompt_len": 677
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the maker of the carr produced in the earliest year and what year was it?",
+        "gold_sql": "SELECT T2.Make , T1.Year FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id = T2.MakeId WHERE T1.Year = (SELECT min(YEAR) FROM CARS_DATA)",
+        "predicted_sql": "select make, year from cars_data join car_names on cars_data.id = car_names.makeid where year = (select min(year) from cars_data)",
+        "prompt_len": 679
+    },
+    {
+        "db_id": "car_1",
+        "question": "Which distinct car models are the produced after 1980?",
+        "gold_sql": "SELECT DISTINCT T1.model FROM MODEL_LIST AS T1 JOIN CAR_NAMES AS T2 ON T1.model = T2.model JOIN CARS_DATA AS T3 ON T2.MakeId = T3.id WHERE T3.year > 1980",
+        "predicted_sql": "select distinct model from model_list join cars_data on model_list.model = cars_data.id where year > 1980",
+        "prompt_len": 670
+    },
+    {
+        "db_id": "car_1",
+        "question": "What are the different models for the cards produced after 1980?",
+        "gold_sql": "SELECT DISTINCT T1.model FROM MODEL_LIST AS T1 JOIN CAR_NAMES AS T2 ON T1.model = T2.model JOIN CARS_DATA AS T3 ON T2.MakeId = T3.id WHERE T3.year > 1980",
+        "predicted_sql": "select model from model_list where modelid in (select model from car_names where makeid in (select id from cars_data where year > 1980))",
+        "prompt_len": 672
+    },
+    {
+        "db_id": "car_1",
+        "question": "How many car makers are there in each continents? List the continent name and the count.",
+        "gold_sql": "SELECT T1.Continent , count(*) FROM CONTINENTS AS T1 JOIN COUNTRIES AS T2 ON T1.ContId = T2.continent JOIN car_makers AS T3 ON T2.CountryId = T3.Country GROUP BY T1.Continent",
+        "predicted_sql": "select continents.continent, count(car_makers.id) as count from continents join countries on continents.contid = countries.continent join car_makers on countries.countryid = car_makers.country group by continents.continent",
+        "prompt_len": 678
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the name of each continent and how many car makers are there in each one?",
+        "gold_sql": "SELECT T1.Continent , count(*) FROM CONTINENTS AS T1 JOIN COUNTRIES AS T2 ON T1.ContId = T2.continent JOIN car_makers AS T3 ON T2.CountryId = T3.Country GROUP BY T1.Continent",
+        "predicted_sql": "select continents.continent, count(car_makers.id) as car_makers_count from continents left join countries on continents.contid = countries.continent left join car_makers on countries.countryid = car_makers.country group by continents.continent",
+        "prompt_len": 678
+    },
+    {
+        "db_id": "car_1",
+        "question": "Which of the countries has the most car makers? List the country name.",
+        "gold_sql": "SELECT T2.CountryName FROM CAR_MAKERS AS T1 JOIN COUNTRIES AS T2 ON T1.Country = T2.CountryId GROUP BY T1.Country ORDER BY Count(*) DESC LIMIT 1",
+        "predicted_sql": "select countryname from countries where countryid in (select country from car_makers group by country order by count(*) desc limit 1)",
+        "prompt_len": 675
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the name of the country with the most car makers?",
+        "gold_sql": "SELECT T2.CountryName FROM CAR_MAKERS AS T1 JOIN COUNTRIES AS T2 ON T1.Country = T2.CountryId GROUP BY T1.Country ORDER BY Count(*) DESC LIMIT 1",
+        "predicted_sql": "select countryname from countries where countryid = (select country from car_makers group by country order by count(*) desc limit 1)",
+        "prompt_len": 673
+    },
+    {
+        "db_id": "car_1",
+        "question": "How many car models are produced by each maker ? Only list the count and the maker full name .",
+        "gold_sql": "select count(*) , t2.fullname from model_list as t1 join car_makers as t2 on t1.maker = t2.id group by t2.id",
+        "predicted_sql": "select count(model_list.modelid), car_makers.fullname from model_list join car_makers on model_list.maker = car_makers.id group by car_makers.fullname",
+        "prompt_len": 680
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the number of car models that are produced by each maker and what is the id and full name of each maker?",
+        "gold_sql": "SELECT Count(*) , T2.FullName , T2.id FROM MODEL_LIST AS T1 JOIN CAR_MAKERS AS T2 ON T1.Maker = T2.Id GROUP BY T2.id",
+        "predicted_sql": "select car_makers.id, car_makers.fullname, count(model_list.model) as model_count from car_makers join model_list on car_makers.id = model_list.maker group by car_makers.id",
+        "prompt_len": 685
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the accelerate of the car make amc hornet sportabout (sw)?",
+        "gold_sql": "SELECT T1.Accelerate FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id = T2.MakeId WHERE T2.Make = 'amc hornet sportabout (sw)'",
+        "predicted_sql": "select accelerate from cars_data where id = (select makeid from car_names where make = \"amc hornet sportabout (sw)\")",
+        "prompt_len": 677
+    },
+    {
+        "db_id": "car_1",
+        "question": "How much does the car accelerate that makes amc hornet sportabout (sw)?",
+        "gold_sql": "SELECT T1.Accelerate FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id = T2.MakeId WHERE T2.Make = 'amc hornet sportabout (sw)'",
+        "predicted_sql": "select accelerate from cars_data where id = (select makeid from car_names where make = \"amc hornet sportabout (sw)\")",
+        "prompt_len": 677
+    },
+    {
+        "db_id": "car_1",
+        "question": "How many car makers are there in france?",
+        "gold_sql": "SELECT count(*) FROM CAR_MAKERS AS T1 JOIN COUNTRIES AS T2 ON T1.Country = T2.CountryId WHERE T2.CountryName = 'france'",
+        "predicted_sql": "select count(*) from car_makers where country = (select countryid from countries where countryname = \"france\")",
+        "prompt_len": 670
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the number of makers of care in France?",
+        "gold_sql": "SELECT count(*) FROM CAR_MAKERS AS T1 JOIN COUNTRIES AS T2 ON T1.Country = T2.CountryId WHERE T2.CountryName = 'france'",
+        "predicted_sql": "select count(*) from car_makers where country = (select countryid from countries where countryname = \"france\")",
+        "prompt_len": 671
+    },
+    {
+        "db_id": "car_1",
+        "question": "How many car models are produced in the usa?",
+        "gold_sql": "SELECT count(*) FROM MODEL_LIST AS T1 JOIN CAR_MAKERS AS T2 ON T1.Maker = T2.Id JOIN COUNTRIES AS T3 ON T2.Country = T3.CountryId WHERE T3.CountryName = 'usa'",
+        "predicted_sql": "select count(*) from car_makers where country = (select countryid from countries where countryname = \"usa\")",
+        "prompt_len": 671
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the count of the car models produced in the United States?",
+        "gold_sql": "SELECT count(*) FROM MODEL_LIST AS T1 JOIN CAR_MAKERS AS T2 ON T1.Maker = T2.Id JOIN COUNTRIES AS T3 ON T2.Country = T3.CountryId WHERE T3.CountryName = 'usa'",
+        "predicted_sql": "select count(model) from model_list where maker in (select id from car_makers where country in (select countryid from countries where countryname = \"usa\"))",
+        "prompt_len": 674
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the average miles per gallon(mpg) of the cars with 4 cylinders?",
+        "gold_sql": "SELECT avg(mpg) FROM CARS_DATA WHERE Cylinders = 4",
+        "predicted_sql": "select avg(mpg) from cars_data where cylinders = 4",
+        "prompt_len": 678
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the average miles per gallon of all the cards with 4 cylinders?",
+        "gold_sql": "SELECT avg(mpg) FROM CARS_DATA WHERE Cylinders = 4",
+        "predicted_sql": "select avg(mpg) from cars_data where cylinders = 4",
+        "prompt_len": 675
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the smallest weight of the car produced with 8 cylinders on 1974 ?",
+        "gold_sql": "select min(weight) from cars_data where cylinders = 8 and year = 1974",
+        "predicted_sql": "select min(weight) from cars_data where cylinders = 8 and year = 1974",
+        "prompt_len": 675
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the minimum weight of the car with 8 cylinders produced in 1974 ?",
+        "gold_sql": "select min(weight) from cars_data where cylinders = 8 and year = 1974",
+        "predicted_sql": "select min(weight) from cars_data where cylinders = 8 and year = 1974",
+        "prompt_len": 675
+    },
+    {
+        "db_id": "car_1",
+        "question": "What are all the makers and models?",
+        "gold_sql": "SELECT Maker , Model FROM MODEL_LIST",
+        "predicted_sql": "select maker, model from car_makers join model_list on car_makers.id = model_list.maker",
+        "prompt_len": 668
+    },
+    {
+        "db_id": "car_1",
+        "question": "What are the makers and models?",
+        "gold_sql": "SELECT Maker , Model FROM MODEL_LIST",
+        "predicted_sql": "select maker, model from car_makers join model_list on car_makers.id = model_list.maker",
+        "prompt_len": 667
+    },
+    {
+        "db_id": "car_1",
+        "question": "What are the countries having at least one car maker? List name and id.",
+        "gold_sql": "SELECT T1.CountryName , T1.CountryId FROM COUNTRIES AS T1 JOIN CAR_MAKERS AS T2 ON T1.CountryId = T2.Country GROUP BY T1.CountryId HAVING count(*) >= 1",
+        "predicted_sql": "select countryname, countryid from countries where countryid in (select country from car_makers)",
+        "prompt_len": 676
+    },
+    {
+        "db_id": "car_1",
+        "question": "What are the names and ids of all countries with at least one car maker?",
+        "gold_sql": "SELECT T1.CountryName , T1.CountryId FROM COUNTRIES AS T1 JOIN CAR_MAKERS AS T2 ON T1.CountryId = T2.Country GROUP BY T1.CountryId HAVING count(*) >= 1",
+        "predicted_sql": "select countryname, countryid from countries where countryid in (select country from car_makers)",
+        "prompt_len": 677
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the number of the cars with horsepower more than 150?",
+        "gold_sql": "SELECT count(*) FROM CARS_DATA WHERE horsepower > 150",
+        "predicted_sql": "select count(*) from cars_data where horsepower > 150",
+        "prompt_len": 673
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the number of cars with a horsepower greater than 150?",
+        "gold_sql": "SELECT count(*) FROM CARS_DATA WHERE horsepower > 150",
+        "predicted_sql": "select count(*) from cars_data where horsepower > 150",
+        "prompt_len": 673
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the average weight of cars each year?",
+        "gold_sql": "SELECT avg(Weight) , YEAR FROM CARS_DATA GROUP BY YEAR",
+        "predicted_sql": "select year, avg(weight) from cars_data group by year",
+        "prompt_len": 670
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the average weight and year for each year?",
+        "gold_sql": "SELECT avg(Weight) , YEAR FROM CARS_DATA GROUP BY YEAR",
+        "predicted_sql": "select year, avg(weight), avg(year) from cars_data group by year",
+        "prompt_len": 671
+    },
+    {
+        "db_id": "car_1",
+        "question": "Which countries in europe have at least 3 car manufacturers?",
+        "gold_sql": "SELECT T1.CountryName FROM COUNTRIES AS T1 JOIN CONTINENTS AS T2 ON T1.Continent = T2.ContId JOIN CAR_MAKERS AS T3 ON T1.CountryId = T3.Country WHERE T2.Continent = 'europe' GROUP BY T1.CountryName HAVING count(*) >= 3",
+        "predicted_sql": "select countryname from countries where continent = 2 and countryid in (select country from car_makers group by country having count(*) >= 3)",
+        "prompt_len": 672
+    },
+    {
+        "db_id": "car_1",
+        "question": "What are the names of all European countries with at least 3 manufacturers?",
+        "gold_sql": "SELECT T1.CountryName FROM COUNTRIES AS T1 JOIN CONTINENTS AS T2 ON T1.Continent = T2.ContId JOIN CAR_MAKERS AS T3 ON T1.CountryId = T3.Country WHERE T2.Continent = 'europe' GROUP BY T1.CountryName HAVING count(*) >= 3",
+        "predicted_sql": "select distinct countryname from countries where continent = 2 and countryid in (select country from car_makers group by country having count(*) >= 3)",
+        "prompt_len": 674
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the maximum horsepower and the make of the car models with 3 cylinders?",
+        "gold_sql": "SELECT T2.horsepower , T1.Make FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId = T2.Id WHERE T2.cylinders = 3 ORDER BY T2.horsepower DESC LIMIT 1",
+        "predicted_sql": "select horsepower, make from cars_data, car_names where cars_data.id = car_names.makeid and cylinders = 3",
+        "prompt_len": 676
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the largest amount of horsepower for the models with 3 cylinders and what make is it?",
+        "gold_sql": "SELECT T2.horsepower , T1.Make FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId = T2.Id WHERE T2.cylinders = 3 ORDER BY T2.horsepower DESC LIMIT 1",
+        "predicted_sql": "select make from car_names where model in (select model from model_list where maker in (select id from car_makers where country in (select countryid from countries where continent in (select contid from continents where continent = \"america\")))) and makeid in (select id from cars_data where cylinders = 3 and horsepower = (select max(horsepower) from cars_data where cylinders = 3))",
+        "prompt_len": 679
+    },
+    {
+        "db_id": "car_1",
+        "question": "Which model saves the most gasoline? That is to say, have the maximum miles per gallon.",
+        "gold_sql": "SELECT T1.Model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId = T2.Id ORDER BY T2.mpg DESC LIMIT 1",
+        "predicted_sql": "select model from model_list where modelid = (select model from car_names where makeid = (select id from cars_data where mpg = (select max(mpg) from cars_data)))",
+        "prompt_len": 679
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the car model with the highest mpg ?",
+        "gold_sql": "select t1.model from car_names as t1 join cars_data as t2 on t1.makeid = t2.id order by t2.mpg desc limit 1",
+        "predicted_sql": "select model from model_list where modelid in (select model from car_names where makeid in (select id from cars_data where mpg = (select max(mpg) from cars_data)))",
+        "prompt_len": 671
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the average horsepower of the cars before 1980?",
+        "gold_sql": "SELECT avg(horsepower) FROM CARS_DATA WHERE YEAR < 1980",
+        "predicted_sql": "select avg(horsepower) from cars_data where year < 1980",
+        "prompt_len": 671
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the average horsepower for all cars produced before 1980 ?",
+        "gold_sql": "select avg(horsepower) from cars_data where year < 1980",
+        "predicted_sql": "select avg(horsepower) from cars_data where year < 1980",
+        "prompt_len": 672
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the average edispl of the cars of model volvo?",
+        "gold_sql": "SELECT avg(T2.edispl) FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId = T2.Id WHERE T1.Model = 'volvo'",
+        "predicted_sql": "select avg(edispl) from cars_data where id in (select makeid from car_names where model = \"volvo\")",
+        "prompt_len": 675
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the average edispl for all volvos?",
+        "gold_sql": "SELECT avg(T2.edispl) FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId = T2.Id WHERE T1.Model = 'volvo'",
+        "predicted_sql": "select avg(edispl) from cars_data where id in (select makeid from car_names where model in (select model from model_list where maker in (select id from car_makers where maker = \"volvo\")))",
+        "prompt_len": 673
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the maximum accelerate for different number of cylinders?",
+        "gold_sql": "SELECT max(Accelerate) , Cylinders FROM CARS_DATA GROUP BY Cylinders",
+        "predicted_sql": "select cylinders, max(accelerate) from cars_data group by cylinders",
+        "prompt_len": 671
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the maximum accelerate for all the different cylinders?",
+        "gold_sql": "SELECT max(Accelerate) , Cylinders FROM CARS_DATA GROUP BY Cylinders",
+        "predicted_sql": "select max(accelerate) from cars_data where cylinders = 4",
+        "prompt_len": 671
+    },
+    {
+        "db_id": "car_1",
+        "question": "Which model has the most version(make) of cars?",
+        "gold_sql": "SELECT Model FROM CAR_NAMES GROUP BY Model ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select model, count(make) as count from car_names group by model order by count desc limit 1",
+        "prompt_len": 672
+    },
+    {
+        "db_id": "car_1",
+        "question": "What model has the most different versions?",
+        "gold_sql": "SELECT Model FROM CAR_NAMES GROUP BY Model ORDER BY count(*) DESC LIMIT 1",
+        "predicted_sql": "select model, count(*) as count from model_list group by model order by count desc limit 1",
+        "prompt_len": 668
+    },
+    {
+        "db_id": "car_1",
+        "question": "How many cars have more than 4 cylinders?",
+        "gold_sql": "SELECT count(*) FROM CARS_DATA WHERE Cylinders > 4",
+        "predicted_sql": "select count(*) from cars_data where cylinders > 4",
+        "prompt_len": 669
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the number of cars with more than 4 cylinders?",
+        "gold_sql": "SELECT count(*) FROM CARS_DATA WHERE Cylinders > 4",
+        "predicted_sql": "select count(*) from cars_data where cylinders > 4",
+        "prompt_len": 672
+    },
+    {
+        "db_id": "car_1",
+        "question": "how many cars were produced in 1980?",
+        "gold_sql": "SELECT count(*) FROM CARS_DATA WHERE YEAR = 1980",
+        "predicted_sql": "select count(*) from cars_data where year = 1980",
+        "prompt_len": 668
+    },
+    {
+        "db_id": "car_1",
+        "question": "In 1980, how many cars were made?",
+        "gold_sql": "SELECT count(*) FROM CARS_DATA WHERE YEAR = 1980",
+        "predicted_sql": "select count(*) from cars_data where year = 1980",
+        "prompt_len": 669
+    },
+    {
+        "db_id": "car_1",
+        "question": "How many car models were produced by the maker with full name American Motor Company?",
+        "gold_sql": "SELECT count(*) FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id = T2.Maker WHERE T1.FullName = 'American Motor Company'",
+        "predicted_sql": "select count(model) from model_list where maker = (select id from car_makers where fullname = \"American Motor Company\")",
+        "prompt_len": 676
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the number of car models created by the car maker American Motor Company?",
+        "gold_sql": "SELECT count(*) FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id = T2.Maker WHERE T1.FullName = 'American Motor Company'",
+        "predicted_sql": "select count(model) from model_list where maker = (select id from car_makers where maker = \"amc\")",
+        "prompt_len": 676
+    },
+    {
+        "db_id": "car_1",
+        "question": "Which makers designed more than 3 car models? List full name and the id.",
+        "gold_sql": "SELECT T1.FullName , T1.Id FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id = T2.Maker GROUP BY T1.Id HAVING count(*) > 3",
+        "predicted_sql": "select fullname, id from car_makers where id in (select maker from model_list group by maker having count(model) > 3)",
+        "prompt_len": 676
+    },
+    {
+        "db_id": "car_1",
+        "question": "What are the names and ids of all makers with more than 3 models?",
+        "gold_sql": "SELECT T1.FullName , T1.Id FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id = T2.Maker GROUP BY T1.Id HAVING count(*) > 3",
+        "predicted_sql": "select car_makers.maker, car_makers.id from car_makers join model_list on car_makers.id = model_list.maker group by car_makers.maker having count(model_list.model) > 3",
+        "prompt_len": 676
+    },
+    {
+        "db_id": "car_1",
+        "question": "Which distinctive models are produced by maker with the full name General Motors or weighing more than 3500?",
+        "gold_sql": "SELECT DISTINCT T2.Model FROM CAR_NAMES AS T1 JOIN MODEL_LIST AS T2 ON T1.Model = T2.Model JOIN CAR_MAKERS AS T3 ON T2.Maker = T3.Id JOIN CARS_DATA AS T4 ON T1.MakeId = T4.Id WHERE T3.FullName = 'General Motors' OR T4.weight > 3500",
+        "predicted_sql": "select model from model_list where maker in (select id from car_makers where fullname = \"General Motors\" or weight > 3500)",
+        "prompt_len": 680
+    },
+    {
+        "db_id": "car_1",
+        "question": "What are the different models created by either the car maker General Motors or weighed more than 3500?",
+        "gold_sql": "SELECT DISTINCT T2.Model FROM CAR_NAMES AS T1 JOIN MODEL_LIST AS T2 ON T1.Model = T2.Model JOIN CAR_MAKERS AS T3 ON T2.Maker = T3.Id JOIN CARS_DATA AS T4 ON T1.MakeId = T4.Id WHERE T3.FullName = 'General Motors' OR T4.weight > 3500",
+        "predicted_sql": "select model from model_list where maker in (select id from car_makers where maker in (\"gm\", \"general motors\")) and model in (select model from car_names where make in (select make from cars_data where weight > 3500))",
+        "prompt_len": 680
+    },
+    {
+        "db_id": "car_1",
+        "question": "In which years cars were produced weighing no less than 3000 and no more than 4000 ?",
+        "gold_sql": "select distinct year from cars_data where weight between 3000 and 4000",
+        "predicted_sql": "select year from cars_data where weight between 3000 and 4000",
+        "prompt_len": 677
+    },
+    {
+        "db_id": "car_1",
+        "question": "What are the different years in which there were cars produced that weighed less than 4000 and also cars that weighted more than 3000 ?",
+        "gold_sql": "select distinct year from cars_data where weight between 3000 and 4000",
+        "predicted_sql": "select distinct year from cars_data where weight < 4000 and weight > 3000",
+        "prompt_len": 685
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the horsepower of the car with the largest accelerate?",
+        "gold_sql": "SELECT T1.horsepower FROM CARS_DATA AS T1 ORDER BY T1.accelerate DESC LIMIT 1",
+        "predicted_sql": "select horsepower from cars_data where accelerate = (select max(accelerate) from cars_data)",
+        "prompt_len": 672
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the horsepower of the car with the greatest accelerate?",
+        "gold_sql": "SELECT T1.horsepower FROM CARS_DATA AS T1 ORDER BY T1.accelerate DESC LIMIT 1",
+        "predicted_sql": "select horsepower from cars_data where accelerate = (select max(accelerate) from cars_data)",
+        "prompt_len": 672
+    },
+    {
+        "db_id": "car_1",
+        "question": "For model volvo, how many cylinders does the car with the least accelerate have?",
+        "gold_sql": "SELECT T1.cylinders FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id = T2.MakeId WHERE T2.Model = 'volvo' ORDER BY T1.accelerate ASC LIMIT 1",
+        "predicted_sql": "select cylinders from cars_data where id in (select makeid from car_names where model = 'volvo' order by accelerate asc limit 1)",
+        "prompt_len": 677
+    },
+    {
+        "db_id": "car_1",
+        "question": "For a volvo model, how many cylinders does the version with least accelerate have?",
+        "gold_sql": "SELECT T1.cylinders FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id = T2.MakeId WHERE T2.Model = 'volvo' ORDER BY T1.accelerate ASC LIMIT 1",
+        "predicted_sql": "select cylinders from cars_data where id in (select id from car_names where model in (select model from model_list where maker in (select id from car_makers where maker = \"volvo\")) order by accelerate asc limit 1)",
+        "prompt_len": 677
+    },
+    {
+        "db_id": "car_1",
+        "question": "How many cars have a larger accelerate than the car with the largest horsepower?",
+        "gold_sql": "SELECT COUNT(*) FROM CARS_DATA WHERE Accelerate > ( SELECT Accelerate FROM CARS_DATA ORDER BY Horsepower DESC LIMIT 1 )",
+        "predicted_sql": "select count(*) from cars_data where accelerate > (select max(horsepower) from cars_data)",
+        "prompt_len": 675
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the number of cars with a greater accelerate than the one with the most horsepower?",
+        "gold_sql": "SELECT COUNT(*) FROM CARS_DATA WHERE Accelerate > ( SELECT Accelerate FROM CARS_DATA ORDER BY Horsepower DESC LIMIT 1 )",
+        "predicted_sql": "select count(*) from cars_data where accelerate > (select max(horsepower) from cars_data)",
+        "prompt_len": 678
+    },
+    {
+        "db_id": "car_1",
+        "question": "How many countries has more than 2 car makers ?",
+        "gold_sql": "select count(*) from countries as t1 join car_makers as t2 on t1.countryid = t2.country group by t1.countryid having count(*) > 2",
+        "predicted_sql": "select count(*) from countries where countryid in (select country from car_makers group by country having count(*) > 2)",
+        "prompt_len": 670
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the number of countries with more than 2 car makers ?",
+        "gold_sql": "select count(*) from countries as t1 join car_makers as t2 on t1.countryid = t2.country group by t1.countryid having count(*) > 2",
+        "predicted_sql": "select count(*) from countries where countryid in (select country from car_makers group by country having count(*) > 2)",
+        "prompt_len": 673
+    },
+    {
+        "db_id": "car_1",
+        "question": "How many cars has over 6 cylinders?",
+        "gold_sql": "SELECT COUNT(*) FROM CARS_DATA WHERE Cylinders > 6",
+        "predicted_sql": "select count(*) from cars_data where cylinders > 6",
+        "prompt_len": 668
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the number of carsw ith over 6 cylinders?",
+        "gold_sql": "SELECT COUNT(*) FROM CARS_DATA WHERE Cylinders > 6",
+        "predicted_sql": "select count(*) from cars_data where cylinders > 6",
+        "prompt_len": 673
+    },
+    {
+        "db_id": "car_1",
+        "question": "For the cars with 4 cylinders, which model has the largest horsepower?",
+        "gold_sql": "SELECT T1.Model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId = T2.Id WHERE T2.Cylinders = 4 ORDER BY T2.horsepower DESC LIMIT 1",
+        "predicted_sql": "select model from model_list where modelid in (select model from car_names where makeid in (select id from cars_data where cylinders = 4 and horsepower = (select max(horsepower) from cars_data where cylinders = 4)))",
+        "prompt_len": 674
+    },
+    {
+        "db_id": "car_1",
+        "question": "For all of the 4 cylinder cars, which model has the most horsepower?",
+        "gold_sql": "SELECT T1.Model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId = T2.Id WHERE T2.Cylinders = 4 ORDER BY T2.horsepower DESC LIMIT 1",
+        "predicted_sql": "select model from model_list where modelid in (select model from car_names where makeid in (select id from cars_data where cylinders = 4 order by horsepower desc limit 1))",
+        "prompt_len": 675
+    },
+    {
+        "db_id": "car_1",
+        "question": "Among the cars with more than lowest horsepower, which ones do not have more than 3 cylinders? List the car makeid and make name.",
+        "gold_sql": "SELECT T2.MakeId , T2.Make FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id = T2.MakeId WHERE T1.Horsepower > (SELECT min(Horsepower) FROM CARS_DATA) AND T1.Cylinders <= 3",
+        "predicted_sql": "select makeid, make from car_names where makeid in (select id from cars_data where horsepower > (select min(horsepower) from cars_data) and cylinders <= 3)",
+        "prompt_len": 688
+    },
+    {
+        "db_id": "car_1",
+        "question": "Among the cars that do not have the minimum horsepower , what are the make ids and names of all those with less than 4 cylinders ?",
+        "gold_sql": "select t2.makeid , t2.make from cars_data as t1 join car_names as t2 on t1.id = t2.makeid where t1.horsepower > (select min(horsepower) from cars_data) and t1.cylinders < 4",
+        "predicted_sql": "select makeid, make from car_names where makeid in (select id from cars_data where horsepower < (select min(horsepower) from cars_data) and cylinders < 4)",
+        "prompt_len": 688
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the maximum miles per gallon of the car with 8 cylinders or produced before 1980 ?",
+        "gold_sql": "select max(mpg) from cars_data where cylinders = 8 or year < 1980",
+        "predicted_sql": "select max(mpg) from cars_data where cylinders = 8 or year < 1980",
+        "prompt_len": 678
+    },
+    {
+        "db_id": "car_1",
+        "question": "What is the maximum mpg of the cars that had 8 cylinders or that were produced before 1980 ?",
+        "gold_sql": "select max(mpg) from cars_data where cylinders = 8 or year < 1980",
+        "predicted_sql": "select max(mpg) from cars_data where cylinders = 8 or year < 1980",
+        "prompt_len": 680
+    },
+    {
+        "db_id": "car_1",
+        "question": "Which models are lighter than 3500 but not built by the 'Ford Motor Company'?",
+        "gold_sql": "SELECT DISTINCT T1.model FROM MODEL_LIST AS T1 JOIN CAR_NAMES AS T2 ON T1.Model = T2.Model JOIN CARS_DATA AS T3 ON T2.MakeId = T3.Id JOIN CAR_MAKERS AS T4 ON T1.Maker = T4.Id WHERE T3.weight < 3500 AND T4.FullName != 'Ford Motor Company'",
+        "predicted_sql": "select model from model_list where modelid in (select model from car_names where makeid in (select id from car_makers where maker != 'ford' and id in (select id from cars_data where weight < 3500)))",
+        "prompt_len": 677
+    },
+    {
+        "db_id": "car_1",
+        "question": "What are the different models wthat are lighter than 3500 but were not built by the Ford Motor Company?",
+        "gold_sql": "SELECT DISTINCT T1.model FROM MODEL_LIST AS T1 JOIN CAR_NAMES AS T2 ON T1.Model = T2.Model JOIN CARS_DATA AS T3 ON T2.MakeId = T3.Id JOIN CAR_MAKERS AS T4 ON T1.Maker = T4.Id WHERE T3.weight < 3500 AND T4.FullName != 'Ford Motor Company'",
+        "predicted_sql": "select model from model_list where model not in (select model from car_names where make like '%ford%') and model in (select model from car_names where makeid in (select id from cars_data where weight < 3500))",
+        "prompt_len": 682
+    },
+    {
+        "db_id": "car_1",
+        "question": "What are the name of the countries where there is not a single car maker?",
+        "gold_sql": "SELECT CountryName FROM countries EXCEPT SELECT T1.CountryName FROM countries AS T1 JOIN CAR_MAKERS AS T2 ON T1.countryId = T2.Country",
+        "predicted_sql": "select countryname from countries where countryid not in (select country from car_makers)",
+        "prompt_len": 676
+    },
+    {
+        "db_id": "car_1",
+        "question": "What are the names of the countries with no car makers?",
+        "gold_sql": "SELECT CountryName FROM countries EXCEPT SELECT T1.CountryName FROM countries AS T1 JOIN CAR_MAKERS AS T2 ON T1.countryId = T2.Country",
+        "predicted_sql": "select countryname from countries where countryid not in (select country from car_makers)",
+        "prompt_len": 672
+    },
+    {
+        "db_id": "car_1",
+        "question": "Which are the car makers which produce at least 2 models and more than 3 car makers ? List the id and the maker .",
+        "gold_sql": "select t1.id , t1.maker from car_makers as t1 join model_list as t2 on t1.id = t2.maker group by t1.id having count(*) >= 2 intersect select t1.id , t1.maker from car_makers as t1 join model_list as t2 on t1.id = t2.maker join car_names as t3 on t2.model = t3.model group by t1.id having count(*) > 3",
+        "predicted_sql": "select id, maker from car_makers where id in (select maker from model_list group by maker having count(*) >= 2) and id in (select id from car_makers group by id having count(*) > 3)",
+        "prompt_len": 685
+    },
+    {
+        "db_id": "car_1",
+        "question": "What are the ids and makers of all car makers that produce at least 2 models and make more than 3 cars?",
+        "gold_sql": "SELECT T1.Id , T1.Maker FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id = T2.Maker GROUP BY T1.Id HAVING count(*) >= 2 INTERSECT SELECT T1.Id , T1.Maker FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id = T2.Maker JOIN CAR_NAMES AS T3 ON T2.model = T3.model GROUP BY T1.Id HAVING count(*) > 3",
+        "predicted_sql": "select car_makers.id, car_makers.maker from car_makers join model_list on car_makers.id = model_list.maker join car_names on model_list.model = car_names.model group by car_makers.id having count(model_list.model) >= 2 and count(car_names.make) > 3",
+        "prompt_len": 684
+    },
+    {
+        "db_id": "car_1",
+        "question": "What are the id and names of the countries which have more than 3 car makers or produce the 'fiat' model?",
+        "gold_sql": "SELECT T1.countryId , T1.CountryName FROM Countries AS T1 JOIN CAR_MAKERS AS T2 ON T1.CountryId = T2.Country GROUP BY T1.countryId HAVING count(*) > 3 UNION SELECT T1.countryId , T1.CountryName FROM Countries AS T1 JOIN CAR_MAKERS AS T2 ON T1.CountryId = T2.Country JOIN MODEL_LIST AS T3 ON T2.Id = T3.Maker WHERE T3.Model = 'fiat'",
+        "predicted_sql": "select countries.countryid, countries.countryname from countries join car_makers on countries.countryid = car_makers.country join model_list on car_makers.id = model_list.maker where car_makers.id > 3 or model_list.model = 'fiat'",
+        "prompt_len": 685
+    },
+    {
+        "db_id": "car_1",
+        "question": "What are the ids and names of all countries that either have more than 3 car makers or produce fiat model ?",
+        "gold_sql": "select t1.countryid , t1.countryname from countries as t1 join car_makers as t2 on t1.countryid = t2.country group by t1.countryid having count(*) > 3 union select t1.countryid , t1.countryname from countries as t1 join car_makers as t2 on t1.countryid = t2.country join model_list as t3 on t2.id = t3.maker where t3.model = 'fiat'",
+        "predicted_sql": "select countries.countryid, countries.countryname from countries join car_makers on countries.countryid = car_makers.country join model_list on car_makers.id = model_list.maker where model_list.model = 'fiat' or car_makers.id > 3",
+        "prompt_len": 683
+    }
+]

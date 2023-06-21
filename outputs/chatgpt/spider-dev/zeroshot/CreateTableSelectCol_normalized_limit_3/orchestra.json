@@ -1,0 +1,282 @@
+[
+    {
+        "db_id": "orchestra",
+        "question": "How many conductors are there?",
+        "gold_sql": "SELECT count(*) FROM conductor",
+        "predicted_sql": "select count(*) from conductor",
+        "prompt_len": 622
+    },
+    {
+        "db_id": "orchestra",
+        "question": "Count the number of conductors.",
+        "gold_sql": "SELECT count(*) FROM conductor",
+        "predicted_sql": "select count(*) from conductor",
+        "prompt_len": 622
+    },
+    {
+        "db_id": "orchestra",
+        "question": "List the names of conductors in ascending order of age.",
+        "gold_sql": "SELECT Name FROM conductor ORDER BY Age ASC",
+        "predicted_sql": "select name from conductor order by age asc",
+        "prompt_len": 627
+    },
+    {
+        "db_id": "orchestra",
+        "question": "What are the names of conductors, ordered by age?",
+        "gold_sql": "SELECT Name FROM conductor ORDER BY Age ASC",
+        "predicted_sql": "select name from conductor order by age",
+        "prompt_len": 627
+    },
+    {
+        "db_id": "orchestra",
+        "question": "What are the names of conductors whose nationalities are not \"USA\"?",
+        "gold_sql": "SELECT Name FROM conductor WHERE Nationality != 'USA'",
+        "predicted_sql": "select name from conductor where nationality != \"USA\"",
+        "prompt_len": 631
+    },
+    {
+        "db_id": "orchestra",
+        "question": "Return the names of conductors that do not have the nationality \"USA\".",
+        "gold_sql": "SELECT Name FROM conductor WHERE Nationality != 'USA'",
+        "predicted_sql": "select name from conductor where nationality != \"USA\"",
+        "prompt_len": 630
+    },
+    {
+        "db_id": "orchestra",
+        "question": "What are the record companies of orchestras in descending order of years in which they were founded?",
+        "gold_sql": "SELECT Record_Company FROM orchestra ORDER BY Year_of_Founded DESC",
+        "predicted_sql": "select orchestra.record_company from orchestra order by orchestra.year_of_founded desc",
+        "prompt_len": 634
+    },
+    {
+        "db_id": "orchestra",
+        "question": "Return the record companies of orchestras, sorted descending by the years in which they were founded.",
+        "gold_sql": "SELECT Record_Company FROM orchestra ORDER BY Year_of_Founded DESC",
+        "predicted_sql": "select record_company, year_of_founded from orchestra order by year_of_founded desc",
+        "prompt_len": 634
+    },
+    {
+        "db_id": "orchestra",
+        "question": "What is the average attendance of shows?",
+        "gold_sql": "SELECT avg(Attendance) FROM SHOW",
+        "predicted_sql": "select avg(attendance) from show",
+        "prompt_len": 623
+    },
+    {
+        "db_id": "orchestra",
+        "question": "Return the average attendance across all shows.",
+        "gold_sql": "SELECT avg(Attendance) FROM SHOW",
+        "predicted_sql": "select avg(attendance) from show",
+        "prompt_len": 623
+    },
+    {
+        "db_id": "orchestra",
+        "question": "What are the maximum and minimum share of performances whose type is not \"Live final\".",
+        "gold_sql": "SELECT max(SHARE) , min(SHARE) FROM performance WHERE TYPE != \"Live final\"",
+        "predicted_sql": "select max(share), min(share) from performance where type != \"Live final\"",
+        "prompt_len": 632
+    },
+    {
+        "db_id": "orchestra",
+        "question": "Return the maximum and minimum shares for performances that do not have the type \"Live final\".",
+        "gold_sql": "SELECT max(SHARE) , min(SHARE) FROM performance WHERE TYPE != \"Live final\"",
+        "predicted_sql": "select max(share), min(share) from performance where type != \"Live final\"",
+        "prompt_len": 633
+    },
+    {
+        "db_id": "orchestra",
+        "question": "How many different nationalities do conductors have?",
+        "gold_sql": "SELECT count(DISTINCT Nationality) FROM conductor",
+        "predicted_sql": "select count(distinct nationality) from conductor",
+        "prompt_len": 625
+    },
+    {
+        "db_id": "orchestra",
+        "question": "Count the number of different nationalities of conductors.",
+        "gold_sql": "SELECT count(DISTINCT Nationality) FROM conductor",
+        "predicted_sql": "select count(distinct nationality) from conductor",
+        "prompt_len": 626
+    },
+    {
+        "db_id": "orchestra",
+        "question": "List names of conductors in descending order of years of work.",
+        "gold_sql": "SELECT Name FROM conductor ORDER BY Year_of_Work DESC",
+        "predicted_sql": "select name from conductor order by year_of_work desc",
+        "prompt_len": 628
+    },
+    {
+        "db_id": "orchestra",
+        "question": "What are the names of conductors, sorted descending by the number of years they have worked?",
+        "gold_sql": "SELECT Name FROM conductor ORDER BY Year_of_Work DESC",
+        "predicted_sql": "select name from conductor order by year_of_work desc",
+        "prompt_len": 634
+    },
+    {
+        "db_id": "orchestra",
+        "question": "List the name of the conductor with the most years of work.",
+        "gold_sql": "SELECT Name FROM conductor ORDER BY Year_of_Work DESC LIMIT 1",
+        "predicted_sql": "select name from conductor where year_of_work = (select max(year_of_work) from conductor)",
+        "prompt_len": 628
+    },
+    {
+        "db_id": "orchestra",
+        "question": "What is the name of the conductor who has worked the greatest number of years?",
+        "gold_sql": "SELECT Name FROM conductor ORDER BY Year_of_Work DESC LIMIT 1",
+        "predicted_sql": "select name from conductor where year_of_work = (select max(year_of_work) from conductor)",
+        "prompt_len": 631
+    },
+    {
+        "db_id": "orchestra",
+        "question": "Show the names of conductors and the orchestras they have conducted.",
+        "gold_sql": "SELECT T1.Name , T2.Orchestra FROM conductor AS T1 JOIN orchestra AS T2 ON T1.Conductor_ID = T2.Conductor_ID",
+        "predicted_sql": "select conductor.name, orchestra.orchestra from conductor inner join orchestra on conductor.conductor_id = orchestra.conductor_id",
+        "prompt_len": 629
+    },
+    {
+        "db_id": "orchestra",
+        "question": "What are the names of conductors as well as the corresonding orchestras that they have conducted?",
+        "gold_sql": "SELECT T1.Name , T2.Orchestra FROM conductor AS T1 JOIN orchestra AS T2 ON T1.Conductor_ID = T2.Conductor_ID",
+        "predicted_sql": "select conductor.name, orchestra.orchestra from conductor inner join orchestra on conductor.conductor_id = orchestra.conductor_id",
+        "prompt_len": 636
+    },
+    {
+        "db_id": "orchestra",
+        "question": "Show the names of conductors that have conducted more than one orchestras.",
+        "gold_sql": "SELECT T1.Name FROM conductor AS T1 JOIN orchestra AS T2 ON T1.Conductor_ID = T2.Conductor_ID GROUP BY T2.Conductor_ID HAVING COUNT(*) > 1",
+        "predicted_sql": "select c.name from conductor c inner join orchestra o on c.conductor_id = o.conductor_id group by c.name having count(distinct o.orchestra_id) > 1",
+        "prompt_len": 630
+    },
+    {
+        "db_id": "orchestra",
+        "question": "What are the names of conductors who have conducted at more than one orchestra?",
+        "gold_sql": "SELECT T1.Name FROM conductor AS T1 JOIN orchestra AS T2 ON T1.Conductor_ID = T2.Conductor_ID GROUP BY T2.Conductor_ID HAVING COUNT(*) > 1",
+        "predicted_sql": "select conductor.name from conductor inner join orchestra on conductor.conductor_id = orchestra.conductor_id group by conductor.name having count(distinct orchestra.orchestra_id) > 1",
+        "prompt_len": 631
+    },
+    {
+        "db_id": "orchestra",
+        "question": "Show the name of the conductor that has conducted the most number of orchestras.",
+        "gold_sql": "SELECT T1.Name FROM conductor AS T1 JOIN orchestra AS T2 ON T1.Conductor_ID = T2.Conductor_ID GROUP BY T2.Conductor_ID ORDER BY COUNT(*) DESC LIMIT 1",
+        "predicted_sql": "select c.name from conductor c join orchestra o on c.conductor_id = o.conductor_id group by c.name order by count(distinct o.orchestra_id) desc limit 1",
+        "prompt_len": 631
+    },
+    {
+        "db_id": "orchestra",
+        "question": "What is the name of the conductor who has conducted the most orchestras?",
+        "gold_sql": "SELECT T1.Name FROM conductor AS T1 JOIN orchestra AS T2 ON T1.Conductor_ID = T2.Conductor_ID GROUP BY T2.Conductor_ID ORDER BY COUNT(*) DESC LIMIT 1",
+        "predicted_sql": "select conductor.name, count(orchestra.conductor_id) as num_orchestras from conductor join orchestra on conductor.conductor_id = orchestra.conductor_id group by conductor.conductor_id order by num_orchestras desc limit 1",
+        "prompt_len": 630
+    },
+    {
+        "db_id": "orchestra",
+        "question": "Please show the name of the conductor that has conducted orchestras founded after 2008.",
+        "gold_sql": "SELECT T1.Name FROM conductor AS T1 JOIN orchestra AS T2 ON T1.Conductor_ID = T2.Conductor_ID WHERE Year_of_Founded > 2008",
+        "predicted_sql": "select c.name from conductor c join orchestra o on c.conductor_id = o.conductor_id where o.year_of_founded > 2008",
+        "prompt_len": 633
+    },
+    {
+        "db_id": "orchestra",
+        "question": "What are the names of conductors who have conducted orchestras founded after the year 2008?",
+        "gold_sql": "SELECT T1.Name FROM conductor AS T1 JOIN orchestra AS T2 ON T1.Conductor_ID = T2.Conductor_ID WHERE Year_of_Founded > 2008",
+        "predicted_sql": "select conductor.name from conductor join orchestra on conductor.conductor_id = orchestra.conductor_id where orchestra.year_of_founded > 2008",
+        "prompt_len": 635
+    },
+    {
+        "db_id": "orchestra",
+        "question": "Please show the different record companies and the corresponding number of orchestras.",
+        "gold_sql": "SELECT Record_Company , COUNT(*) FROM orchestra GROUP BY Record_Company",
+        "predicted_sql": "select record_company, count(distinct orchestra_id) as num_orchestras from orchestra group by record_company",
+        "prompt_len": 629
+    },
+    {
+        "db_id": "orchestra",
+        "question": "How many orchestras does each record company manage?",
+        "gold_sql": "SELECT Record_Company , COUNT(*) FROM orchestra GROUP BY Record_Company",
+        "predicted_sql": "select record_company, count(distinct orchestra_id) as num_orchestras from orchestra group by record_company",
+        "prompt_len": 625
+    },
+    {
+        "db_id": "orchestra",
+        "question": "Please show the record formats of orchestras in ascending order of count.",
+        "gold_sql": "SELECT Major_Record_Format FROM orchestra GROUP BY Major_Record_Format ORDER BY COUNT(*) ASC",
+        "predicted_sql": "select major_record_format, count(*) as count from orchestra group by major_record_format order by count asc",
+        "prompt_len": 629
+    },
+    {
+        "db_id": "orchestra",
+        "question": "What are the major record formats of orchestras, sorted by their frequency?",
+        "gold_sql": "SELECT Major_Record_Format FROM orchestra GROUP BY Major_Record_Format ORDER BY COUNT(*) ASC",
+        "predicted_sql": "select major_record_format, count(*) as frequency from orchestra group by major_record_format order by frequency desc",
+        "prompt_len": 630
+    },
+    {
+        "db_id": "orchestra",
+        "question": "List the record company shared by the most number of orchestras.",
+        "gold_sql": "SELECT Record_Company FROM orchestra GROUP BY Record_Company ORDER BY COUNT(*) DESC LIMIT 1",
+        "predicted_sql": "select record_company, count(distinct orchestra_id) as num_orchestras from orchestra group by record_company order by num_orchestras desc limit 1",
+        "prompt_len": 628
+    },
+    {
+        "db_id": "orchestra",
+        "question": "What is the record company used by the greatest number of orchestras?",
+        "gold_sql": "SELECT Record_Company FROM orchestra GROUP BY Record_Company ORDER BY COUNT(*) DESC LIMIT 1",
+        "predicted_sql": "select record_company, count(distinct orchestra_id) as num_orchestras from orchestra group by record_company order by num_orchestras desc limit 1",
+        "prompt_len": 629
+    },
+    {
+        "db_id": "orchestra",
+        "question": "List the names of orchestras that have no performance.",
+        "gold_sql": "SELECT Orchestra FROM orchestra WHERE Orchestra_ID NOT IN (SELECT Orchestra_ID FROM performance)",
+        "predicted_sql": "select orchestra from orchestra where orchestra_id not in (select orchestra_id from performance)",
+        "prompt_len": 626
+    },
+    {
+        "db_id": "orchestra",
+        "question": "What are the orchestras that do not have any performances?",
+        "gold_sql": "SELECT Orchestra FROM orchestra WHERE Orchestra_ID NOT IN (SELECT Orchestra_ID FROM performance)",
+        "predicted_sql": "select orchestra.orchestra from orchestra left join performance on orchestra.orchestra_id = performance.orchestra_id where performance.performance_id is null",
+        "prompt_len": 627
+    },
+    {
+        "db_id": "orchestra",
+        "question": "Show the record companies shared by orchestras founded before 2003 and after 2003.",
+        "gold_sql": "SELECT Record_Company FROM orchestra WHERE Year_of_Founded < 2003 INTERSECT SELECT Record_Company FROM orchestra WHERE Year_of_Founded > 2003",
+        "predicted_sql": "select distinct record_company from orchestra where year_of_founded < 2003 or year_of_founded > 2003",
+        "prompt_len": 634
+    },
+    {
+        "db_id": "orchestra",
+        "question": "What are the record companies that are used by both orchestras founded before 2003 and those founded after 2003?",
+        "gold_sql": "SELECT Record_Company FROM orchestra WHERE Year_of_Founded < 2003 INTERSECT SELECT Record_Company FROM orchestra WHERE Year_of_Founded > 2003",
+        "predicted_sql": "select distinct o1.record_company from orchestra o1 inner join orchestra o2 on o1.record_company = o2.record_company where o1.year_of_founded < 2003 and o2.year_of_founded > 2003",
+        "prompt_len": 640
+    },
+    {
+        "db_id": "orchestra",
+        "question": "Find the number of orchestras whose record format is \"CD\" or \"DVD\".",
+        "gold_sql": "SELECT COUNT(*) FROM orchestra WHERE Major_Record_Format = \"CD\" OR Major_Record_Format = \"DVD\"",
+        "predicted_sql": "select count(distinct orchestra_id) from orchestra where major_record_format in ('CD', 'DVD')",
+        "prompt_len": 632
+    },
+    {
+        "db_id": "orchestra",
+        "question": "Count the number of orchestras that have CD or DVD as their record format.",
+        "gold_sql": "SELECT COUNT(*) FROM orchestra WHERE Major_Record_Format = \"CD\" OR Major_Record_Format = \"DVD\"",
+        "predicted_sql": "select count(distinct orchestra_id) from orchestra where major_record_format in ('CD', 'DVD')",
+        "prompt_len": 631
+    },
+    {
+        "db_id": "orchestra",
+        "question": "Show the years in which orchestras that have given more than one performance are founded.",
+        "gold_sql": "SELECT Year_of_Founded FROM orchestra AS T1 JOIN performance AS T2 ON T1.Orchestra_ID = T2.Orchestra_ID GROUP BY T2.Orchestra_ID HAVING COUNT(*) > 1",
+        "predicted_sql": "select distinct year_of_founded from orchestra where orchestra_id in (  select orchestra_id  from performance  group by orchestra_id  having count(*) > 1 )",
+        "prompt_len": 632
+    },
+    {
+        "db_id": "orchestra",
+        "question": "What are years of founding for orchestras that have had more than a single performance?",
+        "gold_sql": "SELECT Year_of_Founded FROM orchestra AS T1 JOIN performance AS T2 ON T1.Orchestra_ID = T2.Orchestra_ID GROUP BY T2.Orchestra_ID HAVING COUNT(*) > 1",
+        "predicted_sql": "select distinct orchestra.year_of_founded from orchestra inner join performance on orchestra.orchestra_id = performance.orchestra_id group by orchestra.orchestra_id having count(distinct performance.performance_id) > 1",
+        "prompt_len": 632
+    }
+]
