@@ -6,9 +6,6 @@ import subprocess
 DATA_PATH = "data_processed"
 
 
-# DATA_PATH = "../../../Models/data"
-
-
 def get_prompt_length(prompt):
     result = subprocess.run(["node", "codex_prompt_length.mjs", prompt], stdout=subprocess.PIPE)
     prompt_len = eval(result.stdout)
