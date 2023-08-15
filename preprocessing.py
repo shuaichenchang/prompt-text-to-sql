@@ -62,5 +62,7 @@ if __name__ == '__main__':
     with open(f"data_processed/spider-train/questions/questions.json", "w") as f:
         json.dump(spider_train_questions, f, indent=4)
     for db_id in spider_train_db_ids:
+        with open(f"data_processed/spider-train/questions/{db_id}.json", "w") as f:
+            json.dump([q for q in spider_train_questions if q["db_id"] == db_id], f, indent=4)
         if not os.path.exists(f"data_processed/spider-train/database/{db_id}"):
             shutil.copytree(f"data/spider/database/{db_id}", f"data_processed/spider-train/database/{db_id}")
